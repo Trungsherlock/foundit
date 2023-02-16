@@ -15,14 +15,6 @@ const nav = [
     url: "/faq",
     title: "How it work",
   },
-  {
-    url: "/item",
-    title: "Create item",
-  },
-  {
-    url: "/profile",
-    title: "Profile",
-  },
 ];
 
 const Header: FC = () => {
@@ -78,7 +70,7 @@ const Header: FC = () => {
           className={cn("button-small", styles.button)}
           href="/upload-variants"
         >
-          Upload
+          New Idea
         </CustomLink>
         <User className={styles.user} />
         <button
