@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  address       String    @unique
+  avatar        String?
+  facebook      String?
+  instagram     String?
+  twitter       String?
+  createdAt     DateTime  @default(now())
+  sessions      Session[]
+  ideas         Idea[]
+}
+
+model Idea {
+  id             String     @id @default(cuid())
+  title          String
+  type           Type[]
+  description    String
+  feature        String
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  authorId       String
+  author         User       @relation(fields: [authorId], references: [id])
+  categories     Category[] 
+}
+
+enum Type {
+  WEB
+  APP
+  EXTENSION
+  TOOL
+  CHATBOT
+  AI
+  GAME
+}
+
+enum Category {
+  EDUCATION
+  SOCIAL_MEDIA
+  BLOG
+  MUSIC
+  ECONOMIC
+  ENTERTAINMENT
+  TECHNOLOGY
+  MOVIE
+  ART 
+  MARKETING
+  BUSINESS
+  THRILLER
+  ROMANCE
+}
