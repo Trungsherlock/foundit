@@ -2,8 +2,7 @@ import React, { FC, useState } from "react";
 import cn from "classnames";
 import styles from "./Header.module.sass";
 import { CustomLink } from '../customLink';
-import { Image } from "../image";
-import { Icon } from "../icon";
+// import { Icon } from "../icon";
 import { User } from "./user";
 
 const nav = [
@@ -19,21 +18,22 @@ const nav = [
 
 const Header: FC = () => {
   const [visibleNav, setVisibleNav] = useState(false);
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
-    alert();
-  };
+  // const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
+  //   alert();
+  // };
 
   return (
     <header className={styles.header}>
       <div className={cn("container", styles.container)}>
         <CustomLink className={styles.logo} href="/">
-          <Image
+          {/* <Image
             className={styles.pic}
             src="/images/logo-dark.png"
             alt="Fitness Pro"
-          />
+          /> */}
+          <h3>FOUND IT</h3>
         </CustomLink>
         <div className={cn(styles.wrapper, { [styles.active]: visibleNav })}>
           <nav className={styles.nav}>
@@ -47,7 +47,7 @@ const Header: FC = () => {
               </CustomLink>
             ))}
           </nav>
-          <form
+          {/* <form
             className={styles.search}
             action=""
             onSubmit={(e) => handleSubmit(e)}
@@ -64,7 +64,7 @@ const Header: FC = () => {
             <button className={styles.result}>
               <Icon name="search" size="20" />
             </button>
-          </form>
+          </form> */}
         </div>
         <CustomLink
           className={cn("button-small", styles.button)}

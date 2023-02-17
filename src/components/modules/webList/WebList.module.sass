@@ -1,0 +1,50 @@
+@import ../../../styles/helpers
+
+.head
+    width: fit-content
+    position: relative
+    display: inline-flex
+    align-items: center
+    padding: 4px 16px 4px 4px
+    margin-right: 5px
+    margin-top: 5px
+    border-radius: 20px
+    box-shadow: inset 0 0 0 2px $neutrals6
+    +button-2
+    +caption-2
+    cursor: pointer
+    transition: box-shadow .2s
+    -webkit-tap-highlight-color: rgba(0,0,0,0)
+    +dark
+        box-shadow: inset 0 0 0 2px $neutrals3
+    +m
+        padding: 0
+        border-radius: 0
+        box-shadow: none
+    +dark
+        box-shadow: inset 0 0 0 2px $neutrals3
+        +m
+            box-shadow: none
+    &:hover
+        box-shadow: inset 0 0 0 2px $neutrals3
+        +m
+            box-shadow: none
+
+.avatar
+    flex-shrink: 0
+    width: 20px
+    height: 20px
+    img
+        width: 100%
+        height: 100%
+        border-radius: 50%
+    
+.username
+    margin-left: 12px
+    +m
+        display: none
+
+.chain
+    position: relative
+    flex-direction: column
+    
