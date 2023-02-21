@@ -1,118 +1,36 @@
-import React, {FC} from "react";
+import React, {FC, useEffect, useState} from "react";
 import cn from "classnames";
 import styles from "./WebList.module.sass";
-
-const data = [
-    {
-        image: "/images/mock-logo/fb.png",
-        url: "facebook.com",
-    },
-    {
-        image: "/images/mock-logo/insta.png",
-        url: "instagram.com",
-    },
-    {
-        image: "/images/mock-logo/netflix.webp",
-        url: "netflix.com",
-    },
-    {
-        image: "/images/mock-logo/linkedin.png",
-        url: "linkedin.com",
-    },
-    {
-        image: "/images/mock-logo/github.jpg",
-        url: "github.com",
-    },
-    {
-        image: "/images/mock-logo/UMass.png",
-        url: "umass.com",
-    },
-    {
-        image: "/images/mock-logo/fb.png",
-        url: "facebookkkkkkkkk.com",
-    },
-    {
-        image: "/images/mock-logo/insta.png",
-        url: "instagrammm.com",
-    },
-    {
-        image: "/images/mock-logo/netflix.webp",
-        url: "netflixxx.com",
-    },
-    {
-        image: "/images/mock-logo/linkedin.png",
-        url: "linkedin.com",
-    },
-    {
-        image: "/images/mock-logo/UMass.png",
-        url: "umass.com",
-    },
-    {
-        image: "/images/mock-logo/fb.png",
-        url: "facebook.com",
-    },
-    {
-        image: "/images/mock-logo/insta.png",
-        url: "instagram.com",
-    },
-    {
-        image: "/images/mock-logo/linkedin.png",
-        url: "linkedinnnnn.com",
-    },
-    {
-        image: "/images/mock-logo/github.jpg",
-        url: "github.com",
-    },
-    {
-        image: "/images/mock-logo/UMass.png",
-        url: "umass.com",
-    },
-    {
-        image: "/images/mock-logo/insta.png",
-        url: "instagram.com",
-    },
-    {
-        image: "/images/mock-logo/netflix.webp",
-        url: "netflix.com",
-    },
-    {
-        image: "/images/mock-logo/linkedin.png",
-        url: "linkedin.com",
-    },
-    {
-        image: "/images/mock-logo/github.jpg",
-        url: "github.com",
-    },
-    {
-        image: "/images/mock-logo/UMass.png",
-        url: "umass.com",
-    },
-    {
-        image: "/images/mock-logo/linkedin.png",
-        url: "linkedinnnnnnnn.com",
-    },
-    {
-        image: "/images/mock-logo/UMass.png",
-        url: "umasssssssssss.com",
-    },
-];
+import {data} from "../../mock/data";
+import { getRandomData } from "utils/getRandomData";
+import { TWebData } from "types/WebData";
+import { CustomLink } from "../customLink";
 
 const WebList: FC = () => {
 
+    const [randomData, setRandomData] = useState<TWebData[]>();
+
+    useEffect(() => {
+        setRandomData(getRandomData(data));
+    }, []);
+    console.log(randomData);
+
     return (
         <div className={styles.chain}>
-            {data.map((d) => (
-            <div className={styles.head}>
+            {randomData ? randomData.map((d) => (
+            <CustomLink className={styles.head} href={d.url}>
                 <div className={styles.avatar}>
-                    <img src={d.image} alt="Logo" />
+                    <img src={d.image}/>
                 </div>
                 <div>
                     <div className={styles.username}>
-                        {d.url}
+                        {d.name}
                     </div>
                 </div>
-            </div>
-            ))}
+            </CustomLink>
+            ))
+                : <span>Loading...</span>
+        }
         </div>
     )
 }
