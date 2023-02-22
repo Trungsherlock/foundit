@@ -2,7 +2,7 @@ import { TWebData, Category } from "types/WebData"
   
 export const data: TWebData[] = [    
     {
-        name: "Google",
+        name: "Googlee",
         url: "https://www.google.com/",
         image: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
         category: [
