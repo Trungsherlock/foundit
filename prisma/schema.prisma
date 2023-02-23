@@ -14,12 +14,12 @@ datasource db {
 model User {
   id            String    @id @default(cuid())
   name          String?
-  avatar        String?
   facebook      String?
   instagram     String?
   twitter       String?
   email         String?   @unique
   emailVerified DateTime?
+  image         String?
   createdAt     DateTime  @default(now())
   accounts      Account[]
   sessions      Session[]
