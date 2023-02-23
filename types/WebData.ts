@@ -5,6 +5,16 @@ export type TWebData = {
     category: Category[];
 }
 
+export enum Type {
+    WEB,
+    APP,
+    EXTENSION,
+    TOOL,
+    CHATBOT,
+    AI,
+    GAME
+  }
+
 export enum Category {
     ACTION,
     ADVENTURE,
