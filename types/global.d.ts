@@ -17,3 +17,8 @@ declare module 'react-outside-click-handler' {
         static defaultProps: DefaultProps;
     }
 }
+
+declare module "nodemailer" {
+    var nodemailer: NodeMailer;
+    export = nodemailer;
+ }
