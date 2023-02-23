@@ -1,10 +1,12 @@
 import { TWebData, Category } from "types/WebData"
+
+let u = "images/mock-logo/";
   
 export const data: TWebData[] = [    
     {
         name: "Google",
         url: "https://www.google.com/",
-        image: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+        image: u + `1.webp`,
         category: [
           Category.SEARCH_ENGINES,
           Category.SOCIAL_MEDIA,
@@ -19,7 +21,7 @@ export const data: TWebData[] = [
     {
         name: "Amazon",
         url: "https://www.amazon.com",
-        image: "https://m.media-amazon.com/images/G/01/mobile-apps/dex/amazon_app_logo_us_4x._V516764851_.png",
+        image: u +`2.jpeg`,
         category: [
             Category.ECOMMERCE,
             Category.CLOUD_COMPUTING,
@@ -34,7 +36,7 @@ export const data: TWebData[] = [
     {
         name: "YouTube",
         url: "https://www.youtube.com",
-        image: "https://www.youtube.com/about/static/svgs/icons/brand-resources/YouTube-logo-full_color_light.svg",
+        image: u +`3.webp`,
         category: [
             Category.VIDEO,
             Category.SOCIAL_MEDIA,
@@ -49,7 +51,7 @@ export const data: TWebData[] = [
     {
         name: "Facebook",
         url: "https://www.facebook.com",
-        image: "https://www.facebook.com/images/fb_icon_325x325.png",
+        image: u +`4.png`,
         category: [
             Category.SOCIAL_MEDIA,
             Category.ONLINE_MARKETPLACE,
@@ -61,7 +63,7 @@ export const data: TWebData[] = [
     {
         name: "Twitter",
         url: "https://twitter.com",
-        image: "https://abs.twimg.com/responsive-web/client-web/icon-ios.b1fc7275.png",
+        image: u +`5.jpeg`,
         category: [
             Category.SOCIAL_MEDIA,
             Category.BLOGGING,
@@ -77,7 +79,7 @@ export const data: TWebData[] = [
     {
         name: "Instagram",
         url: "https://www.instagram.com/",
-        image: "",
+        image: u +`6.webp`,
         category: [
             Category.SOCIAL_MEDIA,
             Category.PHOTOGRAPHY,
@@ -91,7 +93,7 @@ export const data: TWebData[] = [
     {
         name: "LinkedIn",
         url: "https://www.linkedin.com/",
-        image: "",
+        image: u +`7.png`,
         category: [
           Category.BUSINESS,
           Category.CAREERS_AND_EMPLOYMENT,
@@ -106,7 +108,7 @@ export const data: TWebData[] = [
     {
         name: "Wikipedia",
         url: "https://www.wikipedia.org/",
-        image: "",
+        image: u +`8.jpeg`,
         category: [
           Category.REFERENCE,
           Category.EDUCATION,
@@ -119,7 +121,7 @@ export const data: TWebData[] = [
     {
         name: "Reddit",
         url: "https://www.reddit.com/",
-        image: "",
+        image: u +`9.jpeg`,
         category: [
           Category.NEWS,
           Category.COMEDY,
@@ -133,7 +135,7 @@ export const data: TWebData[] = [
     {
         name: "Netflix",
         url: "https://www.netflix.com/",
-        image: "",
+        image: u +`10.jpeg`,
         category: [
           Category.TELEVISION
         ]
@@ -141,7 +143,7 @@ export const data: TWebData[] = [
     {
         name: "eBay",
         url: "https://www.ebay.com/",
-        image: "https://www.ebayinc.com/wp-content/uploads/2019/11/EBAY-Logo.png",
+        image: u +`11.jpeg`,
         category: [
             Category.AUTOS_AND_VEHICLES,
             Category.BUSINESS,
@@ -156,7 +158,7 @@ export const data: TWebData[] = [
     {
         name: "Pinterest",
         url: "https://www.pinterest.com/",
-        image: "",
+        image: u +`12.png`,
         category: [
           Category.ART,
           Category.BEAUTY_AND_FITNESS,
@@ -170,7 +172,7 @@ export const data: TWebData[] = [
       {
         name: "Apple",
         url: "https://www.apple.com/",
-        image: "",
+        image: u +`13.jpeg`,
         category: [
           Category.COMPUTERS_AND_ELECTRONICS,
           Category.EDUCATION,
@@ -183,7 +185,7 @@ export const data: TWebData[] = [
       {
         name: "Microsoft",
         url: "https://www.microsoft.com/",
-        image: "",
+        image: u +`14.jpeg`,
         category: [
           Category.BUSINESS_AND_FINANCE,
           Category.COMPUTERS_AND_ELECTRONICS,
@@ -195,7 +197,7 @@ export const data: TWebData[] = [
       {
         name: "IMDb",
         url: "https://www.imdb.com/",
-        image: "",
+        image: u +`15.jpeg`,
         category: [
           Category.ARTS_AND_ENTERTAINMENT,
           Category.BUSINESS_AND_FINANCE,
@@ -206,7 +208,7 @@ export const data: TWebData[] = [
       {
         name: "Etsy",
         url: "https://www.etsy.com/",
-        image: "",
+        image: u +`16.jpeg`,
         category: [
           Category.ART,
           Category.BUSINESS,
@@ -217,7 +219,7 @@ export const data: TWebData[] = [
       {
         name: "CNN",
         url: "https://www.cnn.com/",
-        image: "",
+        image: u +`17.jpeg`,
         category: [
           Category.BUSINESS_AND_FINANCE,
           Category.NEWS,
@@ -228,7 +230,7 @@ export const data: TWebData[] = [
       {
         name: "BBC",
         url: "https://www.bbc.com/",
-        image: "",
+        image: u +`18.jpeg`,
         category: [
           Category.BUSINESS_AND_FINANCE,
           Category.NEWS,
@@ -239,7 +241,7 @@ export const data: TWebData[] = [
       {
         name: "Forbes",
         url: "https://www.forbes.com/",
-        image: "",
+        image: u +`19.jpeg`,
         category: [
           Category.BUSINESS,
           Category.FINANCE,
@@ -253,7 +255,7 @@ export const data: TWebData[] = [
       {
         name: "Quora",
         url: "https://www.quora.com/",
-        image: "",
+        image: u +`20.png`,
         category: [
           Category.EDUCATION,
           Category.CAREERS_AND_EMPLOYMENT,
@@ -266,7 +268,7 @@ export const data: TWebData[] = [
       {
         name: "Medium",
         url: "https://medium.com/",
-        image: "",
+        image: u +`21.jpeg`,
         category: [
           Category.BLOGGING,
           Category.WRITING,
@@ -281,7 +283,7 @@ export const data: TWebData[] = [
       {
         name: "The New York Times",
         url: "https://www.nytimes.com/",
-        image: "nyt_image_url",
+        image: u +`22.jpeg`,
         category: [
           Category.NEWS,
           Category.BUSINESS,
@@ -296,8 +298,7 @@ export const data: TWebData[] = [
       {
         name: "GitHub",
         url: "https://github.com/",
-        image:
-          "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+        image:u +`23.png`,
         category: [
           Category.OPEN_SOURCE,
           Category.PROJECT_MANAGEMENT,
@@ -309,8 +310,7 @@ export const data: TWebData[] = [
       {
         name: "Stack Overflow",
         url: "https://stackoverflow.com/",
-        image:
-          "https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon.png?v=c78bd457575a",
+        image: u +`24.jpeg`,
         category: [
           Category.PROGRAMMING,
           Category.COMMUNITY,
@@ -320,8 +320,7 @@ export const data: TWebData[] = [
       {
         name: "Dropbox",
         url: "https://www.dropbox.com/",
-        image:
-          "https://cfl.dropboxstatic.com/static/images/icons/icon_sparkle_256-vflSx24RL.png",
+        image: u +`25.jpeg`,
         category: [
           Category.CLOUD_STORAGE,
           Category.PROJECT_MANAGEMENT,
@@ -331,7 +330,7 @@ export const data: TWebData[] = [
       {
         name: "Canva",
         url: "https://www.canva.com/",
-        image: "",
+        image: u +`26.jpeg`,
         category: [
           Category.ART,
           Category.ADVERTISING,
@@ -343,7 +342,7 @@ export const data: TWebData[] = [
     {
         name: "Coursera",
         url: "https://www.coursera.org/",
-        image: "",
+        image: u +`27.png`,
         category: [
           Category.ONLINE_COMMUNITIES,
           Category.EDUCATION,
@@ -354,7 +353,7 @@ export const data: TWebData[] = [
     {
         name: "Duolingo",
         url: "https://www.duolingo.com/",
-        image: "",
+        image: u +`28.png`,
         category: [
           Category.EDUCATION,
           Category.EDUCATION,
@@ -364,7 +363,7 @@ export const data: TWebData[] = [
     {
         name: "Airbnb",
         url: "https://www.airbnb.com/",
-        image: "https://www.airbnb.com/favicon.ico",
+        image: u +`29.jpeg`,
         category: [
             Category.TRAVEL,
             Category.HOSPITALITY,
@@ -375,7 +374,7 @@ export const data: TWebData[] = [
     {
         name: "Zillow",
         url: "https://www.zillow.com/",
-        image: "https://www.zillow.com/favicon.ico",
+        image: u +`30.png`,
         category: [
             Category.REAL_ESTATE,
             Category.HOME,
@@ -385,7 +384,7 @@ export const data: TWebData[] = [
     {
         name: "WebMD",
         url: "https://www.webmd.com/",
-        image: "https://www.webmd.com/favicon.ico",
+        image: u +`31.png`,
         category: [
             Category.HEALTH,
             Category.MEDICAL,
@@ -397,7 +396,7 @@ export const data: TWebData[] = [
     {
         name: "Yelp",
         url: "https://www.yelp.com/",
-        image: "",
+        image: u +`41.jpeg`,
         category: [
             Category.BUSINESS,
             Category.SHOPPING,
@@ -410,31 +409,9 @@ export const data: TWebData[] = [
         ]
     },
     {
-        name: "Zillow",
-        url: "https://www.zillow.com/",
-        image: "https://www.zillowstatic.com/static/logos/logo-65x14.png",
-        category: [
-            Category.REAL_ESTATE,
-            Category.FINANCE
-        ]
-    },
-    {
-        name: "WebMD",
-        url: "https://www.webmd.com/",
-        image: "",
-        category: [
-            Category.HEALTH,
-            Category.MEDICAL,
-            Category.WELLNESS,
-            Category.FITNESS,
-            Category.NUTRITION,
-            Category.LIFESTYLE
-        ]
-    },
-    {
         name: "National Geographic",
         url: "https://www.nationalgeographic.com/",
-        image: "",
+        image: u +`32.jpeg`,
         category: [
             Category.SCIENCE,
             Category.NATURE,
@@ -449,7 +426,7 @@ export const data: TWebData[] = [
     {
         name: "Shopify",
         url: "https://www.shopify.com",
-        image: "",
+        image: u +`33.webp`,
         category: [
           Category.ECOMMERCE,
           Category.BUSINESS,
@@ -459,7 +436,7 @@ export const data: TWebData[] = [
       {
         name: "Indeed",
         url: "https://www.indeed.com",
-        image: "",
+        image: u +`34.jpeg`,
         category: [
           Category.CAREERS_AND_EMPLOYMENT,
           Category.BUSINESS_AND_FINANCE,
@@ -468,7 +445,7 @@ export const data: TWebData[] = [
       {
         name: "Investopedia",
         url: "https://www.investopedia.com",
-        image: "",
+        image: u +`35.png`,
         category: [
           Category.FINANCE,
           Category.BUSINESS,
@@ -478,7 +455,7 @@ export const data: TWebData[] = [
       {
         name: "ESPN",
         url: "https://www.espn.com/",
-        image: "",
+        image: u +`36.png`,
         category: [
           Category.SPORTS,
         ]
@@ -486,7 +463,7 @@ export const data: TWebData[] = [
       {
         name: "Chess.com",
         url: "https://www.chess.com/",
-        image: "",
+        image: u +`37.png`,
         category: [
           Category.GAMING,
           Category.HOBBIES_AND_LEISURE,
@@ -497,7 +474,7 @@ export const data: TWebData[] = [
     {
         name: "Sketchfab",
         url: "https://sketchfab.com/",
-        image: "https://static.sketchfab.com/img/press/logos/sketchfab-logo-black.png",
+        image: u +`38.png`,
         category: [
           Category.ART,
           Category.VIRTUAL_REALITY,
@@ -509,7 +486,7 @@ export const data: TWebData[] = [
     {
         name: "Pitchfork",
         url: "https://pitchfork.com/",
-        image: "",
+        image: u +`39.webp`,
         category: [
           Category.MUSIC,
           Category.ARTS_AND_ENTERTAINMENT,
@@ -519,7 +496,7 @@ export const data: TWebData[] = [
     {
         name: "Mint",
         url: "https://www.mint.com/",
-        image: "",
+        image: u +`40.jpeg`,
         category: [
           Category.BUSINESS_AND_FINANCE,
           Category.FINANCE,
