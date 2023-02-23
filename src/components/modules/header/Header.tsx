@@ -68,7 +68,7 @@ const Header: FC = () => {
         </div>
         <CustomLink
           className={cn("button-small", styles.button)}
-          href="/upload-variants"
+          href="/upload-idea-details"
         >
           New Idea
         </CustomLink>
