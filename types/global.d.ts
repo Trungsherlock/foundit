@@ -17,3 +17,14 @@ declare module 'react-outside-click-handler' {
         static defaultProps: DefaultProps;
     }
 }
+
+declare module 'react-interpunct' {
+    import { FC } from 'react'
+    import PropTypes from 'prop-types'
+    interface InterpunctProps {
+        
+    }
+    const Interpunct: FC<InterpunctProps>
+
+    export default Interpunct
+}
