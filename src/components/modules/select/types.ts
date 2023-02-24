@@ -1,6 +1,8 @@
+import { Category } from "@prisma/client"
+
 export type SelectOption = {
     label: string
-    value: string | number
+    value: Category
 }
   
 export type MultipleSelectProps = {

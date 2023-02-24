@@ -7,45 +7,13 @@ import {Select} from "../../modules/select";
 import { SelectOption } from "./types";
 import {useRouter} from 'next/router';
 import { Button } from "../../modules/button";
+import { Category, Type } from "@prisma/client";
 import axios from 'axios';
 
 const options = [
-  { label: "Music", value: 1 },
-  { label: "Movie", value: 2 },
-  { label: "University", value: 3 },
-  { label: "Education", value: 4 },
-  { label: "NLP", value: 5 },
-  { label: "Medical", value: 6},
-  { label: "Tourism", value: 7},
-  { label: "Traffic", value: 8},
-  { label: "Restaurant", value: 9},
-  { label: "Criminal", value: 10},
-  { label: "Art", value: 11},
-  { label: "NFT", value: 12},
-  { label: "Blockchain", value: 13},
-  { label: "Stock", value: 14},
-  { label: "Business", value: 15},
-  { label: "Economy", value: 16},
-  { label: "Hollywood", value: 17},
-  { label: "Food", value: 18},
-  { label: "Car Industry", value: 19},
-  { label: "Consumption", value: 20},
-  { label: "Gym", value: 21},
-  { label: "Fashion", value: 22},
-  { label: "Animal", value: 23},
-  { label: "Forest", value: 24 },
-  { label: "Record", value: 25 },
-  { label: "Technology", value: 26 },
-  { label: "Big Tech", value: 27 },
-  { label: "Marketing", value: 28 },
-  { label: "Plants", value: 29 },
-  { label: "Inflation", value: 30 },
-  { label: "Recession", value: 31 },
-  { label: "Employment", value: 32 },
-  { label: "Labor", value: 33 },
-  { label: "Population", value: 34 },
-  { label: "World Cup", value: 35 },
-  { label: "Agriculture", value: 36 },
+  { label: "Action", value: Category.EDUCATION },
+  { label: "Adventure", value: Category.MUSIC },
+  //{ label: "", value: Category. },
 ]
 
 const UploadIdeaDetails:FC = () => {
