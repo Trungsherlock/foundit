@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
@@ -19,6 +19,7 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
+  bio           String?
   facebook      String?
   instagram     String?
   twitter       String?
@@ -26,26 +27,14 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  point         Int       @default(0)
   bio           String?
   point         Int       @default(0)
   Account       Account[]
   ideas         Idea[]
   Product       Product[]
   sessions      Session[]
-}
-
-model Idea {
-  id          String     @id @default(cuid())
-  title       String
-  type        Type[]
-  description String
-  feature     String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  authorId    String
-  categories  Category[]
-  vote        Int        @default(0)
-  author      User       @relation(fields: [authorId], references: [id])
+  ideas         Idea[]
 }
 
 model Account {
@@ -92,6 +81,19 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model Idea {
+  id             String     @id @default(cuid())
+  title          String
+  type           Type[]
+  description    String
+  feature        String
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  authorId       String
+  author         User       @relation(fields: [authorId], references: [id])
+  categories     Category[] 
+}
+
 enum Type {
   WEB
   APP
@@ -103,127 +105,17 @@ enum Type {
 }
 
 enum Category {
-  ACTION
-  ADVENTURE
-  ADVERTISING
-  ANIMATION
-  ANIME
-  ART
-  ARTS_AND_ENTERTAINMENT
-  AUTOS_AND_VEHICLES
-  BANKING
-  BARS
-  BEAUTY
-  BEAUTY_AND_FITNESS
-  BETTING
-  BLOCKCHAIN
-  BLOGGING
-  BOOKS
-  BOOKS_AND_LITERATURE
-  BUSINESS
-  BUSINESS_AND_FINANCE
-  CAREERS_AND_EMPLOYMENT
-  CHARITY
-  CHILDREN
-  CLOUD_COMPUTING
-  CLOUD_STORAGE
-  COLLECTIBLES
-  COMEDY
-  COMMUNITY
-  COMPUTERS_AND_ELECTRONICS
-  CREDIT
-  CULTURE
-  CUSTOMER_SERVICE
-  DATING
-  DESIGN
-  DIGITAL_ART
-  DIGITAL_STREAMING
-  DIY
-  DRAMA
-  ECOMMERCE
   EDUCATION
-  ELECTRONICS
-  EMAIL
-  ENTERTAINMENT
-  ENVIRONMENT
-  EVENT
-  FAMILY_AND_PARENTING
-  FASHION
-  FINANCE
-  FITNESS
-  FOOD
-  FOOD_AND_DRINK
-  GAMING
-  GARDENING
-  GOVERNMENT
-  HEALTH
-  HEALTH_AND_WELLNESS
-  HOBBIES_AND_LEISURE
-  HOSPITALITY
-  HISTORY
-  HOME
-  HOME_AND_GARDEN
-  HUMOR
-  INTERNET_AND_TELECOM
-  INVESTMENT
-  JOURNALISM
-  LAW_AND_GOVERNMENT
-  LIFESTYLE
-  LITERATURE
-  LIVE_STREAMING
-  LOCAL_SEARCH
-  MAPS
-  MARKETING
-  MEDIA
-  MEDICAL
-  MUSIC
-  NATURE
-  NEWS
-  NON_PROFIT
-  NUTRITION
-  ONLINE_COMMUNITIES
-  ONLINE_MARKETPLACE
-  OPEN_SOURCE
-  PARENTING
-  PERSONAL_DEVELOPMENT
-  PEOPLE_AND_SOCIETY
-  PETS
-  PETS_AND_ANIMALS
-  PHILOSOPHY
-  PHOTOGRAPHY
-  POLITICS
-  PROGRAMMING
-  PROJECT_MANAGEMENT
-  PSYCHOLOGY
-  REAL_ESTATE
-  RECRUITMENT
-  REFERENCE
-  RELIGION
-  RESEARCH
-  RESTAURANTS
-  SCIENCE
-  SEARCH_ENGINES
-  SELF_HELP
-  SHOPPING
   SOCIAL_MEDIA
-  SOFTWARE
-  SPORTS
+  BLOG
+  MUSIC
+  ECONOMIC
+  ENTERTAINMENT
   TECHNOLOGY
-  TELEVISION
-  THEATER
-  TRAVEL
-  TOURISM
-  UNCATEGORIZED
-  VIDEO
-  VIDEO_PRODUCTION
-  VIDEO_SHARING
-  VIRTUAL_REALITY
-  VLOGS
-  WEATHER
-  WEB_DESIGN
-  WEB_DEVELOPMENT
-  WEB_HOSTING
-  WEDDINGS
-  WELLNESS
-  WRITING
+  MOVIE
+  ART 
+  MARKETING
+  BUSINESS
+  THRILLER
+  ROMANCE
 }
