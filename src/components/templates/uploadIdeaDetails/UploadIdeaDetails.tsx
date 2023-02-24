@@ -7,14 +7,8 @@ import {Select} from "../../modules/select";
 import { SelectOption } from "./types";
 import {useRouter} from 'next/router';
 import { Button } from "../../modules/button";
-import { Category, Type } from "@prisma/client";
+import { options } from "@/components/mock/category";
 import axios from 'axios';
-
-const options = [
-  { label: "Action", value: Category.EDUCATION },
-  { label: "Adventure", value: Category.MUSIC },
-  //{ label: "", value: Category. },
-]
 
 const UploadIdeaDetails:FC = () => {
   const [title, setTitle] = useState<string>("");
