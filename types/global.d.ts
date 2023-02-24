@@ -18,6 +18,11 @@ declare module 'react-outside-click-handler' {
     }
 }
 
+declare module "nodemailer" {
+    var nodemailer: NodeMailer;
+    export = nodemailer;
+ }
+
 declare module 'react-interpunct' {
     import { FC } from 'react'
     import PropTypes from 'prop-types'
