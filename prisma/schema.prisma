@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,6 +11,43 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  bio           String?
+  facebook      String?
+  instagram     String?
+  twitter       String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  point         Int       @default(0)
+  createdAt     DateTime  @default(now())
+  accounts      Account[]
+  sessions      Session[]
+  ideas         Idea[]
+  products      Product[]
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String? @db.Text
+  access_token       String? @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String? @db.Text
+  session_state      String?
+  oauth_token_secret String?
+  oauth_token        String?
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
+}
+
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
@@ -16,65 +56,10 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  facebook      String?
-  instagram     String?
-  twitter       String?
-  createdAt     DateTime  @default(now())
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  point         Int       @default(0)
-  bio           String?
-  Account       Account[]
-  ideas         Idea[]
-  Product       Product[]
-  sessions      Session[]
-}
-
-model Account {
-  id                 String  @id
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?
-  access_token       String?
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?
-  session_state      String?
-  oauth_token_secret String?
-  oauth_token        String?
-  User               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
-
-model Product {
-  id          String     @id
-  link        String?
-  title       String
-  type        Type[]
-  brief       String
-  description String
-  image       String[]
-  vote        Int?       @default(0)
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime
-  authorId    String
-  categories  Category[]
-  User        User       @relation(fields: [authorId], references: [id])
-}
-
 model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
-
   @@unique([identifier, token])
 }
 
@@ -84,6 +69,23 @@ model Idea {
   type           Type[]
   description    String
   feature        String
+  vote           Int        @default(0)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  authorId       String
+  author         User       @relation(fields: [authorId], references: [id])
+  categories     Category[] 
+}
+
+model Product {
+  id             String     @id @default(cuid())
+  link           String?
+  title          String
+  type           Type[]
+  brief          String
+  description    String
+  image          String[]
+  vote           Int?       @default(0)
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
   authorId       String
@@ -102,17 +104,127 @@ enum Type {
 }
 
 enum Category {
-  EDUCATION
-  SOCIAL_MEDIA
-  BLOG
-  MUSIC
-  ECONOMIC
-  ENTERTAINMENT
-  TECHNOLOGY
-  MOVIE
-  ART 
-  MARKETING
-  BUSINESS
-  THRILLER
-  ROMANCE
+    ACTION 
+    ADVENTURE 
+    ADVERTISING 
+    ANIMATION 
+    ANIME 
+    ART 
+    ARTS_AND_ENTERTAINMENT 
+    AUTOS_AND_VEHICLES 
+    BANKING 
+    BARS 
+    BEAUTY 
+    BEAUTY_AND_FITNESS 
+    BETTING 
+    BLOCKCHAIN 
+    BLOGGING 
+    BOOKS 
+    BOOKS_AND_LITERATURE 
+    BUSINESS 
+    BUSINESS_AND_FINANCE 
+    CAREERS_AND_EMPLOYMENT 
+    CHARITY 
+    CHILDREN 
+    CLOUD_COMPUTING 
+    CLOUD_STORAGE 
+    COLLECTIBLES 
+    COMEDY 
+    COMMUNITY 
+    COMPUTERS_AND_ELECTRONICS 
+    CREDIT 
+    CULTURE 
+    CUSTOMER_SERVICE 
+    DATING 
+    DESIGN 
+    DIGITAL_ART 
+    DIGITAL_STREAMING 
+    DIY 
+    DRAMA 
+    ECOMMERCE 
+    EDUCATION 
+    ELECTRONICS 
+    EMAIL 
+    ENTERTAINMENT 
+    ENVIRONMENT 
+    EVENT 
+    FAMILY_AND_PARENTING 
+    FASHION 
+    FINANCE 
+    FITNESS 
+    FOOD 
+    FOOD_AND_DRINK 
+    GAMING 
+    GARDENING 
+    GOVERNMENT 
+    HEALTH 
+    HEALTH_AND_WELLNESS 
+    HOBBIES_AND_LEISURE 
+    HOSPITALITY 
+    HISTORY 
+    HOME 
+    HOME_AND_GARDEN 
+    HUMOR 
+    INTERNET_AND_TELECOM 
+    INVESTMENT 
+    JOURNALISM 
+    LAW_AND_GOVERNMENT 
+    LIFESTYLE 
+    LITERATURE 
+    LIVE_STREAMING 
+    LOCAL_SEARCH 
+    MAPS 
+    MARKETING 
+    MEDIA 
+    MEDICAL 
+    MUSIC 
+    NATURE 
+    NEWS 
+    NON_PROFIT 
+    NUTRITION 
+    ONLINE_COMMUNITIES 
+    ONLINE_MARKETPLACE 
+    OPEN_SOURCE 
+    PARENTING 
+    PERSONAL_DEVELOPMENT 
+    PEOPLE_AND_SOCIETY 
+    PETS 
+    PETS_AND_ANIMALS 
+    PHILOSOPHY 
+    PHOTOGRAPHY 
+    POLITICS 
+    PROGRAMMING 
+    PROJECT_MANAGEMENT 
+    PSYCHOLOGY 
+    REAL_ESTATE 
+    RECRUITMENT 
+    REFERENCE 
+    RELIGION 
+    RESEARCH 
+    RESTAURANTS 
+    SCIENCE 
+    SEARCH_ENGINES 
+    SELF_HELP 
+    SHOPPING 
+    SOCIAL_MEDIA 
+    SOFTWARE 
+    SPORTS 
+    TECHNOLOGY 
+    TELEVISION 
+    THEATER 
+    TRAVEL 
+    TOURISM 
+    UNCATEGORIZED 
+    VIDEO 
+    VIDEO_PRODUCTION 
+    VIDEO_SHARING 
+    VIRTUAL_REALITY 
+    VLOGS 
+    WEATHER 
+    WEB_DESIGN 
+    WEB_DEVELOPMENT 
+    WEB_HOSTING 
+    WEDDINGS 
+    WELLNESS 
+    WRITING 
 }
