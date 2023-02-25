@@ -73,7 +73,7 @@ const Header: FC = () => {
           className={cn("button-small", styles.button)}
           href="/upload-variants"
         >
-          New Idea
+          Post & Idea
         </CustomLink>
         {(session && session.user) ? (
           <>
