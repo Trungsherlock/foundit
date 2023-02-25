@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const SUPABASE_BUCKET = process.env.SUPABASE_BUCKET || "datahotpot";
+const SUPABASE_BUCKET = process.env.SUPABASE_BUCKET || "avatar";
 const SUPABASE_URL = process.env.SUPABASE_URL || "";
 
 export const config = {
