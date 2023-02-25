@@ -7,17 +7,6 @@ import { prisma } from '../../lib/prismadb';
 import { IProfile } from '../../src/components/templates/profile/types';
 
 
-// Extend the built-in session type
-declare module "next-auth" {
-    interface Session {
-        user: {
-            name: string;
-            email: string;
-            image: string;
-            uid: string;
-        };
-    }
-}
 
 export const getServerSideProps = async ({ params } : any) => {
     const userId = params.id;
