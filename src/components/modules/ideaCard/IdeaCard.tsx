@@ -21,7 +21,8 @@ const IdeaCard: FC<TIdeaCard> = ({ idea }) => {
           <div className={styles.line}>
           <div className={styles.title}>{idea.title}</div>
           <div className={styles.details}>
-            {issuePreviewShorterner(idea.description)}
+            
+            {issuePreviewShorterner(idea.description, 250)}
           </div>
         
           <div className={styles.foot}>
