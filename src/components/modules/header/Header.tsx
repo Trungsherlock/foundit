@@ -7,7 +7,7 @@ import { User } from "./user";
 
 const nav = [
   {
-    url: "/search01",
+    url: "/discover",
     title: "Discover",
   },
   {
