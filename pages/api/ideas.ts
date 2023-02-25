@@ -1,5 +1,6 @@
 import {prisma} from '../../lib/prismadb';
 import {getSession} from 'next-auth/react';
+import { SelectOption } from '@/components/modules/select/types';
 
 
 export default async function handler(
@@ -27,7 +28,7 @@ export default async function handler(
                     feature,
                     author: { connect: { id: authorId } },
                     // categories: {
-                    //     connectOrCreate: categories.map((category: any) => ({
+                    //     connectOrCreate: categories.map((category: SelectOption) => ({
                     //         where: {name: category.name},
                     //         create: {name: category.name}
                     //     }))
