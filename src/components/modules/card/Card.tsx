@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import Link from "next/link";
 import cn from "classnames";
 import {TCard} from './types';
@@ -16,6 +16,11 @@ const Card: FC<TCard> = ({ className, product }) => {
   const href: string = "/";
   const typeasd:Type = getRandomProductType(product);
 
+  const [hydrated, setHydrated] = useState(false);
+  React.useEffect(() => {
+      setHydrated(true);
+  },[])
+
   return (
     <div className={cn(styles.card, className)}>
       <CustomLink className={styles.cover} href="/prod-description">
@@ -28,9 +33,9 @@ const Card: FC<TCard> = ({ className, product }) => {
             </div>
           </div>
        
-          {/* <div className={styles.types}>
-              <div className={cn("status-black",styles.type)}> {typeasd} </div>
-          </div> */}
+          <div className={styles.types}>
+              {hydrated && <div className={cn("status-black",styles.type) }> {typeasd} </div>}
+          </div>
 
           <img 
             srcSet="/images/mock-logo/1.webp"
