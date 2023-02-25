@@ -7,7 +7,6 @@ import {Icon} from "../../modules/icon";
 //import {Modal} from "../../modules/modal";
 //import { FacebookShareButton, TwitterShareButton } from "react-share";
 import {TUP} from "./types";
-//import { walletAddressShorterner } from "../../../../utils/walletAddressShorterner";
 //import { createdAt } from "../../../../utils/createdAt";
 
 const UserProfile: FC<TUP> = ({ className, socials, user }) => {
@@ -17,11 +16,11 @@ const UserProfile: FC<TUP> = ({ className, socials, user }) => {
     <>
       <div className={cn(styles.user, className)}>
         <div className={styles.avatar}>
-          <img src={user.avatar ? user.avatar : "/images/content/avatar-big.jpg"} alt="Avatar" />
+          <img src={user.image ? user.image : "/images/content/avatar-big.jpg"} alt="Avatar" />
         </div>
         <div className={styles.name}>{user.name ? user.name : "Unamed"}</div>
+        <div className={styles.email}>{user.email ? user.email : "No email"}</div>
         <div className={styles.code}>
-          {/* <div className={styles.number}>{walletAddressShorterner(user.address)}</div> */}
           <button className={styles.copy}>
             <Icon name="copy" size="16" />
           </button>

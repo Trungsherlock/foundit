@@ -10,7 +10,7 @@ const items = [
   {
     title: "My profile",
     icon: "user",
-    url: "/profile",
+    url: "/profile/cleirrlcg0000e2fhrhslh7re",
   },
   {
     title: "My ideas",

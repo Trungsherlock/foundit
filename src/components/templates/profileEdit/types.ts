@@ -1,5 +1,5 @@
 import { TUser } from "../../../../types/user";
 
-export interface IProfile {
+export interface IProfileEdit {
     user: TUser;
 }
