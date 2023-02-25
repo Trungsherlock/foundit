@@ -33,3 +33,15 @@ declare module 'react-interpunct' {
 
     export default Interpunct
 }
+
+declare module 'react-slick' {
+    import {FC} from 'react'
+    import PropTypes from 'prop-types'
+    interface SliderProps {
+        className?:string,
+        children:React.ReactNode
+    }
+    const Slider: FC<SliderProps>
+
+    export default Slider
+}

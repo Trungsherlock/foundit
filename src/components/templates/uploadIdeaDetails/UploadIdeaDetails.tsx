@@ -25,8 +25,6 @@ export const options = [
   { label: "Beauty and Fitness", value: Category.BEAUTY_AND_FITNESS },
   { label: "Betting", value: Category.BETTING },
   { label: "Blockchain", value: Category.BLOCKCHAIN },
-  { label: "Betting", value: Category.BETTING },
-  { label: "Blockchain", value: Category.BLOCKCHAIN },
   { label: "Blogging", value: Category.BLOGGING },
   { label: "Books", value: Category.BOOKS },
   { label: "Books and Literature", value: Category.BOOKS_AND_LITERATURE },
@@ -138,11 +136,24 @@ export const options = [
   { label: "Writing", value: Category.WRITING }
 ];
 
+const typeOfProduct = [
+  { label: "Web", value: Type.WEB },
+  { label: "App", value: Type.APP },
+  { label: "Extension", value: Type.EXTENSION },
+  { label: "Tool", value: Type.TOOL },
+  { label: "Chatbot", value: Type.CHATBOT },
+  { label: "AI", value: Type.AI },
+  { label: "Game", value: Type.GAME },
+];
+
+
+
 const UploadIdeaDetails:FC = () => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [feature, setFeature] = useState<string>("");
   const [tags, setTags] = useState<SelectOption[]>([]);
+  const [type, setType] = useState<SelectOption[]>([]);
 
   const router = useRouter();
   const [visiblePreview, setVisiblePreview] = useState(false);
@@ -153,7 +164,7 @@ const UploadIdeaDetails:FC = () => {
   
   const submitData = async (e: React.SyntheticEvent) => {
     setUploadLoading(true);
-    e.preventDefault()
+    e.preventDefault();
     try {
       const data = {
         title, 
@@ -161,12 +172,13 @@ const UploadIdeaDetails:FC = () => {
         feature, 
         tags
       } 
+      console.log(tags);
       console.log(data);
-      const res = await axios.post('/api/ideas', data)
+      const res = await axios.post(`/api/ideas`, data)
       console.log("upload successfully", res);
       setUploadLoading(false);
       setUploadSuccess(true);
-      router.push('/ideas')
+      //await router.push('/ideas')
     } catch (err) {
       console.log("errr",err);
       setUploadLoading(false);
@@ -219,17 +231,17 @@ const UploadIdeaDetails:FC = () => {
                       value={feature}
                       onChange={(e: any) => setFeature(e.target.value)}
                     />
-                    {/* <div className={styles.field}>
-                      <div className={styles.label}>Categories</div>
-                      <Select
+                    <div className={styles.field}>
+                      <div className={styles.label}>Type of product</div>
+                      {/* <Select 
                         multiple
-                        options={types}
+                        options={typeOfProduct}
                         value={type}
                         onChange={o => { 
                           setType(o)
                         }}
-                      />
-                    </div> */}
+                      /> */}
+                    </div>
                     <div className={styles.field}>
                       <div className={styles.label}>Categories</div>
                       <Select

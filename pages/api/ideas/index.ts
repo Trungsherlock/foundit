@@ -1,38 +1,37 @@
-import {prisma} from '../../lib/prismadb';
+import {prisma} from '../../../lib/prismadb';
 import {getSession} from 'next-auth/react';
+import type { NextApiRequest, NextApiResponse } from 'next'
 import { SelectOption } from '@/components/modules/select/types';
+import { Category } from '@prisma/client';
 
 
 export default async function handler(
-    req: any,
-    res: any
+    req: NextApiRequest,
+    res: NextApiResponse
 ) {
     if (req.method === 'POST') {
         try {
             const {title, description, feature, tags} = req.body;
-            const categories = tags.map((tag: any) => {
-                return {name: tag.label}
+            let categories: Category[] = [];
+            tags.forEach((tag: SelectOption) => {
+                categories.push(tag.value)
             });
-            console.log(tags);
+            console.log("title", title);
             const session = await getSession({req});
             console.log(session);
             if (!session) {
                 res.status(401).json({message: 'Unauthorized'});
                 return;
             }
-            const authorId = "12";
+            const authorId = session.user.id;
+            console.log("author", authorId);
             const result = await prisma.idea.create({
                 data: {
                     title,
                     description,
                     feature,
                     author: { connect: { id: authorId } },
-                    // categories: {
-                    //     connectOrCreate: categories.map((category: SelectOption) => ({
-                    //         where: {name: category.name},
-                    //         create: {name: category.name}
-                    //     }))
-                    // },  
+                    categories,  
                 }
                 
             });

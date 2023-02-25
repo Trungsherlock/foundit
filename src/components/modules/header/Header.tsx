@@ -4,10 +4,11 @@ import styles from "./Header.module.sass";
 import { CustomLink } from '../customLink';
 // import { Icon } from "../icon";
 import { User } from "./user";
+import { useSession, signIn } from "next-auth/react"
 
 const nav = [
   {
-    url: "/search01",
+    url: "/discover",
     title: "Discover",
   },
   {
@@ -23,6 +24,8 @@ const Header: FC = () => {
   // const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
   //   alert();
   // };
+
+  const { data: session} = useSession();
 
   return (
     <header className={styles.header}>
@@ -68,15 +71,27 @@ const Header: FC = () => {
         </div>
         <CustomLink
           className={cn("button-small", styles.button)}
-          href="/upload-idea-details"
+          href="/upload-variants"
         >
-          New Idea
+          Post & Idea
         </CustomLink>
-        <User className={styles.user} />
-        <button
-          className={cn(styles.burger, { [styles.active]: visibleNav })}
-          onClick={() => setVisibleNav(!visibleNav)}
-        ></button>
+        {(session && session.user) ? (
+          <>
+            <User className={styles.user} />
+            <button
+            className={cn(styles.burger, { [styles.active]: visibleNav })}
+            onClick={() => setVisibleNav(!visibleNav)}
+            ></button>
+          </>
+          ) : (
+            <button
+            className={cn("button-small", styles.button)}
+            onClick={() => signIn()}
+            >
+              Sign in
+            </button>
+          
+        )}
       </div>
     </header>
   );

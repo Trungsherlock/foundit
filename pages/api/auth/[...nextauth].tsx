@@ -13,6 +13,9 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+const NEXTAUTH_URL = process.env.NEXTAUTH_URL || "http://localhost:3000";
+const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET || "";
+
 // const emailsDir = path.resolve(process.cwd(), 'emails');
 
 // const sendVerificationRequest = ({ identifier , url} : { identifier : string , url: string}) => {
@@ -42,6 +45,7 @@ const prisma = new PrismaClient();
 //   secure: true,
 // })
 
+
 export default NextAuth({
     providers: [
       EmailProvider({
@@ -65,5 +69,13 @@ export default NextAuth({
         clientSecret: process.env.GITHUB_SECRET!,
       }),
     ],
+    callbacks: {
+      session: async ({ session, user }) => {
+        if (session?.user) {
+          session.user.id = user.id;
+        }
+        return session;
+      },
+    },
     adapter: PrismaAdapter(prisma),
   });

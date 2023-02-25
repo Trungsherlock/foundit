@@ -1,10 +1,6 @@
-import { Category } from "@prisma/client";
+import { Category, Type } from "@prisma/client";
 
 export type SelectOption = {
     label: string
     value: Category
-}
-
-export type TRoyaltiesMap = {
-    [key: string]: number;
 }
