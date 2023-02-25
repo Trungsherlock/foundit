@@ -45,7 +45,6 @@ const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
     try {
       toastId = toast.loading('Uploading...');
       const { data } = await axios.post('/api/image-upload', { image });
-      console.log(data);
       setAvatarUrl(data?.url);
       toast.success('Successfully uploaded', { id: toastId });
     } catch (e) {
@@ -67,7 +66,6 @@ const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
         try {
           setImage({ src: reader.result, alt: fileName });
           await handleAvatarUpload(reader.result);
-          
         } catch (err) {
           toast.error('Unable to update image');
         }
@@ -94,7 +92,8 @@ const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
         instagram,
         image: avatarUrl
       }
-  
+      
+
       const res = await axios.put(`/api/profile-edit/${id}`, data);
       console.log('update profile res', res);
       setEditLoading(false);
