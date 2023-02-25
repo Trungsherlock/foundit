@@ -1,0 +1,263 @@
+@import ../../../styles/helpers
+
+.card
+    display: flex
+    width: 300px
+    flex-direction: column
+    &:hover
+        .control
+            visibility: visible
+            opacity: 1
+
+.box
+    display: flex
+    flex-direction: row
+
+.preview
+    position: relative
+    border-radius: 16px
+    overflow: hidden
+    & > img
+        width: 100%
+        border-radius: 16px
+        height: 270px
+    
+.control
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: $neutrals3
+    visibility: hidden
+    border-radius: 16px
+    opacity: 0
+    transition: all .2s
+    +dark
+        background: $neutrals8
+
+.control2
+    position: absolute
+    top: 11px
+    left: 8px
+   
+.category
+    position: absolute
+    top: 11px
+    left: 8px
+
+.favorite
+    position: absolute
+    top: 8px
+    right: 8px
+    width: 32px
+    height: 32px
+    background: $neutrals8
+    box-shadow: 0px 8px 16px rgba(15, 15, 15, 0.2)
+    border-radius: 50%
+    svg
+        width: 20px
+        height: 20px
+        fill: $neutrals4
+        transition: fill .2s
+        transition: opacity .2s 
+    &:before
+        content: ""
+        position: absolute
+        top: 51%
+        left: 50%
+        transform: translate(-50%,-50%)
+        width: 18px
+        height: 18px
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='18' fill='none' viewBox='0 0 22 18'%3E%3Cpath d='M11 1.81A6.48 6.48 0 0 0 6.5 0 6.5 6.5 0 0 0 0 6.5c0 6.368 6.97 9.885 9.814 11.055.766.315 1.607.315 2.372 0C15.03 16.385 22 12.868 22 6.5A6.5 6.5 0 0 0 15.5 0 6.48 6.48 0 0 0 11 1.81z' fill='%23ef466f'/%3E%3C/svg%3E") no-repeat 50% 50% / 100% auto 
+        opacity: 0
+        transition: opacity .2s  
+    &:hover
+        svg
+            fill: $neutrals2
+    &.active
+        svg
+            opacity: 0
+        &:before
+            opacity: 1
+    +dark
+        background: $neutrals2
+        &:hover
+            svg
+                fill: $neutrals8
+
+.button
+    position: absolute
+    left: 50%
+    bottom: 16px
+    transform: translateX(-50%)
+
+.link
+    display: flex
+    flex-direction: column
+    flex-grow: 1
+    padding: 20px 0
+    color: $neutrals2
+    +dark
+        color: $neutrals8
+
+.body
+    display: flex
+    flex-direction: column
+    flex-grow: 1
+
+.line
+    display: flex
+    align-items: flex-start
+    &:first-child
+        margin-bottom: 12px
+    &:nth-child(2)
+        margin-top: auto
+    padding-top: 20px
+.date
+    margin-right: auto
+    padding-top: 1px
+    font-size: 15px
+    +poppins
+.tittle
+    text-align: center
+    padding-top: 1px
+    font-size: 35px
+    +poppins
+.text
+    display: flex
+    text-align: left
+.textFrame
+    margin:auto
+    width:100%
+    height: 154px
+    margin-top:20px
+    margin-left:10px
+.frame
+    margin-top:2%
+    width:100%
+    margin-left: 3%
+    margin-right: 3%
+.update
+    margin-right: auto
+    padding-top: 9px
+    font-size: 11px
+    color: $green
+.files
+    margin-right: 5px
+    font-size: 13px
+    color: $blue
+    
+.limitSize 
+    margin-right: auto
+    padding-right: 3px
+    font-size: 13px
+    margin-left: 5px
+.price
+    flex-shrink: 0
+    margin-left: 8px
+    padding: 0 8px
+    border-radius: 4px
+    box-shadow: inset 0 0 0 2px $green
+    font-size: 12px
+    line-height: 26px
+    font-weight: 700
+    text-transform: uppercase
+    color: $green
+
+.users
+    display: flex
+    margin-right: auto
+
+.avatar
+    margin-left: auto
+    flex-shrink: 0
+    width: 32px
+    height: 32px
+    border-radius: 50%
+    border: 2px solid $neutrals8
+    +dark
+        border-color: $neutrals2
+    img
+        width: 100%
+        height: 100%
+        object-fit: cover
+        border-radius: 50%
+    &:not(:first-child)
+
+.cover
+    color: $neutrals1
+    &:hover
+        .box
+            // visibility: visible
+            width: 101%
+            height: 102.5%
+            opacity: 0.2
+            transition: all .2s
+            border-radius: 16px
+
+.control
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: $neutrals3
+    visibility: hidden
+    border-radius: 16px
+    opacity: 0
+    transition: all .2s
+    +dark
+        background: $neutrals8
+
+.tag
+    +dm-sans
+    font-size: 10px
+    line-height: 20px
+    border-radius: 10px
+    &:not(:last-child)
+        margin-right: 5px     
+    
+.counter
+    +dark
+        color: $neutrals6
+    
+.foot
+    display: flex
+    justify-content: space-between
+
+.line2
+    display: flex
+    align-items: flex-start
+
+
+.code
+    display: flex
+    margin-top: -5px
+
+.number
+    font-size: 25px
+    color: #FFFF00
+
+.copy
+    margin-left: 8px
+    margin-right: 8px
+    svg
+        fill: $neutrals1
+        transition: fill .2s
+    &:hover
+        svg
+            fill: darken(#FF0000, 10)
+
+.status
+    svg
+        margin: -2px 4px 0 0
+        fill: $neutrals4
+    span
+        font-weight: 600
+        color: $neutrals3
+        +dark
+            color: $neutrals8
+
+.button
+    white-space: nowrap

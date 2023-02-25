@@ -8,7 +8,7 @@ import { useSession, signIn } from "next-auth/react"
 
 const nav = [
   {
-    url: "/search01",
+    url: "/discover",
     title: "Discover",
   },
   {
