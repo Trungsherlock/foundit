@@ -10,7 +10,7 @@ import {Icon} from "../../modules/icon";
 import { IProfileEdit } from "./types";
 import { Button } from "../../modules/button";
 import axios from "axios";
-import { toast } from 'react-hot-toast';
+import {toast} from "react-hot-toast"
 
 const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
   const [name, setName] = useState<string>(user.name);
