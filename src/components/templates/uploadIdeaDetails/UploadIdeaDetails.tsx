@@ -178,7 +178,7 @@ const UploadIdeaDetails:FC = () => {
       console.log("upload successfully", res);
       setUploadLoading(false);
       setUploadSuccess(true);
-      //await router.push('/ideas')
+      await router.push('/ideas')
     } catch (err) {
       console.log("errr",err);
       setUploadLoading(false);
