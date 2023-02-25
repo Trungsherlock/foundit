@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import cn from "classnames";
 import styles from "./Details.module.sass";
 import {Users} from "../../modules/control/users";
-import {Control} from "../../modules/control";
-import {Options} from "../../modules/options";
 import { Icon } from "@/components/modules/icon";
 
 const navLinks = ["About", "Features", "Authors"];
