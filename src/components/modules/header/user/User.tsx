@@ -34,9 +34,6 @@ const User: FC<TU> = ({ className }) => {
     },
   ];
 
-  console.log(session?.user);
-  console.log(session);
-
   return (
     <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
       <div className={cn(styles.user, className)}>
