@@ -2,7 +2,7 @@
 import React, { FC , useState } from "react";
 import { useRouter } from "next/router";
 import cn from "classnames";
-import styles from "./ProfileEdit.module.sass";
+import styles from "./profileEdit.module.sass";
 import {Control} from "../../modules/control";
 import {TextInput} from "../../modules/textInput";
 import {TextArea} from "../../modules/textArea";
@@ -10,7 +10,7 @@ import {Icon} from "../../modules/icon";
 import { IProfileEdit } from "./types";
 import { Button } from "../../modules/button";
 import axios from "axios";
-import { toast } from 'react-hot-toast';
+import {toast} from "react-hot-toast"
 
 const ProfileEdit: FC<IProfileEdit> = ({ user }) => {
   const [name, setName] = useState<string>(user.name);
