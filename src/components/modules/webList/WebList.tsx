@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useState} from "react";
-import cn from "classnames";
 import styles from "./WebList.module.sass";
 import {data} from "../../mock/data";
 import { getRandomData } from "utils/getRandomData";
@@ -13,12 +12,11 @@ const WebList: FC = () => {
     useEffect(() => {
         setRandomData(getRandomData(data));
     }, []);
-    console.log(randomData);
 
     return (
         <div className={styles.chain}>
-            {randomData ? randomData.map((d) => (
-            <CustomLink className={styles.head} href={d.url}>
+            {randomData ? randomData.map((d, index) => (
+            <CustomLink className={styles.head} href={d.url} key={index}>
                 <div className={styles.avatar}>
                     <img src={d.image}/>
                 </div>
