@@ -2,7 +2,7 @@
 import React, { FC , useState } from "react";
 import { useRouter } from "next/router";
 import cn from "classnames";
-import styles from "./ProfileEdit.module.sass";
+import styles from "./profileEdit.module.sass";
 import {Control} from "../../modules/control";
 import {TextInput} from "../../modules/textInput";
 import {TextArea} from "../../modules/textArea";
