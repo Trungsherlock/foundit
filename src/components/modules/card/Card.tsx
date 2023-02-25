@@ -13,7 +13,7 @@ const Card: FC<TCard> = ({ className, item }) => {
 
   return (
     <div className={cn(styles.card, className)}>
-      <CustomLink className={styles.cover} href="/prod-description">
+      <CustomLink className={styles.cover} href="/discover-detail">
       
       <div className={styles.box}>
         <div className={styles.preview}>
