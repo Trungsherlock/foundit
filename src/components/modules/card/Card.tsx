@@ -1,15 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import Link from "next/link";
 import cn from "classnames";
 import {TCard} from './types';
 import styles from "./Card.module.sass";
 import { Icon } from "../icon";
 import { CustomLink } from "../customLink"
+import { issuePreviewShorterner } from "../../../../utils/issuePreviewShorterner";
 import Interpunct from "react-interpunct";
+import { updatedAt } from "../../../../utils/updatedAt";
+import { getRandomProductType } from "utils/getRandomProductType";
+import { Type } from "@prisma/client";
 
-const Card: FC<TCard> = ({ className, item }) => {
+const Card: FC<TCard> = ({ className, product }) => {
   const href: string = "/";
+  const typeasd:Type = getRandomProductType(product);
+
+  const [hydrated, setHydrated] = useState(false);
+  React.useEffect(() => {
+      setHydrated(true);
+  },[])
 
   return (
     <div className={cn(styles.card, className)}>
@@ -19,10 +29,14 @@ const Card: FC<TCard> = ({ className, item }) => {
         <div className={styles.preview}>
           <div className={styles.body}>
             <div className={styles.line}>
-              <div className={styles.date}>Feb, 25 2023</div>
+              <div className={styles.date}>{updatedAt(product.updatedAt)}</div>
             </div>
           </div>
        
+          <div className={styles.types}>
+              {hydrated && <div className={cn("status-black",styles.type) }> {typeasd} </div>}
+          </div>
+
           <img 
             srcSet="/images/mock-logo/1.webp"
             src=""
@@ -46,20 +60,10 @@ const Card: FC<TCard> = ({ className, item }) => {
             src={"/images/content/avatar-user.jpg"} 
             alt="Avatar" />
           </div> 
-          <div className={styles.tittle}>Product Name</div>
+          <div className={styles.tittle}>{product.title}</div>
           <div className={styles.textFrame}>
             <div className={styles.text}>
-            Googles mission is to organize
-            the worlds information and
-            make it universally accessible
-            and useful. As a first step to
-            fulfilling this mission, Googles
-            founders Larry Page and
-            Sergey Brin developed a new
-            approach to online search that
-            took root in a Stanford
-            University dorm room and quickly spread to 
-            information seekers around the globe. </div>
+            {issuePreviewShorterner(product.description, 250)} </div>
           </div>
           
           <div className={styles.foot}> 
@@ -67,7 +71,7 @@ const Card: FC<TCard> = ({ className, item }) => {
               <button className={styles.copy}>
                 <Icon name="heart" size="32" />
               </button>
-              <div className={styles.number}>100</div>
+              <div className={styles.number}>{product.vote}</div>
             </div>
           <div>
             <div className={cn("status-purple", styles.tag)}>

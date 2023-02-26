@@ -1,4 +1,5 @@
 import {TIdea} from "./idea"
+import { TProduct } from "./product";
 
 export type TUser = {
     id: string;
@@ -12,4 +13,5 @@ export type TUser = {
     image: string;
     ideas: TIdea[];
     point: number;
+    product: TProduct[]
 }

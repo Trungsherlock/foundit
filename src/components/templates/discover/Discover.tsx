@@ -8,6 +8,7 @@ import Slider from "react-slick";
 import { TSlide, IDiscovery } from "./types";
 import {Dropdown} from "../../modules/dropdown";
 import { bids } from "../../mock/bids";
+import { TProducts } from "./types";
 
 const SlickArrow: FC<TSlide> = ({children, ...props }) => (
   <button {...props}>{children}</button>
@@ -22,7 +23,7 @@ const navLinks = ["Suggestion", "Trending", ];
 
 
 
-const Discover: FC = () => {
+const Discover: FC<TProducts> = ({products}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [date, setDate] = useState(dateOptions[0]);
   const [likes, setLikes] = useState(likesOptions[0]);
@@ -193,8 +194,8 @@ const Discover: FC = () => {
           </div>
           <div className={styles.wrapper}>
             <div className={styles.list}>
-              {bids.map((x, index) => (
-                <Card className={styles.card} item={x} key={index} />
+              {products.map((product, index) => (
+                <Card className={styles.card} product={product} key={index} />
               ))}
             </div>
             <div className={styles.btns}>
