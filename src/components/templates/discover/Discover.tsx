@@ -164,7 +164,7 @@ const Discover: FC<TProducts> = ({products}) => {
               />
               <div className={styles.scale}>
                 <div className={styles.number}>0 </div>
-                <div className={styles.number}>10000</div>
+                <div className={styles.number}>100</div>
               </div>
             </div>
             <div className={styles.group}>
