@@ -1,1 +1,1 @@
-export { default as IssueDetails } from "./IdeasDetails";
+export { default as IdeasDetails } from "./IdeasDetails";

@@ -4,10 +4,11 @@ import styles from "./Ideas.module.sass";
 import { Icon } from "../../modules/icon";
 import { IdeaCard } from "../../modules/ideaCard";
 import { TIdeas } from "./types";
+import { CustomLink } from "../../modules/customLink"
 
 const Idea: FC<TIdeas> = ({ ideas }) => {
   const [search, setSearch] = useState("");
-
+  const href: string = "/";
   return (
     <div className={cn("section-pt80", styles.section)}>
       <div className={cn("container", styles.container)}>

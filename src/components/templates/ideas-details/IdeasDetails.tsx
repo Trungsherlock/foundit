@@ -1,13 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, FC } from "react";
 import cn from "classnames";
-import styles from "./IssueDetails.module.sass";
+import styles from "./IdeasDetails.module.sass";
 //import {UserItem} from "../../modules/userItem";
-import { IIdeasDetails } from "./types";
+import { TIdeasDetails } from "./types";
+import {Users} from "../../modules/control/users";
 //import useUserByUid from "../../../hooks/useUserByUid";
 
 
-const navLinks = ["By"];
+const navLinks = ["Author"];
 
 const idea = {
     id: "One",
@@ -36,7 +37,7 @@ const user = {
     point: 100
 }
 
-const IssueDetails: FC<IIdeasDetails> = ({ issue }) => {
+const IdeasDetails: FC<TIdeasDetails> = ({ idea }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const author = user;//useUserByUid(issue.authorId);
 
@@ -54,9 +55,9 @@ const IssueDetails: FC<IIdeasDetails> = ({ issue }) => {
       <div className={cn("section", styles.section)}>
         <div className={cn("container", styles.container)}>
           <div className={styles.details}>
-            <h1 className={cn("h3", styles.title)}>{issue.title}</h1>
+            <h1 className={cn("h3", styles.title)}>{idea.title}</h1>
             <div className={styles.cate}>
-              {issue.categories.map((category: any, index: number) => 
+              {idea.categories.map((category: any, index: number) => 
                 <div key={index} className={cn("status-purple", styles.tag)}>
                   #{category.name}
                 </div>
@@ -88,6 +89,7 @@ const IssueDetails: FC<IIdeasDetails> = ({ issue }) => {
                 </button>
               ))}
             </div>
+            <Users className={styles.users} items={users} />
             {/* <UserItem className={styles.users} items={users} /> */}
           </div>
         </div>
@@ -96,4 +98,4 @@ const IssueDetails: FC<IIdeasDetails> = ({ issue }) => {
   );
 };
 
-export default IssueDetails;
+export default IdeasDetails;

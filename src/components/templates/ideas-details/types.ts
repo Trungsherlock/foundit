@@ -1,5 +1,5 @@
 import { TIdea } from '../../../../types/idea';
 
-export interface IIdeasDetails {
-    issue: TIdea
+export interface TIdeasDetails {
+    idea: TIdea
 }
