@@ -29,7 +29,13 @@ const Discover: FC<TProducts> = ({products}) => {
   const [likes, setLikes] = useState(likesOptions[0]);
   const [creator, setCreator] = useState(creatorOptions[0]);
 
-  const [search, setSearch] = useState("");
+  //const [search, setSearch] = useState("");
+  const [searchInput, setSearchInput] = useState('');
+
+  const searchItems = (searchValue: string) => {
+    setSearchInput(searchValue)
+    console.log(searchValue);
+  }
 
   const [values, setValues] = useState([5]);
 
@@ -54,8 +60,8 @@ const Discover: FC<TProducts> = ({products}) => {
             <input
               className={styles.input}
               type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              value={searchInput}
+              onChange={(e) => searchItems(e.target.value)}
               name="search"
               placeholder="Search ..."
               required
