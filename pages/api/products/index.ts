@@ -11,7 +11,7 @@ export default async function handler(
 ) {
     if (req.method === 'POST') {
         try {
-            const {title, type, brief, description, link} = req.body as TProduct;
+            const {title, type, brief, description, link, image} = req.body as TProduct;
             let categories: Category[] = [];
             console.log("title", title);
             const session = await getSession({req});
@@ -29,6 +29,7 @@ export default async function handler(
                     brief,
                     description,
                     link,
+                    image,
                     author: { connect: { id: authorId } },
                     categories
                 }
