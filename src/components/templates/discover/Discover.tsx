@@ -12,7 +12,7 @@ import { TProduct } from "types/product";
 import { SelectOption1 } from "../uploadIdeaDetails/types";
 import {Select} from "../../modules/select";
 import { Category, Type } from "@prisma/client";
-import { randomizeArray } from "utils/randomizeArray";
+import { randomizeArray } from "utils/randomizeArrayProduct";
 import { compareDate } from "utils/compareDate";
 
 export const options = [
@@ -145,7 +145,7 @@ const SlickArrow: FC<TSlide> = ({children, ...props }) => (
   <button {...props}>{children}</button>
 );
 // const dateOptions = ["Newest", "Oldest"];
-const typesOptions = ["NONE", "WEB", "APP", "EXTENSION", "TOOL", "CHATBOT", "AI", "GAME"];
+const typesOptions = ["None", "Web", "App", "Extension", "Tool", "Chatbot", "AI", "Game"];
 const categoryOptions = ["Trending", "Newest"];
 const creatorOptions = ["Verified only", "All", "Most liked"];
 
@@ -168,6 +168,18 @@ const Discover: FC<TProducts> = ({products}) => {
 
   const searchItems = (searchValue: string) => {
     setSearchInput(searchValue);    
+    
+  }
+
+  const [values, setValues] = useState([5]);
+
+  const [filteredProducts, setFilteredProducts] = useState<TProduct[]>(products);
+
+  const [loading, setLoading] = useState (false);
+
+
+  useEffect(() => {
+    setLoading(!loading)
     if (searchInput !== '') {
       const filteredData = products.filter((item) => {
         return Object.values(item.title).join('').toLowerCase().includes(searchInput.toLowerCase())
@@ -176,44 +188,39 @@ const Discover: FC<TProducts> = ({products}) => {
     } else {
       setFilteredResults(products);
     }
-  }
-
-  const [values, setValues] = useState([5]);
-
-  const [filteredProducts, setFilteredProducts] = useState<TProduct[]>([]);
-
-  const [loading, setLoading] = useState (false);
-
-  let filterProducts = products;
+    setLoading(!loading)
+  }, [searchInput]);
 
   useEffect(() => {
     setLoading(!loading)
-    filterProducts = products;
-    console.log(products[0].updatedAt)
-
+    setFilteredProducts(filteredResults);
+    console.log(filteredProducts);
     //Filter Types
-    if (type !== "NONE") {
-      filterProducts = products.filter((product) => product.type.map((type) => type.toString().toLowerCase()).includes(type.toLowerCase()));
+    if (type !== "None") {
+      setFilteredProducts(products.filter((product) => product.type.map((type) => type.toString().toLowerCase()).includes(type.toLowerCase())));
     }
-
     //Filter Tags
-    tags.forEach((e) => filterProducts = products.filter((product) => product.categories.includes(e.value)))
+    tags.forEach((e) => setFilteredProducts(filteredProducts.filter((product) => product.categories.includes(e.value))))
 
-    setFilteredProducts(filterProducts)
-  }, [type, tags]);
+    // setFilteredProducts(filterProducts)
+    setLoading(!loading)
+  }, [type, tags, filteredResults]);
 
   useEffect(() => {
+    setLoading(!loading)
     //Sort
     if (activeIndex === 0) {
-      console.log("a");
-      filterProducts = randomizeArray(filterProducts)
+      setFilteredProducts(randomizeArray(filteredProducts))
     } else if (activeIndex === 1) {
-      filterProducts = randomizeArray(filterProducts)
+      setFilteredProducts(randomizeArray(filteredProducts))
     } else {
-      filterProducts = filterProducts.sort((e1,e2) => compareDate(e2.updatedAt, e1.updatedAt))
+      setFilteredProducts(filteredProducts.sort((e1,e2) => compareDate(e2.updatedAt, e1.updatedAt)))
       // filterProducts = randomizeArray(filterProducts)
     }
-    setFilteredProducts(filterProducts)
+
+    setFilteredProducts(filteredProducts.filter(value => filteredResults.includes(value)));
+
+    // setFilteredProducts(filterProducts)
     setLoading(!loading)
   }, [activeIndex]);
 
@@ -244,7 +251,7 @@ const Discover: FC<TProducts> = ({products}) => {
               placeholder="Search ..."
               required
             />
-            <button className={styles.result}>
+            <button className={styles.result} onClick={() => searchItems(searchInput)}>
               <Icon name="search" size="16" />
             </button>
           </form>
@@ -362,7 +369,7 @@ const Discover: FC<TProducts> = ({products}) => {
                 />
               </div>
               <div className={styles.item}>
-                <div className={styles.label}>Creator</div>
+                <div className={styles.label}>Categories</div>
                 {/* <Dropdown
                   className={styles.dropdown}
                   value={creator}
@@ -389,7 +396,7 @@ const Discover: FC<TProducts> = ({products}) => {
           </div>
           <div className={styles.wrapper}>
             <div className={styles.list}>
-              {filteredResults.map((product, index) => (
+              {filteredProducts.map((product, index) => (
                 <Card className={styles.card} product={product} key={index} />
               ))}
             </div>

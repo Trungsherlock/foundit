@@ -19,7 +19,6 @@ const Card: FC<TCard> = ({ className, product }) => {
   const type:(Type |undefined) = getRandomProductType(product);
   const author = useUserByUid(product.authorId);
   const categories = getRandomProductCategories(product, 3)?.map((e)=> e.toString())
-  console.log(categories)
 
   const [hydrated, setHydrated] = useState(false);
   React.useEffect(() => {
