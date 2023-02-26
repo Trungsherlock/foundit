@@ -1,5 +1,6 @@
 import {NextPage} from 'next';
 import { GetServerSideProps } from 'next';
+import { Category, Type } from "@prisma/client";
 import { Layout } from '../src/components/layout';
 import { Ideas } from '../src/components/templates/ideas';
 import { prisma } from '../lib/prismadb';

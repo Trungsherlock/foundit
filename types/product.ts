@@ -1,11 +1,14 @@
 import { Category, Type } from "@prisma/client";
 
-export type TIdea = {
+export type TProduct = {
     id: string,
+    link: string,
     title: string,
     type: Type[],
+    brief: string,
     description: string,
-    feature: string,
+    image: string[],
+    vote: number,
     createdAt: string,
     updatedAt: string,
     authorId: string,

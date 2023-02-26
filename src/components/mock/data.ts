@@ -1,4 +1,5 @@
-import { TWebData, Category } from "types/WebData"
+import { TWebData } from "types/WebData"
+import { Category} from "@prisma/client"
 
 let u = "images/mock-logo/";
   
