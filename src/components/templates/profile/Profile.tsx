@@ -4,14 +4,9 @@ import { CustomLink } from "../../modules/customLink";
 import styles from "./Profile.module.sass";
 import {Icon} from "../../modules/icon";
 import {UserProfile} from "../../modules/userProfile";
-import { Range, getTrackBackground } from "react-range";
-import { Card } from "../../modules/profile_card";
-import {Dropdown} from "../../modules/dropdown";
-import Slider from "react-slick";
-import { bids } from "../../mock/bids";
-import  Product  from "./Product/Product";
-import { TSlide, IProfile } from "./types";
+import { IProfile } from "./types";
 import { IdeaCard } from "@/components/modules/ideaCard";
+import { TIdeas } from "../ideas/types";
 
 const navLinks = [
    "Products",
@@ -33,10 +28,13 @@ const idea1 = {
 }
 
 
-const Profile: FC<IProfile> = ({ user }) => {
+
+const Profile: FC<IProfile> = ({ user, products, ideas }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [visible, setVisible] = useState(false);
   console.log('profile user', user);
+  console.log(user.ideas);
+
 
   const socials = [
     {
@@ -171,8 +169,16 @@ const Profile: FC<IProfile> = ({ user }) => {
                 {/* {activeIndex === 0 && (
                   <Product className ={styles.items} item={bids.slice(0, 3)} />
                 )}*/}
+
+
                 {activeIndex === 1 && (
-                  <IdeaCard idea = {idea1} />
+                  // <IdeaCard idea = {idea1} />
+
+                  <div>
+                    {ideas.map((idea, index) => <IdeaCard key={index} idea={idea} />)}
+                  </div>
+
+
                 )}
               </div>
             </div>

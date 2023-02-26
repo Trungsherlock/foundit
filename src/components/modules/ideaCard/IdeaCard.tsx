@@ -9,10 +9,12 @@ import Interpunct from "react-interpunct";
 import { TIdeaCard } from "./types";
 import { updatedAt } from "../../../../utils/updatedAt";
 import { issuePreviewShorterner } from "../../../../utils/issuePreviewShorterner";
+import useUserByUid from "../../../hooks/useUserByUid"
 
 const IdeaCard: FC<TIdeaCard> = ({ idea }) => {
   //const tags = idea.categories.map((category) => category.name);
   console.log(idea.categories);
+  const author = useUserByUid(idea.authorId);
 
   return (
     <div>
@@ -27,13 +29,13 @@ const IdeaCard: FC<TIdeaCard> = ({ idea }) => {
         
           <div className={styles.foot}>
             <div className = {styles.line2}>
-              <div className={styles.author}>Trung Nguyen</div>
+              <div className={styles.author}> {author?.name}</div>
               <Interpunct/>
               <div className={styles.updatedAt}>{updatedAt(idea.updatedAt)}</div>
             </div>
               <div className={styles.avatar}>
                   <img 
-                    src={"/images/content/avatar-1.jpg" }
+                    src={author?.image}
                     alt="Avatar" />
               </div>
           </div>

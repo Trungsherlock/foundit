@@ -11,7 +11,7 @@ import {TUP} from "./types";
 
 const UserProfile: FC<TUP> = ({ className, socials, user }) => {
 
-  console.log(user);
+  console.log("userprofile" , user);
   return (
     <>
       <div className={cn(styles.user, className)}>
