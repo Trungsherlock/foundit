@@ -5,12 +5,15 @@ import {Users} from "../../modules/control/users";
 import { Icon } from "@/components/modules/icon";
 import { TProductDetails } from "./types";
 import { updatedAt } from "utils/updatedAt";
+import axios from 'axios';
 
 const navLinks = ["About", "Features", "Authors"];
 
 const Item: FC<TProductDetails> = ({product}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [like, setLike] = useState<boolean>(false);
+  const [vote, setVote] = useState<number>(product.vote);
+  const [likeAuthor, setLikeAuthor] = useState<string[]>(product.likeAuthor);
 
   const categories = [
     {
@@ -21,7 +24,6 @@ const Item: FC<TProductDetails> = ({product}) => {
 
   const handleClick = () => {
     setLike(!like);
-    console.log(like);
   }
 
   const [bigImage,setBigImage] = useState<string>(product.image[0]);
