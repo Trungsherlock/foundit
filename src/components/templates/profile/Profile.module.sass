@@ -197,3 +197,114 @@
     padding-top: 16px
     +m
         padding-top: 0
+
+///////////////////////////////////////////////////////////////////////////import css-variables from 
+
+//from discover
+
+.reset
+    display: inline-flex
+    align-items: center
+    +button-2
+    cursor: pointer
+    transition: color .2s
+    svg
+        margin-right: 8px
+        fill: $neutrals2
+        transition: fill .2s
+        +dark
+            fill: $neutrals8
+    &:hover
+        color: $blue
+        svg
+            fill: $blue
+
+.wrapper_
+    flex-grow: 1
+    padding-left: 32px
+    +t
+        padding-left: 0
+
+.list
+    display: flex
+    flex-wrap: wrap
+    margin: -32px -16px 0
+    +m
+        display: block
+        margin: 0
+
+.card
+    flex: 0 0 calc(100%)
+    margin: 32px 16px 0
+    padding: 8px 
+    box-shadow: 0px 32px 32px rgba(31, 47, 70, 0.12)
+    border-radius: 20px
+    +r(1279)
+        flex: 0 0 calc(100%)
+        max-width: calc(100%)
+    +m
+        max-width: 100%
+        margin: 0
+        &:not(:last-child)
+            margin-bottom: 32px
+    +dark
+        background: $neutrals2
+
+.btns_
+    margin-top: 32px
+    text-align: center
+
+.tag
+    display: flex
+    +hairline-2
+    color: $neutrals3
+    font-size: 24px
+    +dm-sans
+    svg
+        margin: -2px 4px 0 0
+        fill: $neutrals4
+
+.line
+    padding-top: 16px
+    border-bottom: 1px solid $neutrals6
+
+.row
+    display: flex
+    +t
+        display: block
+
+
+//from REACT
+
+.list
+    display: flex
+    flex-wrap: wrap
+    margin: -32px -16px 0
+    +x
+        margin: -32px -10px 0
+    +d
+        margin: -32px -16px 0
+    +m
+        display: block
+        margin: 0
+
+.card
+    flex: 0 0 calc(33.333% - 32px)
+    width: calc(33.333% - 32px)
+    margin: 32px 16px 0
+    +x
+        flex: 0 0 calc(33.333% - 20px)
+        width: calc(33.333% - 20px)
+        margin: 32px 10px 0
+    +d
+        flex: 0 0 calc(50% - 32px)
+        width: calc(50% - 32px)
+        margin: 32px 16px 0
+    +m
+        width: 100%
+        margin: 0
+        &:not(:last-child)
+            margin-bottom: 32px
+
+.loader
+    margin: 32px auto 10px

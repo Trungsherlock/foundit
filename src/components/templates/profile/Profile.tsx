@@ -4,13 +4,33 @@ import { CustomLink } from "../../modules/customLink";
 import styles from "./Profile.module.sass";
 import {Icon} from "../../modules/icon";
 import {UserProfile} from "../../modules/userProfile";
-//import {Items} from "../../modules/items";
-import { IProfile } from "./types";
+import { Range, getTrackBackground } from "react-range";
+import { Card } from "../../modules/profile_card";
+import {Dropdown} from "../../modules/dropdown";
+import Slider from "react-slick";
+import { bids } from "../../mock/bids";
+import  Product  from "./Product/Product";
+import { TSlide, IProfile } from "./types";
+import { IdeaCard } from "@/components/modules/ideaCard";
 
 const navLinks = [
    "Products",
    "Ideas",
 ];
+
+
+const idea1 = {
+    id: "1",
+    title: "1",
+    type: [],
+    description: "haha",
+    feature: "none",
+    createdAt: "Today",
+    updatedAt: "",
+    authorId: "Pink",
+    author: "Pink",
+    categories: [],
+}
 
 
 const Profile: FC<IProfile> = ({ user }) => {
@@ -81,6 +101,57 @@ const Profile: FC<IProfile> = ({ user }) => {
             socials={socials} 
             user={user}
           />
+          {/* <div className={styles.wrapper}>
+            <div className={styles.nav}>
+              {navLinks.map((x, index) => (
+                <button
+                  className={cn(styles.link, {
+                    [styles.active]: index === activeIndex,
+                  })}
+                  key={index}
+                  onClick={() => setActiveIndex(index)}
+                >
+                  {x}
+                </button>
+              ))}
+            </div>
+            <div className={styles.group}>
+              <div className={styles.item}> */}
+                
+                {/* {(activeIndex === 0 && myDataNFTs) && (
+                  <Items 
+                    className={styles.items} 
+                    items={myDataNFTs.slice(0, 6)} 
+                    cardName="View / Sell"
+                    isBuy={false}
+                  />
+                )} */}
+                {/* {activeIndex === 1 && (
+                  <></>
+                )}
+                {activeIndex === 2 && (
+                  <></>
+                )}
+              </div>
+            </div>
+          </div> */}
+            
+          {/* Changes  */}
+          {/* <div className={styles.row}>
+            <div className={styles.wrapper_}>
+                <div className={styles.list}>
+                    {bids.map((x, index) => (
+                        <Card className={styles.card} item={x} key={index} />
+                    ))}
+                </div>
+                <div className={styles.btns_}>
+                    <button className={cn("button-stroke", styles.button)}>
+                        <span>Load more</span>
+                    </button>
+                </div>
+            </div>
+          </div> */}
+
           <div className={styles.wrapper}>
             <div className={styles.nav}>
               {navLinks.map((x, index) => (
@@ -97,24 +168,18 @@ const Profile: FC<IProfile> = ({ user }) => {
             </div>
             <div className={styles.group}>
               <div className={styles.item}>
-                
-                {/* {(activeIndex === 0 && myDataNFTs) && (
-                  <Items 
-                    className={styles.items} 
-                    items={myDataNFTs.slice(0, 6)} 
-                    cardName="View / Sell"
-                    isBuy={false}
-                  />
-                )} */}
+                {/* {activeIndex === 0 && (
+                  <Product className ={styles.items} item={bids.slice(0, 3)} />
+                )}*/}
                 {activeIndex === 1 && (
-                  <></>
-                )}
-                {activeIndex === 2 && (
-                  <></>
+                  <IdeaCard idea = {idea1} />
                 )}
               </div>
             </div>
           </div>
+          {/* End_Changes */}
+
+
         </div>
       </div>
     </div>
@@ -122,3 +187,19 @@ const Profile: FC<IProfile> = ({ user }) => {
 };
 
 export default Profile;
+
+
+{/* <div className={styles.row}>
+    <div className={styles.wrapper_}>
+        <div className={styles.list}>
+            {bids.map((x, index) => (
+                <Card className={styles.card} item={x} key={index} />
+            ))}
+        </div>
+        <div className={styles.btns_}>
+            <button className={cn("button-stroke", styles.button)}>
+                <span>Load more</span>
+            </button>
+        </div>
+    </div>
+</div> */}
