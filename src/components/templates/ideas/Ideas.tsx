@@ -11,21 +11,22 @@ import { TSlide } from "./types";
 import { Range, getTrackBackground } from "react-range";
 import { prisma } from "lib/prismadb";
 import { Type, Category} from "@prisma/client"
+import { SelectOption1 } from "../uploadIdeaDetails/types";
+import { randomizeArray } from "utils/randomizeArrayIdea";
+import { compareDate } from "utils/compareDate";
 
 const SlickArrow: FC<TSlide> = ({children, ...props }) => (
   <button {...props}>{children}</button>
 );
 
-const TypeOptions = ["Web", "App", "Extension", "Tool", "Chatbot", "AI", "Game"];
+const typeOptions = ["None", "Web", "App", "Extension", "Tool", "Chatbot", "AI", "Game"];
 
 const dateOptions = ["Newest", "Oldest"];
 
 
 const Idea: FC<TIdeas> = ({ ideas }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
   const [date, setDate] = useState(dateOptions[0]);
   const [values, setValues] = useState([5]);
-  const [types, setTypes] = useState(TypeOptions[0]);
   const handleSubmit = (e:any) => {
     alert();
   };
@@ -35,13 +36,49 @@ const Idea: FC<TIdeas> = ({ ideas }) => {
   const MAX = 100;
 
   const [search, setSearch] = useState("");
-  const [filteredIdeas, setFilteredIdeas] = useState<TIdea[]>([]);
+  const [filteredIdeas, setFilteredIdeas] = useState<TIdea[]>(ideas);
+  const [loading, setLoading] = useState(false);
+  const [filteredResults, setFilteredResults] = useState<TIdea[]>(ideas);
+  const [type, setType] = useState(typeOptions[0]);
+  const [tags, setTags] = useState<SelectOption1[]>([]);
+  const [searchInput, setSearchInput] = useState('');
+
+  let filterIdeas = filteredResults;
+
+  const searchItems = (searchValue: string) => {
+    setSearchInput(searchValue);    
+    if (searchInput !== '') {
+      const filteredData = ideas.filter((item) => {
+        return Object.values(item.title).join('').toLowerCase().includes(searchInput.toLowerCase())
+      });
+      setFilteredResults(filteredData);
+    } else {
+      setFilteredResults(ideas);
+    }
+  }
 
   useEffect(() => {
-    const filterIdeas = ideas.filter((idea) => idea.type.map((type) => type.toString()).includes(search.toLowerCase()));
-    setFilteredIdeas(filterIdeas);
-  });
-  
+    setLoading(!loading)
+    setLoading(!loading)
+  }, [searchInput]);
+
+  useEffect(() => {
+    setLoading(!loading)
+    setFilteredIdeas(filteredResults);
+    //Filter Types
+    if (type !== "None") {
+      setFilteredIdeas(ideas.filter((idea) => idea.type.map((type) => type.toString().toLowerCase()).includes(type.toLowerCase())));
+    }
+
+    //Filter Tags
+    tags.forEach((e) => setFilteredIdeas(filteredIdeas.filter((idea) => idea.categories.includes(e.value))))
+
+    //setFilteredIdeas(filterIdeas)
+
+    setLoading(!loading)
+  }, [type, tags, filteredResults]);
+
+
 
   //const href: string = "/";
 
@@ -58,8 +95,8 @@ const Idea: FC<TIdeas> = ({ ideas }) => {
             <input
               className={styles.input}
               type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              value={searchInput}
+              onChange={(e) => searchItems(e.target.value)}
               name="search"
               placeholder="Search ..."
               required
@@ -155,9 +192,9 @@ const Idea: FC<TIdeas> = ({ ideas }) => {
                 <div className={styles.label}>Type</div>
                 <Dropdown
                   className={styles.dropdown}
-                  value={types}
-                  setValue={setTypes}
-                  options={TypeOptions}
+                  value={type}
+                  setValue={setType}
+                  options={typeOptions}
                 />
               </div>
               <div className={styles.sorting}>
@@ -178,7 +215,7 @@ const Idea: FC<TIdeas> = ({ ideas }) => {
           </div>
           <div className={styles.wrapper}>
             <div className={styles.list}>
-              {ideas.map((idea, index) => (
+              {filteredIdeas.map((idea, index) => (
                 <IdeaCard key={index} idea={idea} />
               ))}
             </div>

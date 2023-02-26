@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { FC } from "react";
+import React, { FC,useState } from "react";
 import cn from "classnames";
 import { CustomLink } from "../customLink/index";
 //import {TCard} from './types';
@@ -10,12 +10,19 @@ import { TIdeaCard } from "./types";
 import { updatedAt } from "../../../../utils/updatedAt";
 import { issuePreviewShorterner } from "../../../../utils/issuePreviewShorterner";
 import useUserByUid from "../../../hooks/useUserByUid"
+import { getRandomProductCategories } from "utils/getRandomIdeaCategories";
 
 const IdeaCard: FC<TIdeaCard> = ({ idea }) => {
   //const tags = idea.categories.map((category) => category.name);
   console.log(idea.categories);
   const author = useUserByUid(idea.authorId);
   const href: string = `/ideas-details/${idea.id}`;
+  const categories = getRandomProductCategories(idea, 3)?.map((e)=> e.toString())
+
+  const [hydrated, setHydrated] = useState(false);
+  React.useEffect(() => {
+      setHydrated(true);
+  },[])
 
   return (
     <div>
@@ -43,7 +50,7 @@ const IdeaCard: FC<TIdeaCard> = ({ idea }) => {
         
           <div className={styles.foot}>
             <div className={styles.categoryBox}>
-              <div className={cn("status-purple", styles.tag)}>
+              {/* <div className={cn("status-purple", styles.tag)}>
                 <p className={styles.textCenter}>#category.name
                 </p>
               </div>
@@ -52,7 +59,12 @@ const IdeaCard: FC<TIdeaCard> = ({ idea }) => {
               </div>
               <div className={cn("status-purple", styles.tag)}>
                 #category.name
-            </div>
+            </div> */}
+            {hydrated && categories?.map((x, index) => (
+              <div className={cn("status-purple", styles.tag)}>
+              {x}
+              </div>
+            ))}
           </div>
             <div className={styles.authorBox}>
               <div className={styles.avatarBox}>
