@@ -506,4 +506,348 @@ export const data: TWebData[] = [
           Category.CREDIT,
         ]
       },
-    ]
+      {
+        name: "Udacity",
+        url: "https://www.udacity.com/",
+        image: u + `42.jpeg`,
+        category: [
+          Category.ONLINE_COMMUNITIES,
+          Category.EDUCATION,
+          Category.CAREERS_AND_EMPLOYMENT,
+          Category.TECHNOLOGY,
+          Category.COMPUTERS_AND_ELECTRONICS,
+          Category.PROGRAMMING,
+        ],
+      },
+      {
+        name: "Fiverr",
+        url: "https://www.fiverr.com/",
+        image: u + `43.jpeg` ,
+        category: [
+          Category.BUSINESS,
+          Category.ONLINE_MARKETPLACE,
+          Category.WEB_DESIGN,
+          Category.WEB_DEVELOPMENT,
+          Category.WRITING,
+          Category.MARKETING,
+          Category.VIDEO_PRODUCTION,
+        ],
+      },
+      {
+        name: "SoundCloud",
+        url: "https://soundcloud.com/",
+        image: u + `44.png`,
+        category: [
+          Category.MUSIC,
+        ],
+      },
+      {
+        name: "Goodreads",
+        url: "https://www.goodreads.com/",
+        image: u + `45.png`,
+        category: [
+          Category.BOOKS,
+          Category.BOOKS_AND_LITERATURE,
+          Category.LITERATURE,
+        ],
+      },
+        {
+          name: "Khan Academy",
+          url: "https://www.khanacademy.org",
+          image: u + `46.png`,
+          category: [
+            Category.EDUCATION,
+            Category.SCIENCE,
+            Category.TECHNOLOGY,
+          ],
+        },
+        {
+          name: "Wattpad",
+          url: "https://www.wattpad.com",
+          image: u + `47.png`,
+          category: [
+            Category.WRITING,
+            Category.BOOKS_AND_LITERATURE,
+            Category.ARTS_AND_ENTERTAINMENT,
+          ],
+        },
+        {
+          name: "MyFitnessPal",
+          url: "https://www.myfitnesspal.com/",
+          image: u + `48.png`,
+          category: [
+            Category.HEALTH_AND_WELLNESS,
+            Category.FITNESS,
+            Category.NUTRITION,
+            Category.FOOD_AND_DRINK,
+          ]
+        },
+        {
+          name: "Wayfair",
+          url: "https://www.wayfair.com/",
+          image: u + `49.png`,
+          category: [
+            Category.HOME,
+            Category.HOME_AND_GARDEN,
+            Category.SHOPPING,
+          ]
+        },
+        {
+          name: "Allrecipes",
+          url: "https://www.allrecipes.com/",
+          image: u + `50.jpeg`,
+          category: [
+            Category.FOOD_AND_DRINK,
+          ]
+        },
+        {
+          name: "Codecademy",
+          url: "https://www.codecademy.com/",
+          image: u + `51.jpeg`,
+          category: [
+            Category.EDUCATION,
+            Category.PROGRAMMING,
+            Category.WEB_DEVELOPMENT,
+           Category.CAREERS_AND_EMPLOYMENT,
+          ],
+        },
+        {
+          name: "Healthline",
+          url: "https://www.healthline.com/",
+          image: u + `52.png`,
+          category: [
+            Category.HEALTH,
+            Category.HEALTH_AND_WELLNESS,
+            Category.MEDICAL,
+            Category.NUTRITION,
+            Category.RESEARCH,
+          ],
+        },
+        {
+          name: "TripAdvisor",
+          url: "https://www.tripadvisor.com",
+          image: u + `53.jpeg`,
+          category: [
+              Category.TRAVEL,
+              Category.RESTAURANTS,
+          ],
+        },
+        {
+          name: "Politico",
+          url: "https://www.politico.com/",
+          image: u + `54.png`,
+          category: [
+              Category.NEWS,
+              Category.POLITICS,
+          ]
+      },
+      {
+        name: "Houzz",
+        url: "https://www.houzz.com/",
+        image: u + `55.png`,
+        category: [
+          Category.HOME_AND_GARDEN,
+          Category.DESIGN,
+          Category.DIY,
+        ],
+      },
+      {
+        name: "AllTrails",
+        url: "https://www.alltrails.com/",
+        image: u + `56.jpeg`,
+        category: [
+            Category.ADVENTURE,
+            Category.PETS_AND_ANIMALS,
+            Category.SPORTS,
+            Category.TRAVEL,
+        ],
+    },
+    {
+      name: "Pocket",
+      url: "https://getpocket.com/",
+      image: u + `57.png`,
+      category: [
+        Category.NEWS,
+      ]
+    },
+    {
+      name: "Flipboard",
+      url: "https://flipboard.com/",
+      image: u + `58.jpeg`,
+      category: [
+        Category.NEWS,
+      ]
+    },
+    {
+      name: "Spotify",
+      url: "https://www.spotify.com/",
+      image: u + `59.jpeg`,
+      category: [
+        Category.MUSIC,
+      ]
+    },
+    {
+      name: "Skillshare",
+      url: "https://www.skillshare.com",
+      image: u + `60.png`,
+      category: [
+        Category.ONLINE_COMMUNITIES,
+        Category.BUSINESS,
+        Category.EDUCATION,
+        Category.DESIGN,
+        Category.PHOTOGRAPHY,
+        Category.WRITING,
+      ],
+    },
+    {
+      name: "Trello",
+      url: "https://trello.com/",
+      image: u + `61.jpeg`,
+      category: [
+        Category.PROJECT_MANAGEMENT,
+      ],
+    },
+    {
+      name: "NBA.com",
+      url: "https://www.nba.com/",
+      image: u + `62.jpeg`,
+      category: [
+          Category.SPORTS,
+          Category.NEWS,
+          Category.VIDEO_SHARING
+      ]
+    },
+    {
+      name: "Buzzfeed",
+      url: "https://www.buzzfeed.com/",
+      image: u + `63.jpeg`,
+      category: [
+        Category.ENTERTAINMENT,
+        Category.LIFESTYLE,
+        Category.SOCIAL_MEDIA,
+        Category.NEWS,
+      ]
+    },
+    {
+      name: "Twitch",
+      url: "https://www.twitch.tv/",
+      image: u + `65.png`,
+      category: [
+        Category.GAMING,
+        Category.LIVE_STREAMING,
+        Category.VIDEO,
+        Category.SOCIAL_MEDIA,
+        Category.COMMUNITY,
+      ]
+    },
+    {
+        name: "DeviantArt",
+        url: "https://www.deviantart.com/",
+        image: u + `66.png`,
+        category: [
+          Category.ART,
+          Category.DIGITAL_ART,
+          Category.PHOTOGRAPHY,
+          Category.LITERATURE,
+          Category.COMMUNITY,
+        ]
+    },
+    {
+        name: "OpenTable",
+        url: "https://www.opentable.com/",
+        image: u + `67.jpeg`,
+        category: [
+          Category.FOOD_AND_DRINK,
+        ]
+    },
+    {
+      name: "Business Insider",
+      url: "https://www.businessinsider.com/",
+      image: u + `68.png`,
+      category: [
+        Category.BUSINESS,
+        Category.TECHNOLOGY,
+        Category.POLITICS,
+        Category.LIFESTYLE,
+        Category.ADVERTISING,
+        Category.MARKETING,
+        Category.CAREERS_AND_EMPLOYMENT,
+      ]
+    },
+    {
+      name: "DeviantArt",
+      url: "https://www.deviantart.com/",
+      image: u + `69.png`,
+      category: [
+        Category.ART,
+        Category.PHOTOGRAPHY,
+        Category.LITERATURE,
+        Category.COMMUNITY,
+        Category.DIGITAL_ART,
+      ]
+    },
+    {
+      name: "Groupon",
+      url: "https://www.groupon.com/",
+      image: u + `70.png`,
+      category: [
+        Category.TRAVEL,
+        Category.BEAUTY_AND_FITNESS,
+        Category.HEALTH,
+        Category.ONLINE_MARKETPLACE,
+        Category.ONLINE_COMMUNITIES,
+        Category.CAREERS_AND_EMPLOYMENT,
+        Category.EDUCATION,
+      ]
+  },
+  {
+      name: "Rotten Tomatoes",
+      url: "https://www.rottentomatoes.com/",
+      image: u + `71.jpeg`,
+      category: [
+        Category.ARTS_AND_ENTERTAINMENT,
+        Category.TELEVISION,
+        Category.NEWS,
+      ]
+  },
+  {
+      name: "The Guardian",
+      url: "https://www.theguardian.com/",
+      image: u + `72.png`,
+      category: [
+        Category.NEWS,
+        Category.ARTS_AND_ENTERTAINMENT,
+        Category.POLITICS,
+        Category.SCIENCE,
+      ]
+  },
+    {
+      name: "LendingTree",
+      url: "https://www.lendingtree.com/",
+      image: u + `73.jpeg`,
+      category: [
+        Category.BUSINESS_AND_FINANCE,
+        Category.FINANCE,
+        Category.BANKING,
+      ]
+    },
+    {
+      name: "CodePen",
+      url: "https://codepen.io/",
+      image: u + `74.jpeg`,
+      category: [
+        Category.COMMUNITY,
+        Category.WEB_DESIGN,
+        Category.WEB_DEVELOPMENT,
+      ],
+    },
+    {
+      name: "Cookpad",
+      url: "https://cookpad.com/",
+      image: u + `75.png`,
+      category: [
+        Category.FOOD_AND_DRINK,
+      ],
+    },
+  ];
+  
