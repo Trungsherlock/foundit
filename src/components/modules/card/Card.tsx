@@ -36,16 +36,16 @@ const Card: FC<TCard> = ({ className, product }) => {
               <div className={styles.date}>{updatedAt(product.updatedAt)}</div>
             </div>
           </div>
-       
+        {/* <div className={styles.imagee}> */}
           <div className={styles.types}>
               {hydrated && <div className={cn("status-black",styles.type) }> {type} </div>}
           </div>
-
           <img 
             srcSet={product.image[0]}
             src="/images/mock-logo/1.webp"
             alt="Card" 
           />
+          {/* </div> */}
           {/* <div className={styles.control}>
             <Link href={href}>
               <button 
@@ -77,17 +77,7 @@ const Card: FC<TCard> = ({ className, product }) => {
               </button>
               <div className={styles.number}>{product.vote}</div>
             </div>
-          <div>
-            {/* <div className={cn("status-purple", styles.tag)}>
-              #category.name
-            </div>
-            <div className={cn("status-purple", styles.tag)}>
-              #category.name
-            </div>
-            <div className={cn("status-purple", styles.tag)}>
-              #category.name
-            </div> */}
-            
+          <div className={styles.cateBox}>
             {hydrated && categories?.map((x, index) => (
               <div className={cn("status-purple", styles.tag)}>
               {x}
