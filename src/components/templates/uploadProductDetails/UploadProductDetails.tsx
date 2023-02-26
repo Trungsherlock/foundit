@@ -1,15 +1,17 @@
 import React, { useState, FC } from "react";
 import cn from "classnames";
-import styles from "./UploadIdeaDetails.module.sass";
+import styles from "./UploadProductDetails.module.sass";
 import {TextInput} from "../../modules/textInput";
 import {TextArea} from "../../modules/textArea";
 import {Select} from "../../modules/select";
-import { SelectOption1, SelectOption2 } from "./types";
+import { SelectOption } from "src/components/modules/select/types";
 import {useRouter} from 'next/router';
 import { Button } from "../../modules/button";
 import { Category, Type } from "@prisma/client";
 import axios from 'axios';
-import { SelectSingle } from "../../modules/selectSingle";
+import Product from "../profile/Product/Product";
+import { TProduct } from "types/product";
+import {toast} from "react-hot-toast";
 
 export const options = [
   { label: "Action", value: Category.ACTION },
@@ -149,13 +151,17 @@ const typeOfProduct = [
 
 
 
-const UploadIdeaDetails:FC = () => {
+const UploadProductDetails:FC = () => {
   const [title, setTitle] = useState<string>("");
+  const [type, setType] = useState<Type[]>();
+  const [brief, setBrief] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [feature, setFeature] = useState<string>("");
-  const [tags, setTags] = useState<SelectOption1[]>([]);
-  const [type, setType] = useState<SelectOption2>();
-  const single: boolean = false;
+  const [link, setLink] = useState<string | undefined>();
+  const [image, setImage] = useState<any>();
+  //const [tags, setTags] = useState<SelectOption[]>([]);
+  //const [type, setType] = useState<SelectOption[]>([]);
+
+  const sizeLimit = 10 * 1024 * 1024 // 10MB
 
   const router = useRouter();
   const [visiblePreview, setVisiblePreview] = useState(false);
@@ -163,6 +169,47 @@ const UploadIdeaDetails:FC = () => {
   const [uploadingLoading, setUploadLoading] = useState<boolean>(false);
   const [uploadSuccess, setUploadSuccess] = useState<boolean>(false);
 
+  const handleAvatarUpload = async (image: any) => {
+    if (!image) return;
+
+    let toastId;
+    try {
+      toastId = toast.loading('Uploading...');
+      const { data } = await axios.post('/api/image-upload', { image });
+      setImage(data?.url);
+      toast.success('Successfully uploaded', { id: toastId });
+    } catch (e) {
+      toast.error('Unable to upload', { id: toastId });
+      setImage(undefined);
+    } 
+  };
+  
+
+  const handleOnChangeAvatar = (e: any) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    const fileName = file?.name?.split('.')?.[0] ?? 'New file';
+
+    reader.addEventListener(
+      'load',
+      async function () {
+        try {
+          setImage({ src: reader.result, alt: fileName });
+          await handleAvatarUpload(reader.result);
+        } catch (err) {
+          toast.error('Unable to update image');
+        }
+      },
+      false
+    );
+
+    if (file) {
+      if (file.size <= sizeLimit) {
+        reader.readAsDataURL(file);
+      } 
+    }
+  };
   
   const submitData = async (e: React.SyntheticEvent) => {
     setUploadLoading(true);
@@ -170,18 +217,18 @@ const UploadIdeaDetails:FC = () => {
     try {
       const data = {
         title, 
-        description, 
-        feature, 
-        tags,
-        type
+        //type,
+        brief,
+        description,
+        link, 
+        image
       } 
-      console.log(tags);
       console.log(data);
-      const res = await axios.post(`/api/ideas`, data)
+      const res = await axios.post(`/api/products`, data)
       console.log("upload successfully", res);
       setUploadLoading(false);
       setUploadSuccess(true);
-      await router.push('/ideas')
+      await router.push('/discover')
     } catch (err) {
       console.log("errr",err);
       setUploadLoading(false);
@@ -196,56 +243,77 @@ const UploadIdeaDetails:FC = () => {
           <div className={styles.wrapper}>
             <div className={styles.head}>
               <div className={cn("h2", styles.title)}>
-                Create idea
+                Post your product
               </div>
             </div>
             <form className={styles.form}>
               <div className={styles.list}>
                 <div className={styles.item}>
-                  <div className={styles.category}>Idea Details</div>
+                  <div className={styles.category}>Product Details</div>
                   <div className={styles.fieldset}>
                     <TextInput
                       className={styles.field}
-                      label="Idea name"
-                      name="Item"
+                      label="Product name"
+                      name="Title"
                       type="text"
-                      placeholder='e. g. Redeemable Bitcoin Card with logo"'
+                      placeholder='e. g. Potata"'
                       required
                       value={title}
                       onChange={(e: any) => setTitle(e.target.value)}
+                    />
+                    <TextInput
+                      className={styles.field}
+                      label="Brief"
+                      name="Brief"
+                      type="text"
+                      placeholder="e. g. “Grocery shopping app”"
+                      required
+                      value={brief}
+                      onChange={(e: any) => setBrief(e.target.value)}
                     />
                     <TextArea
                       className={styles.field}
                       label="Description"
                       name="Description"
                       type="text"
-                      placeholder="e. g. “After purchasing you will able to recived the logo...”"
+                      placeholder="e. g. “An online grocery shopping app that ustilize the shortest path algorithm”"
                       required
                       value={description}
                       onChange={(e: any) => setDescription(e.target.value)}
                     />
-                    <TextArea
+                    <TextInput
                       className={styles.field}
-                      label="Feature"
-                      name="Feature"
+                      label="Link to product"
+                      name="Link"
                       type="text"
-                      placeholder="e. g. “abc”"
+                      placeholder="e. g. “https://potata.com”"
                       required
-                      value={feature}
-                      onChange={(e: any) => setFeature(e.target.value)}
+                      value={link ?? ''}
+                      onChange={(e: any) => setLink(e.target.value)}
                     />
-                    <div className={styles.field}>
+                    <div className={styles.file}>
+                        <button
+                        className={cn(
+                            "button-stroke button-small",
+                            styles.button
+                        )}
+                        >
+                        Upload
+                        </button>
+                        <input className={styles.load} type="file" onChange={handleOnChangeAvatar} />
+                    </div>
+                    {/* <div className={styles.field}>
                       <div className={styles.label}>Type of product</div>
-                      <SelectSingle
-                        multiple={single}
+                      <Select 
+                        multiple
                         options={typeOfProduct}
                         value={type}
                         onChange={o => { 
                           setType(o)
                         }}
                       />
-                    </div>
-                    <div className={styles.field}>
+                    </div> */}
+                    {/* <div className={styles.field}>
                       <div className={styles.label}>Categories</div>
                       <Select
                         multiple
@@ -255,7 +323,7 @@ const UploadIdeaDetails:FC = () => {
                           setTags(o)
                         }}
                       />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -271,7 +339,7 @@ const UploadIdeaDetails:FC = () => {
                   loading={uploadingLoading}
                   success={uploadSuccess}
                   disabled={false}
-                  name="Create Idea"
+                  name="Upload product"
                   onClick={async (e) => { await submitData(e)}}
                 />
               </div>
@@ -283,4 +351,4 @@ const UploadIdeaDetails:FC = () => {
   );
 };
 
-export default UploadIdeaDetails;
+export default UploadProductDetails;

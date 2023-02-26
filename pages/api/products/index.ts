@@ -1,10 +1,9 @@
 import {prisma} from '../../../lib/prismadb';
 import {getSession} from 'next-auth/react';
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { SelectOption } from '@/components/modules/select/types';
-import { Category, Type } from '@prisma/client';
-import { SelectOption2 } from '@/components/templates/uploadIdeaDetails/types';
-
+import { SelectOption } from 'src/components/modules/select/types';
+import { Category } from '@prisma/client';
+import { TProduct } from 'types/product';
 
 export default async function handler(
     req: NextApiRequest,
@@ -12,12 +11,8 @@ export default async function handler(
 ) {
     if (req.method === 'POST') {
         try {
-            const {title, description, feature, tags, type} = req.body;
+            const {title, type, brief, description, link, image} = req.body as TProduct;
             let categories: Category[] = [];
-            tags.forEach((tag: SelectOption) => {
-                categories.push(tag.value)
-            });
-            let typeOfProduct: Type = type.value;
             console.log("title", title);
             const session = await getSession({req});
             console.log(session);
@@ -27,14 +22,16 @@ export default async function handler(
             }
             const authorId = session.user.id;
             console.log("author", authorId);
-            const result = await prisma.idea.create({
+            const result = await prisma.product.create({
                 data: {
                     title,
+                    type,
+                    brief,
                     description,
-                    feature,
+                    link,
+                    image,
                     author: { connect: { id: authorId } },
-                    categories, 
-                    type: typeOfProduct
+                    categories
                 }
                 
             });

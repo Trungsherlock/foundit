@@ -1,0 +1,248 @@
+@import ../../../styles/helpers
+
+.body
+    margin: 0
+    
+
+.section
+    padding: 96px 0
+    +x
+        padding: 80px 0
+    +m
+        padding: 64px 0
+
+.container
+    display: flex
+    align-items: flex-start
+    +t
+        display: block
+
+.bg
+    position: relative
+    flex-grow: 1
+    margin-right: 96px
+    +x
+        margin-right: 64px
+    +d
+        margin-right: 32px
+    +t
+        margin: 0 0 32px
+
+
+.details
+    display: flex
+    flex-direction: column
+    flex-shrink: 0
+    width: 500px
+    +d
+        width: 336px
+    +t
+        width: 100%
+
+.preview
+    position: relative
+    img
+        width: 100%
+        border-radius: 16px
+        height: 500px
+
+.categories
+    position: absolute
+    top: 24px
+    left: 24px
+    display: flex
+    flex-wrap: wrap
+    margin: -8px 0 0 -8px
+
+.category
+    margin: 8px 0 0 8px
+
+.options
+    position: absolute
+    top: auto
+    left: 50%
+    bottom: 24px
+    transform: translateX(-50%)
+
+.title
+    margin-left: 15px
+    margin-bottom: 8px
+    color: #470F03  
+
+.title_small
+    margin-bottom: 7px
+    font-size: 30px
+
+.cate
+    display: flex
+    align-items: center
+    margin-bottom: 40px
+
+.tag
+    +dm-sans
+    font-size: 10px
+    line-height: 20px
+    border-radius: 10px
+    &:not(:last-child)
+        margin-right: 8px
+
+.cost
+    display: flex
+    align-items: center
+    margin-bottom: 40px
+
+
+.price
+    +dm-sans
+    display: flex
+    font-size: 16px
+    flex-direction: row
+    line-height: 26px
+    &:not(:last-child)
+        margin-right: 8px
+
+.buy
+    +dm-sans
+    margin-left: 50px
+    font-size: 16px
+    border-radius: 10px
+    line-height: 30px
+    &:not(:last-child)
+        margin-right: 8px
+    
+.counter
+    +button-1
+    color: $neutrals4
+
+.info
+    margin-bottom: 40px
+    +body-2
+    color: $neutrals4
+    a
+        text-decoration: underline
+        font-weight: 500
+        color: $neutrals2
+        +dark
+            color: $neutrals8
+        &:hover
+            text-decoration: none
+
+.nav
+    display: flex
+    margin-bottom: 32px
+    padding: 6px
+    border-radius: 20px
+    box-shadow: inset 0 0 0 2px $neutrals6
+    +dark
+        box-shadow: inset 0 0 0 2px $neutrals3
+
+.link
+    padding: 6px 12px
+    border-radius: 15px
+    background: none
+    +button-2
+    color: $neutrals4
+    transition: all .2s
+    &:hover
+        color: $neutrals3
+        +dark
+            color: $neutrals6
+    &.active
+        background: $neutrals3
+        color: $neutrals8
+        +dark
+            background: $neutrals8
+            color: $neutrals2
+    &:not(:last-child)
+        margin-right: 8px
+    
+.copy
+    margin-right: 5px
+    svg
+        display: top
+        fill: $neutrals1
+        transition: fill .2s
+        margin-top:2px
+    &:hover
+        svg
+            fill: darken(#FF0000, 10)
+
+.users
+    margin-bottom: auto
+
+.control
+    margin-top: 40px
+    +m
+        margin-top: 32px
+
+.button
+    margin-left: 20px
+    height: 36px
+    width: 40%
+    &:not(:last-child)
+        margin-bottom: 8px
+
+.col
+    flex: 0 0 calc(50% - 90px)
+    width: calc(50% - 16px)
+    margin: 0 8px
+    +d
+        width: 100%
+        margin: 0
+    &:not(:last-child)
+        +d
+            margin-bottom: 64px
+        +m
+            margin-bottom: 32px
+            padding-bottom: 32px
+            border-bottom: 1px solid $neutrals6
+            +dark
+                border-color: $neutrals3
+    
+.item
+    margin-top: -12px
+    height: 300px
+    
+    
+
+.author1 
+    flex-direction: row
+    background-color: #000
+
+.gsc-control-cse
+    background-color: #fff !important 
+    border: 0 !important
+
+form.gsc-search-box, table.gsc-search-box
+    margin-bottom: 0 !important
+
+.gsc-input-box
+    border: 0 !important
+    //background: transparentize($dark, 0.5) !important
+
+.gsc-search-box-tools 
+    padding-right: 0 !important
+
+.gsc-search-box
+    padding-right: 0 !important
+
+.gsc-input
+    padding-right: 0 !important
+
+#gs_tti50
+    padding: 6px 0 !important
+    background: none !important
+
+#gsc-i-id1
+    text-indent: 0 !important
+    font-size: 14px !important
+    line-height: 1 !important
+    background: none !important
+
+.gsc-search-button
+    margin-left: 0 !important
+
+.gsib_b
+    display: none !important
+
+

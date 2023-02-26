@@ -31,7 +31,6 @@ const Idea: FC<TIdeas> = ({ ideas }) => {
   const MAX = 100;
 
   const [search, setSearch] = useState("");
-  const href: string = "/";
   return (
     <div className={cn("section-pt80", styles.section)}>
       <div className={cn("container", styles.container)}>

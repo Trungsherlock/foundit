@@ -15,10 +15,11 @@ const IdeaCard: FC<TIdeaCard> = ({ idea }) => {
   //const tags = idea.categories.map((category) => category.name);
   console.log(idea.categories);
   const author = useUserByUid(idea.authorId);
+  const href: string = `/ideas-details/${idea.id}`;
 
   return (
     <div>
-      <CustomLink className={styles.preview} href={`/ideas-details`}>
+      <CustomLink className={styles.preview} href={href}>
         <div className={styles.body}>
           <div className={styles.line}>
           <div className={styles.upper}>
