@@ -1,14 +1,26 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, useEffect } from "react";
 import cn from "classnames";
 import styles from "./Ideas.module.sass";
 import { Icon } from "../../modules/icon";
 import { IdeaCard } from "../../modules/ideaCard";
 import { TIdeas } from "./types";
+import { TIdea } from "../../../../types/idea"
 import { CustomLink } from "../../modules/customLink"
+import { prisma } from "lib/prismadb";
+import { Type, Category} from "@prisma/client"
 
 const Idea: FC<TIdeas> = ({ ideas }) => {
   const [search, setSearch] = useState("");
-  const href: string = "/";
+  const [filteredIdeas, setFilteredIdeas] = useState<TIdea[]>([]);
+
+  useEffect(() => {
+    const filterIdeas = ideas.filter((idea) => idea.type.map((type) => type.toString()).includes(search.toLowerCase()));
+    setFilteredIdeas(filterIdeas);
+  });
+  
+
+  //const href: string = "/";
+
   return (
     <div className={cn("section-pt80", styles.section)}>
       <div className={cn("container", styles.container)}>
@@ -35,18 +47,18 @@ const Idea: FC<TIdeas> = ({ ideas }) => {
         </div>
         <div className={styles.wrapper}> 
             <div className={styles.arow}>
-                <div>
-                  {ideas.map((idea, index) => <IdeaCard key={index} idea={idea} />)}
-                </div>
-            <div className={styles.btns}>
-              <button className={cn("button-stroke", styles.button)}>
-                <span>Load more</span>
-              </button>
+              <div>
+                {ideas.map((idea, index) => <IdeaCard key={index} idea={idea} />)}
+              </div>
+              <div className={styles.btns}>
+                <button className={cn("button-stroke", styles.button)}>
+                 <span>Load more</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        </div>
-    </div>
+      </div>
   );
 };
 
