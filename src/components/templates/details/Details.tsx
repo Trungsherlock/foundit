@@ -52,7 +52,7 @@ const Item: FC<TProductDetails> = ({product}) => {
                   alt="Item"
                 />
               </div>
-              <div className={styles.threeSlide}>
+              {/* <div className={styles.threeSlide}>
                 <div className={styles.slideOne}>
                   
                 <img
@@ -78,7 +78,7 @@ const Item: FC<TProductDetails> = ({product}) => {
                   onClick={() => setBigImage("/images/content/item-pic@2x.jpg 2x")}
                 />  
                 </div>
-              </div>
+              </div> */}
             </div>
             {/* <Options className={styles.options} /> */}
           </div>

@@ -219,11 +219,12 @@ const UploadProductDetails:FC = () => {
     try {
       const data = {
         title, 
-        //type,
+        type,
         brief,
         description,
         link, 
-        image
+        image,
+        categories
       } 
       console.log(data);
       const res = await axios.post(`/api/products`, data)
