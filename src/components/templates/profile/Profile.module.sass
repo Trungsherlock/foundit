@@ -138,16 +138,6 @@
         width: 100%
         margin: -32px 0 48px
 
-.wrapper
-    flex: 0 0 calc(100% - 256px)
-    width: calc(100% - 256px)
-    padding-left: 64px
-    +x
-        padding-left: 32px
-    +t
-        width: 100%
-        padding-left: 0
-
 .nav
     display: flex
     margin: 0 -6px 32px
@@ -273,38 +263,6 @@
     +t
         display: block
 
-
-//from REACT
-
-.list
-    display: flex
-    flex-wrap: wrap
-    margin: -32px -16px 0
-    +x
-        margin: -32px -10px 0
-    +d
-        margin: -32px -16px 0
-    +m
-        display: block
-        margin: 0
-
-.card
-    flex: 0 0 calc(33.333% - 32px)
-    width: calc(33.333% - 32px)
-    margin: 32px 16px 0
-    +x
-        flex: 0 0 calc(33.333% - 20px)
-        width: calc(33.333% - 20px)
-        margin: 32px 10px 0
-    +d
-        flex: 0 0 calc(50% - 32px)
-        width: calc(50% - 32px)
-        margin: 32px 16px 0
-    +m
-        width: 100%
-        margin: 0
-        &:not(:last-child)
-            margin-bottom: 32px
 
 .loader
     margin: 32px auto 10px
