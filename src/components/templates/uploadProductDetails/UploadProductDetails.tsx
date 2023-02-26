@@ -9,6 +9,10 @@ import {useRouter} from 'next/router';
 import { Button } from "../../modules/button";
 import { Category, Type } from "@prisma/client";
 import axios from 'axios';
+import Product from "../profile/Product/Product";
+import { TProduct } from "types/product";
+import { IImageUpload } from "./types";
+import {toast} from "react-hot-toast";
 
 export const options = [
   { label: "Action", value: Category.ACTION },
@@ -150,12 +154,15 @@ const typeOfProduct = [
 
 const UploadProductDetails:FC = () => {
   const [title, setTitle] = useState<string>("");
-  //const [type, setType] = useState<Type[]>();
+  const [type, setType] = useState<Type[]>();
   const [brief, setBrief] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [link, setLink] = useState<string>("");
+  const [link, setLink] = useState<string | undefined>();
+  const [image, setImage] = useState<any>();
   //const [tags, setTags] = useState<SelectOption[]>([]);
   //const [type, setType] = useState<SelectOption[]>([]);
+
+  const sizeLimit = 10 * 1024 * 1024 // 10MB
 
   const router = useRouter();
   const [visiblePreview, setVisiblePreview] = useState(false);
@@ -163,6 +170,47 @@ const UploadProductDetails:FC = () => {
   const [uploadingLoading, setUploadLoading] = useState<boolean>(false);
   const [uploadSuccess, setUploadSuccess] = useState<boolean>(false);
 
+  const handleAvatarUpload = async (image: any) => {
+    if (!image) return;
+
+    let toastId;
+    try {
+      toastId = toast.loading('Uploading...');
+      const { data } = await axios.post('/api/image-upload', { image });
+      setImage(data?.url);
+      toast.success('Successfully uploaded', { id: toastId });
+    } catch (e) {
+      toast.error('Unable to upload', { id: toastId });
+      setImage(undefined);
+    } 
+  };
+  
+
+  const handleOnChangeAvatar = (e: any) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    const fileName = file?.name?.split('.')?.[0] ?? 'New file';
+
+    reader.addEventListener(
+      'load',
+      async function () {
+        try {
+          setImage({ src: reader.result, alt: fileName });
+          await handleAvatarUpload(reader.result);
+        } catch (err) {
+          toast.error('Unable to update image');
+        }
+      },
+      false
+    );
+
+    if (file) {
+      if (file.size <= sizeLimit) {
+        reader.readAsDataURL(file);
+      } 
+    }
+  };
   
   const submitData = async (e: React.SyntheticEvent) => {
     setUploadLoading(true);
@@ -173,7 +221,8 @@ const UploadProductDetails:FC = () => {
         //type,
         brief,
         description,
-        link
+        link, 
+        image
       } 
       console.log(data);
       const res = await axios.post(`/api/products`, data)
@@ -240,9 +289,20 @@ const UploadProductDetails:FC = () => {
                       type="text"
                       placeholder="e. g. “https://potata.com”"
                       required
-                      value={link}
-                      onChange={(e: any) => setDescription(e.target.value)}
+                      value={link ?? ''}
+                      onChange={(e: any) => setLink(e.target.value)}
                     />
+                    <div className={styles.file}>
+                        <button
+                        className={cn(
+                            "button-stroke button-small",
+                            styles.button
+                        )}
+                        >
+                        Upload
+                        </button>
+                        <input className={styles.load} type="file" onChange={handleOnChangeAvatar} />
+                    </div>
                     {/* <div className={styles.field}>
                       <div className={styles.label}>Type of product</div>
                       <Select 
