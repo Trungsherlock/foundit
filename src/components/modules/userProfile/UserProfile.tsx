@@ -8,6 +8,8 @@ import {Icon} from "../../modules/icon";
 //import { FacebookShareButton, TwitterShareButton } from "react-share";
 import {TUP} from "./types";
 //import { createdAt } from "../../../../utils/createdAt";
+import { issuePreviewShorterner } from "utils/issuePreviewShorterner";
+
 
 const UserProfile: FC<TUP> = ({ className, socials, user }) => {
 
@@ -19,7 +21,7 @@ const UserProfile: FC<TUP> = ({ className, socials, user }) => {
           <img src={user.image ? user.image : "/images/content/avatar-big.jpg"} alt="Avatar" />
         </div>
         <div className={styles.name}>{user.name ? user.name : "Unamed"}</div>
-        <div className={styles.email}>{user.email ? user.email : "No email"}</div>
+        <div className={styles.email}>{user.email ? issuePreviewShorterner(user.email, 25) : "No email"}</div>
         <div className={styles.code}>
           <button className={styles.copy}>
             <Icon name="copy" size="16" />
