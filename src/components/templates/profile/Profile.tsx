@@ -8,6 +8,7 @@ import { IProfile } from "./types";
 import { IdeaCard } from "@/components/modules/ideaCard";
 import { TIdeas } from "../ideas/types";
 import { Card } from "@/components/modules/card";
+import { issuePreviewShorterner } from "utils/issuePreviewShorterner"; 
 
 const navLinks = [
    "Products",
@@ -99,6 +100,7 @@ const Profile: FC<IProfile> = ({ user, products, ideas }) => {
             className={styles.user} 
             socials={socials} 
             user={user}
+            
           />
           {/* <div className={styles.wrapper}>
             <div className={styles.nav}>

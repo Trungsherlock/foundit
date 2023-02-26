@@ -79,6 +79,7 @@ model Idea {
   authorId       String
   author         User       @relation(fields: [authorId], references: [id])
   categories     Category[] 
+  likeAuthor     String[]
 }
 
 model Product {
@@ -95,6 +96,7 @@ model Product {
   authorId       String
   author         User       @relation(fields: [authorId], references: [id])
   categories     Category[] 
+  likeAuthor     String[]
 }
 
 enum Type {

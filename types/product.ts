@@ -14,4 +14,5 @@ export type TProduct = {
     authorId: string,
     author: string
     categories: Category[],
+    likeAuthor: string[]
 }
