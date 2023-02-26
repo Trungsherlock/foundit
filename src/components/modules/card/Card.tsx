@@ -12,11 +12,14 @@ import { updatedAt } from "../../../../utils/updatedAt";
 import { getRandomProductType } from "utils/getRandomProductType";
 import { Type } from "@prisma/client";
 import useUserByUid from "../../../hooks/useUserByUid"
+import {getRandomProductCategories} from "../../../../utils/getRandomProductCategories"
 
 const Card: FC<TCard> = ({ className, product }) => {
   const href: string = `/discover-details/${product.id}`;
-  const type:Type = getRandomProductType(product);
+  const type:(Type |undefined) = getRandomProductType(product);
   const author = useUserByUid(product.authorId);
+  const categories = getRandomProductCategories(product, 3)?.map((e)=> e.toString())
+  console.log(categories)
 
   const [hydrated, setHydrated] = useState(false);
   React.useEffect(() => {
@@ -76,7 +79,7 @@ const Card: FC<TCard> = ({ className, product }) => {
               <div className={styles.number}>{product.vote}</div>
             </div>
           <div>
-            <div className={cn("status-purple", styles.tag)}>
+            {/* <div className={cn("status-purple", styles.tag)}>
               #category.name
             </div>
             <div className={cn("status-purple", styles.tag)}>
@@ -84,7 +87,13 @@ const Card: FC<TCard> = ({ className, product }) => {
             </div>
             <div className={cn("status-purple", styles.tag)}>
               #category.name
-            </div>
+            </div> */}
+            
+            {hydrated && categories?.map((x, index) => (
+              <div className={cn("status-purple", styles.tag)}>
+              {x}
+              </div>
+            ))}
           </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, useEffect } from "react";
 import cn from "classnames";
 import styles from "./Discover.module.sass";
 import { Icon } from "../../modules/icon";
@@ -7,29 +7,159 @@ import { Card } from "../../modules/card";
 import Slider from "react-slick";
 import { TSlide, IDiscovery } from "./types";
 import {Dropdown} from "../../modules/dropdown";
-import { bids } from "../../mock/bids";
 import { TProducts } from "./types";
-import { TProduct } from "../../../../types/product";
-import axios from "axios";
+import { TProduct } from "types/product";
+import { SelectOption1 } from "../uploadIdeaDetails/types";
+import {Select} from "../../modules/select";
+import { Category, Type } from "@prisma/client";
+import { randomizeArray } from "utils/randomizeArray";
+import { compareDate } from "utils/compareDate";
+
+export const options = [
+  { label: "Action", value: Category.ACTION },
+  { label: "Adventure", value: Category.ADVENTURE },
+  { label: "Advertising", value: Category.ADVERTISING },
+  { label: "Animation", value: Category.ANIMATION },
+  { label: "Anime", value: Category.ANIME },
+  { label: "Art", value: Category.ART },
+  { label: "Art and Entertainment", value: Category.ARTS_AND_ENTERTAINMENT },
+  { label: "Autos and Vehicles", value: Category.AUTOS_AND_VEHICLES },
+  { label: "Banking", value: Category.BANKING },
+  { label: "Bars", value: Category.BARS },
+  { label: "Beauty", value: Category.BEAUTY },
+  { label: "Beauty and Fitness", value: Category.BEAUTY_AND_FITNESS },
+  { label: "Betting", value: Category.BETTING },
+  { label: "Blockchain", value: Category.BLOCKCHAIN },
+  { label: "Blogging", value: Category.BLOGGING },
+  { label: "Books", value: Category.BOOKS },
+  { label: "Books and Literature", value: Category.BOOKS_AND_LITERATURE },
+  { label: "Business", value: Category.BUSINESS },
+  { label: "Business and Finance", value: Category.BUSINESS_AND_FINANCE },
+  { label: "Careers and Employment", value: Category.CAREERS_AND_EMPLOYMENT },
+  { label: "Charity", value: Category.CHARITY },
+  { label: "Children", value: Category.CHILDREN },
+  { label: "Cloud Computing", value: Category.CLOUD_COMPUTING },
+  { label: "Cloud Storage", value: Category.CLOUD_STORAGE },
+  { label: "Collectibles", value: Category.COLLECTIBLES },
+  { label: "Comedy", value: Category.COMEDY },
+  { label: "Community", value: Category.COMMUNITY },
+  { label: "Computers and Electronics", value: Category.COMPUTERS_AND_ELECTRONICS },
+  { label: "Credit", value: Category.CREDIT },
+  { label: "Culture", value: Category.CULTURE },
+  { label: "Customer Service", value: Category.CUSTOMER_SERVICE },
+  { label: "Dating", value: Category.DATING },
+  { label: "Design", value: Category.DESIGN },
+  { label: "Digital Art", value: Category.DIGITAL_ART },
+  { label: "Digital Streaming", value: Category.DIGITAL_STREAMING },
+  { label: "DIY", value: Category.DIY },
+  { label: "Drama", value: Category.DRAMA },
+  { label: "Ecommerce", value: Category.ECOMMERCE },
+  { label: "Education", value: Category.EDUCATION },
+  { label: "Electronics", value: Category.ELECTRONICS },
+  { label: "Email", value: Category.EMAIL },
+  { label: "Entertainment", value: Category.ENTERTAINMENT },
+  { label: "Environment", value: Category.ENVIRONMENT },
+  { label: "Event", value: Category.EVENT },
+  { label: "Family and Parenting", value: Category.FAMILY_AND_PARENTING },
+  { label: "Fashion", value: Category.FASHION },
+  { label: "Finance", value: Category.FINANCE },
+  { label: "Fitness", value: Category.FITNESS },
+  { label: "Food", value: Category.FOOD },
+  { label: "Food and Drink", value: Category.FOOD_AND_DRINK },
+  { label: "Gaming", value: Category.GAMING },
+  { label: "Gardening", value: Category.GARDENING },
+  { label: "Government", value: Category.GOVERNMENT },
+  { label: "Health", value: Category.HEALTH },
+  { label: "Health and Wellness", value: Category.HEALTH_AND_WELLNESS },
+  { label: "Hobbies and Leisure", value: Category.HOBBIES_AND_LEISURE },
+  { label: "Hospitality", value: Category.HOSPITALITY },
+  { label: "History", value: Category.HISTORY },
+  { label: "Home", value: Category.HOME },
+  { label: "Home and Garden", value: Category.HOME_AND_GARDEN },
+  { label: "Humor", value: Category.HUMOR },
+  { label: "Internet and Telecom", value: Category.INTERNET_AND_TELECOM },
+  { label: "Investment", value: Category.INVESTMENT },
+  { label: "Journalism", value: Category.JOURNALISM },
+  { label: "Law and Government", value: Category.LAW_AND_GOVERNMENT },
+  { label: "Lifestyle", value: Category.LIFESTYLE },
+  { label: "Literature", value: Category.LITERATURE },
+  { label: "Live Streaming", value: Category.LIVE_STREAMING },
+  { label: "Local Search", value: Category.LOCAL_SEARCH },
+  { label: "Maps", value: Category.MAPS },
+  { label: "Marketing", value: Category.MARKETING },
+  { label: "Media", value: Category.MEDIA },
+  { label: "Medical", value: Category.MEDICAL },
+  { label: "Music", value: Category.MUSIC },
+  { label: "Nature", value: Category.NATURE },
+  { label: "News", value: Category.NEWS },
+  { label: "Non-Profit", value: Category.NON_PROFIT },
+  { label: "Nutrition", value: Category.NUTRITION },
+  { label: "Online Communities", value: Category.ONLINE_COMMUNITIES },
+  { label: "Online Marketplace", value: Category.ONLINE_MARKETPLACE },
+  { label: "Open Source", value: Category.OPEN_SOURCE },
+  { label: "Parenting", value: Category.PARENTING },
+  { label: "Personal Development", value: Category.PERSONAL_DEVELOPMENT },
+  { label: "People and Society", value: Category.PEOPLE_AND_SOCIETY },
+  { label: "Pets", value: Category.PETS },
+  { label: "Pets and Animals", value: Category.PETS_AND_ANIMALS },
+  { label: "Philosophy", value: Category.PHILOSOPHY },
+  { label: "Photography", value: Category.PHOTOGRAPHY },
+  { label: "Politics", value: Category.POLITICS },
+  { label: "Programming", value: Category.PROGRAMMING },
+  { label: "Project Management", value: Category.PROJECT_MANAGEMENT },
+  { label: "Psychology", value: Category.PSYCHOLOGY },
+  { label: "Real Estate", value: Category.REAL_ESTATE },
+  { label: "Recruitment", value: Category.RECRUITMENT },
+  { label: "Reference", value: Category.REFERENCE },
+  { label: "Religion", value: Category.RELIGION },
+  { label: "Research", value: Category.RESEARCH },
+  { label: "Restaurants", value: Category.RESTAURANTS },
+  { label: "Science", value: Category.SCIENCE },
+  { label: "Search Engines", value: Category.SEARCH_ENGINES },
+  { label: "Self Help", value: Category.SELF_HELP },
+  { label: "Shopping", value: Category.SHOPPING },
+  { label: "Social Media", value: Category.SOCIAL_MEDIA },
+  { label: "Software", value: Category.SOFTWARE },
+  { label: "Sports", value: Category.SPORTS },
+  { label: "Technology", value: Category.TECHNOLOGY },
+  { label: "Television", value: Category.TELEVISION },
+  { label: "Theater", value: Category.THEATER },
+  { label: "Travel", value: Category.TRAVEL },
+  { label: "Tourism", value: Category.TOURISM },
+  { label: "Uncategorized", value: Category.UNCATEGORIZED },
+  { label: "Video", value: Category.VIDEO },
+  { label: "Video Production", value: Category.VIDEO_PRODUCTION },
+  { label: "Video Sharing", value: Category.VIDEO_SHARING },
+  { label: "Virtual Reality", value: Category.VIRTUAL_REALITY },
+  { label: "Vlogs", value: Category.VLOGS },
+  { label: "Weather", value: Category.WEATHER },
+  { label: "Web Design", value: Category.WEB_DESIGN },
+  { label: "Web Development", value: Category.WEB_DEVELOPMENT },
+  { label: "Web Hosting", value: Category.WEB_HOSTING },
+  { label: "Weddings", value: Category.WEDDINGS },
+  { label: "Wellness", value: Category.WELLNESS },
+  { label: "Writing", value: Category.WRITING }
+];
 
 const SlickArrow: FC<TSlide> = ({children, ...props }) => (
   <button {...props}>{children}</button>
 );
-const dateOptions = ["Newest", "Oldest"];
-const likesOptions = ["Most liked", "Least liked"];
+// const dateOptions = ["Newest", "Oldest"];
+const typesOptions = ["NONE", "WEB", "APP", "EXTENSION", "TOOL", "CHATBOT", "AI", "GAME"];
 const categoryOptions = ["Trending", "Newest"];
 const creatorOptions = ["Verified only", "All", "Most liked"];
 
-
-const navLinks = ["Suggestion", "Trending", ];
+const navLinks = ["Suggestion", "Trending", "Newest"];
 
 
 
 const Discover: FC<TProducts> = ({products}) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [date, setDate] = useState(dateOptions[0]);
-  const [likes, setLikes] = useState(likesOptions[0]);
-  const [creator, setCreator] = useState(creatorOptions[0]);
+  const [type, setType] = useState(typesOptions[0]);
+  const [tags, setTags] = useState<SelectOption1[]>([]);
+
+  //const [creator, setCreator] = useState(creatorOptions[0]);
+  //const [date, setDate] = useState(dateOptions[0]);
 
   //const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState('');
@@ -49,6 +179,43 @@ const Discover: FC<TProducts> = ({products}) => {
   }
 
   const [values, setValues] = useState([5]);
+
+  const [filteredProducts, setFilteredProducts] = useState<TProduct[]>([]);
+
+  const [loading, setLoading] = useState (false);
+
+  let filterProducts = products;
+
+  useEffect(() => {
+    setLoading(!loading)
+    filterProducts = products;
+    console.log(products[0].updatedAt)
+
+    //Filter Types
+    if (type !== "NONE") {
+      filterProducts = products.filter((product) => product.type.map((type) => type.toString().toLowerCase()).includes(type.toLowerCase()));
+    }
+
+    //Filter Tags
+    tags.forEach((e) => filterProducts = products.filter((product) => product.categories.includes(e.value)))
+
+    setFilteredProducts(filterProducts)
+  }, [type, tags]);
+
+  useEffect(() => {
+    //Sort
+    if (activeIndex === 0) {
+      console.log("a");
+      filterProducts = randomizeArray(filterProducts)
+    } else if (activeIndex === 1) {
+      filterProducts = randomizeArray(filterProducts)
+    } else {
+      filterProducts = filterProducts.sort((e1,e2) => compareDate(e2.updatedAt, e1.updatedAt))
+      // filterProducts = randomizeArray(filterProducts)
+    }
+    setFilteredProducts(filterProducts)
+    setLoading(!loading)
+  }, [activeIndex]);
 
   const handleSubmit = (e:any) => {
     alert();
@@ -84,12 +251,12 @@ const Discover: FC<TProducts> = ({products}) => {
         </div>
         <div className={styles.sorting}>
           <div className={styles.dropdown}>
-            <Dropdown
+            {/* <Dropdown
               className={styles.dropdown}
               value={date}
               setValue={setDate}
               options={dateOptions}
-            />
+            /> */}
           </div>
           <div className={styles.nav}>
             {navLinks.map((x, index) => (
@@ -181,32 +348,43 @@ const Discover: FC<TProducts> = ({products}) => {
               />
               <div className={styles.scale}>
                 <div className={styles.number}>0 </div>
-                <div className={styles.number}>10000</div>
+                <div className={styles.number}>100</div>
               </div>
             </div>
             <div className={styles.group}>
               <div className={styles.item}>
-                <div className={styles.label}>Price</div>
+                <div className={styles.label}>Types</div>
                 <Dropdown
                   className={styles.dropdown}
-                  value={likes}
-                  setValue={setLikes}
-                  options={likesOptions}
+                  value={type}
+                  setValue={setType}
+                  options={typesOptions}
                 />
               </div>
               <div className={styles.item}>
                 <div className={styles.label}>Creator</div>
-                <Dropdown
+                {/* <Dropdown
                   className={styles.dropdown}
                   value={creator}
                   setValue={setCreator}
                   options={creatorOptions}
-                />
+                /> */}
+              <Select
+                multiple
+                options={options}
+                value={tags}
+                onChange={o => { 
+                  setTags(o)
+                }}
+              />
+                
               </div>
             </div>
             <div className={styles.reset}>
+              <button onClick={() => {setType(typesOptions[0]); setTags([])}}>
               <Icon name="close-circle-fill" size="24" />
               <span>Reset filter</span>
+              </button>
             </div>
           </div>
           <div className={styles.wrapper}>

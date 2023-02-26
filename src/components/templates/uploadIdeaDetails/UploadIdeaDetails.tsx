@@ -247,14 +247,7 @@ const UploadIdeaDetails:FC = () => {
                     </div>
                     <div className={styles.field}>
                       <div className={styles.label}>Categories</div>
-                      <Select
-                        multiple
-                        options={options}
-                        value={tags}
-                        onChange={o => { 
-                          setTags(o)
-                        }}
-                      />
+                      
                     </div>
                   </div>
                 </div>

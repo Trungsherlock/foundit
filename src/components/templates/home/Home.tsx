@@ -9,7 +9,6 @@ const Home: FC = () => {
 
     return (
         <>
-            
             <div className={cn("section1", styles.section1)}>
                 <div className={cn("container1", styles.container1)}>
                     <div className={cn("head1", styles.head)}>
@@ -19,7 +18,12 @@ const Home: FC = () => {
                         <h1 className={cn("h3", styles.title)}>
                             NEED ANY WEBSITE?
                         </h1>
-                        <SearchBar />
+                        <CustomLink
+                            className={cn("button-small", styles.button)}
+                            href="/search-results#gsc.tab=0">
+                            Go To Search
+                        </CustomLink>
+                        {/* <SearchBar /> */}
                         <p className={styles.ppp}>
                             This section helps you rediscover forgotten websites. Use our search tool and tips to find what you're looking for. Don't let forgetting a site hold you back - let us help you rediscover it today.
                         </p>

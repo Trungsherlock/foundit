@@ -12,6 +12,8 @@ import axios from 'axios';
 import Product from "../profile/Product/Product";
 import { TProduct } from "types/product";
 import {toast} from "react-hot-toast";
+import { SelectSingle } from "../../modules/selectSingle";
+import { SelectOption1, SelectOption2 } from "../uploadIdeaDetails/types";
 
 export const options = [
   { label: "Action", value: Category.ACTION },
@@ -153,13 +155,13 @@ const typeOfProduct = [
 
 const UploadProductDetails:FC = () => {
   const [title, setTitle] = useState<string>("");
-  const [type, setType] = useState<Type[]>();
+  const [type, setType] = useState<SelectOption2>();
   const [brief, setBrief] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [link, setLink] = useState<string | undefined>();
   const [image, setImage] = useState<any>();
-  //const [tags, setTags] = useState<SelectOption[]>([]);
-  //const [type, setType] = useState<SelectOption[]>([]);
+  const [categories, setCategories] = useState<SelectOption1[]>([]);
+  const single: boolean = false;
 
   const sizeLimit = 10 * 1024 * 1024 // 10MB
 
@@ -291,6 +293,28 @@ const UploadProductDetails:FC = () => {
                       value={link ?? ''}
                       onChange={(e: any) => setLink(e.target.value)}
                     />
+                    <div className={styles.field}>
+                      <div className={styles.label}>Type of product</div>
+                      <SelectSingle
+                        multiple={single}
+                        options={typeOfProduct}
+                        value={type}
+                        onChange={o => { 
+                          setType(o)
+                        }}
+                      />
+                    </div>
+                    <div className={styles.field}>
+                      <div className={styles.label}>Categories</div>
+                      <Select
+                        multiple
+                        options={options}
+                        value={categories}
+                        onChange={o => { 
+                          setCategories(o)
+                        }}
+                      />
+                    </div>
                     <div className={styles.file}>
                         <button
                         className={cn(
@@ -302,28 +326,6 @@ const UploadProductDetails:FC = () => {
                         </button>
                         <input className={styles.load} type="file" onChange={handleOnChangeAvatar} />
                     </div>
-                    {/* <div className={styles.field}>
-                      <div className={styles.label}>Type of product</div>
-                      <Select 
-                        multiple
-                        options={typeOfProduct}
-                        value={type}
-                        onChange={o => { 
-                          setType(o)
-                        }}
-                      />
-                    </div> */}
-                    {/* <div className={styles.field}>
-                      <div className={styles.label}>Categories</div>
-                      <Select
-                        multiple
-                        options={options}
-                        value={tags}
-                        onChange={o => { 
-                          setTags(o)
-                        }}
-                      />
-                    </div> */}
                   </div>
                 </div>
               </div>
