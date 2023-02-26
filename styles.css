@@ -1,0 +1,29 @@
+#gs_tti50{
+    padding: 6px 0 !important;
+    background: none !important;
+}
+
+#gsc-i-id1{
+    text-indent: 0 !important;
+    font-size: 14px !important;
+    line-height: 1 !important;
+    background: none !important;
+}
+
+.gsc-control-cse{
+    background-color: #eaeafa !important;
+    border: 0 !important;
+}
+
+.gsc-input-box
+{
+    border: 0 !important;
+}
+
+.gsc-webResult.gsc-result a {
+    color: #23598C  !important;
+}
+
+.gsc-webResult.gsc-result b {
+    color: #23598C !important;
+}
