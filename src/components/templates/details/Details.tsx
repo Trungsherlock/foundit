@@ -8,17 +8,23 @@ import { updatedAt } from "utils/updatedAt";
 
 const navLinks = ["About", "Features", "Authors"];
 
-const categories = [
-  {
-    category: "black",
-    content: "TYPE",
-  },
-];
-
 const Item: FC<TProductDetails> = ({product}) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [like, setLike] = useState<boolean>(false);
 
-  const [bigImage,setBigImage] = useState("/images/content/photo-1.1.jpg");
+  const categories = [
+    {
+      category: "black",
+      content: product.type[0],
+    },
+  ];
+
+  const handleClick = () => {
+    setLike(!like);
+    console.log(like);
+  }
+
+  const [bigImage,setBigImage] = useState<string>(product.image[0]);
   return (
     <>
       <div className={cn("section", styles.section)}>
@@ -50,15 +56,15 @@ const Item: FC<TProductDetails> = ({product}) => {
                 <div className={styles.slideOne}>
                   
                 <img
-                srcSet="/images/content/photo-1.1.jpg"
-                src={product.image[0]}
+                srcSet={product.image[0]? product.image[0] :"/images/content/photo-1.1.jpg"}
+                src="/images/content/photo-1.1.jpg"
                 alt="Item"
                 onClick={() => setBigImage("/images/content/photo-1.1.jpg")}
                 />  
                 </div>
                 <div className={styles.slideTwo}>
                   <img
-                  srcSet="/images/content/item-pic@2x.jpg 2x"
+                  srcSet={product.image[1]? product.image[1] :"/images/content/item-pic@2x.jpg 2x"}
                   src="/images/content/photo-1.2.jpg"
                   alt="Item"
                   onClick={() => setBigImage("/images/content/item-pic@2x.jpg 2x")}
@@ -66,7 +72,7 @@ const Item: FC<TProductDetails> = ({product}) => {
                 </div>
                 <div className={styles.slideThree}>
                   <img
-                  srcSet="/images/content/item-pic@2x.jpg 2x"
+                  srcSet={product.image[2]? product.image[2] :"/images/content/item-pic@2x.jpg 2x"}
                   src="/images/content/photo-1.3.jpg"
                   alt="Item"
                   onClick={() => setBigImage("/images/content/item-pic@2x.jpg 2x")}
@@ -80,9 +86,9 @@ const Item: FC<TProductDetails> = ({product}) => {
             <h1 className={cn("h3", styles.title)}>{product.title}</h1>
             <div className={styles.cost}>
               <div className={cn("status-stroke-green", styles.price)}>
-                <button className={styles.copy}>
-                <Icon name="heart" size="22" />
-              </button>
+                <button onClick={handleClick} className={styles.copy}>
+                  {like? 'like': <Icon name="heart" size="22" />}
+                </button>
               <div className={styles.number}>{product.vote}</div>
               </div>
               <div className={styles.counter}>{updatedAt(product.updatedAt)}</div>
@@ -124,16 +130,11 @@ const Item: FC<TProductDetails> = ({product}) => {
               </div>
             </div>
             <div className={styles.categoryBox}>
-              <div className={cn("status-purple", styles.tag)}>
-                <p className={styles.textCenter}>#category.name
-                </p>
-              </div>
-              <div className={cn("status-purple", styles.tag)}>
-                #category.name
-              </div>
-              <div className={cn("status-purple", styles.tag)}>
-                #category.name
-            </div>
+              {product.categories.map((c, index) => (
+                <div className={cn("status-purple", styles.tag)} key={index}>
+                  <p className={styles.textCenter}>{c}</p>
+                </div>
+              ))}
           </div>
         </div>
       </div>
