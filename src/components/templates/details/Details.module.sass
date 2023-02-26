@@ -99,7 +99,7 @@
     margin-bottom: 32px
     padding: 6px
     border-radius: 20px
-    box-shadow: inset 0 0 0 2px $neutrals6
+    box-shadow: inset 0 0 0 2px #660000
     +dark
         box-shadow: inset 0 0 0 2px $neutrals3
 
@@ -115,7 +115,7 @@
         +dark
             color: $neutrals6
     &.active
-        background: $neutrals3
+        background: #666600
         color: $neutrals8
         +dark
             background: $neutrals8
@@ -148,11 +148,11 @@
     &:hover
         svg
             fill: darken(#FF0000, 10)
-.item
+.about
     margin-top: -12px
-    height: 300px
+    height: 325px
     //display: bottom
-    border-bottom: solid #FFFFFF
+    border-bottom: solid #660000
 
     
 
@@ -163,5 +163,48 @@
     background-color: #000
 .about
    +dm-sans
-   color: #FFFFFF
+   color: #54545f
+.threeSlide
+    display: flex
+    width:97%
+    height:200px
+    align-items: space-between
+.slideOne
+    display: flex
+    height: 200px
+    width:33.3%
+    border-radius: 10px
+    & > img
+        height:100%
+.slideTwo
+    display: flex
+    height: 200px
+    width:33.3%
+    border-radius: 10px
+    & > img
+        height:100%    
+.slideThree
+    display: flex
+    height: 200px
+    border-radius: 10px
+    width:33.3%
+    & > img
+        height:100% 
+.tag
+    +dm-sans
+    display: flex
+    color:#ffffff
+    font-size: 10px
+    line-height: 25px
+    border-radius: 10px
+    width:33.3%
+    text-align: center
+    margin: 0 auto
+    &:not(:last-child)
+        margin-right: 5px  
+.categoryBox
+    display: flex
+    margin-top:10px
+    align-items: flex-start
+
     

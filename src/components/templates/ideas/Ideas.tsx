@@ -1,27 +1,31 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, useEffect } from "react";
 import cn from "classnames";
 import styles from "./Ideas.module.sass";
 import { Icon } from "../../modules/icon";
 import { IdeaCard } from "../../modules/ideaCard";
 import { TIdeas } from "./types";
+import { TIdea } from "../../../../types/idea"
 import { CustomLink } from "../../modules/customLink"
 import {Dropdown} from "../../modules/dropdown"
 import { TSlide } from "./types";
 import { Range, getTrackBackground } from "react-range";
+import { prisma } from "lib/prismadb";
+import { Type, Category} from "@prisma/client"
 
 const SlickArrow: FC<TSlide> = ({children, ...props }) => (
   <button {...props}>{children}</button>
 );
 
-const Type = ["Web", "App", "Extension", "Tool", "Chatbot", "AI", "Game"];
+const TypeOptions = ["Web", "App", "Extension", "Tool", "Chatbot", "AI", "Game"];
 
 const dateOptions = ["Newest", "Oldest"];
+
 
 const Idea: FC<TIdeas> = ({ ideas }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [date, setDate] = useState(dateOptions[0]);
   const [values, setValues] = useState([5]);
-  const [types, setTypes] = useState(Type[0]);
+  const [types, setTypes] = useState(TypeOptions[0]);
   const handleSubmit = (e:any) => {
     alert();
   };
@@ -31,6 +35,16 @@ const Idea: FC<TIdeas> = ({ ideas }) => {
   const MAX = 100;
 
   const [search, setSearch] = useState("");
+  const [filteredIdeas, setFilteredIdeas] = useState<TIdea[]>([]);
+
+  useEffect(() => {
+    const filterIdeas = ideas.filter((idea) => idea.type.map((type) => type.toString()).includes(search.toLowerCase()));
+    setFilteredIdeas(filterIdeas);
+  });
+  
+
+  //const href: string = "/";
+
   return (
     <div className={cn("section-pt80", styles.section)}>
       <div className={cn("container", styles.container)}>
@@ -143,7 +157,7 @@ const Idea: FC<TIdeas> = ({ ideas }) => {
                   className={styles.dropdown}
                   value={types}
                   setValue={setTypes}
-                  options={Type}
+                  options={TypeOptions}
                 />
               </div>
               <div className={styles.sorting}>
@@ -175,22 +189,8 @@ const Idea: FC<TIdeas> = ({ ideas }) => {
             </div>
           </div>
         </div>
-
-        {/* End */}
-        {/* <div className={styles.wrapper}> 
-            <div className={styles.arow}>
-                <div>
-                  {ideas.map((idea, index) => <IdeaCard key={index} idea={idea} />)}
-                </div>
-            <div className={styles.btns}>
-              <button className={cn("button-stroke", styles.button)}>
-                <span>Load more</span>
-              </button>
-            </div>
-          </div>
-        </div> */}
         </div>
-    </div>
+      </div>
   );
 };
 
