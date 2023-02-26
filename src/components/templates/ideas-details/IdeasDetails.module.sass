@@ -69,6 +69,10 @@
 .title
     margin-bottom: 8px
 
+.title_small
+    margin-bottom: 7px
+    font-size: 30px
+
 .cate
     display: flex
     align-items: center
@@ -87,10 +91,19 @@
     align-items: center
     margin-bottom: 40px
 
+// .price
+//     +dm-sans
+//     font-size: 16px
+//     line-height: 30px
+//     &:not(:last-child)
+//         margin-right: 8px
+
 .price
     +dm-sans
+    display: flex
     font-size: 16px
-    line-height: 30px
+    flex-direction: row
+    line-height: 26px
     &:not(:last-child)
         margin-right: 8px
 
@@ -131,7 +144,7 @@
 
 .link
     padding: 6px 12px
-    border-radius: 14px
+    border-radius: 15px
     background: none
     +button-2
     color: $neutrals4
@@ -149,6 +162,17 @@
     &:not(:last-child)
         margin-right: 8px
     
+.copy
+    margin-right: 5px
+    svg
+        display: top
+        fill: $neutrals1
+        transition: fill .2s
+        margin-top:2px
+    &:hover
+        svg
+            fill: darken(#FF0000, 10)
+
 .users
     margin-bottom: auto
 
@@ -180,3 +204,13 @@
             border-bottom: 1px solid $neutrals6
             +dark
                 border-color: $neutrals3
+    
+.item
+    margin-top: -12px
+    height: 300px
+    //display: bottom
+    
+
+.author1 
+    flex-direction: row
+    background-color: #000
