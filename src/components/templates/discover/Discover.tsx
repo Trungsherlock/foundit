@@ -9,6 +9,8 @@ import { TSlide, IDiscovery } from "./types";
 import {Dropdown} from "../../modules/dropdown";
 import { bids } from "../../mock/bids";
 import { TProducts } from "./types";
+import { TProduct } from "../../../../types/product";
+import axios from "axios";
 
 const SlickArrow: FC<TSlide> = ({children, ...props }) => (
   <button {...props}>{children}</button>
@@ -31,10 +33,19 @@ const Discover: FC<TProducts> = ({products}) => {
 
   //const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState('');
+  const [filteredResults, setFilteredResults] = useState<TProduct[]>(products);
+
 
   const searchItems = (searchValue: string) => {
-    setSearchInput(searchValue)
-    console.log(searchValue);
+    setSearchInput(searchValue);    
+    if (searchInput !== '') {
+      const filteredData = products.filter((item) => {
+        return Object.values(item.title).join('').toLowerCase().includes(searchInput.toLowerCase())
+      });
+      setFilteredResults(filteredData);
+    } else {
+      setFilteredResults(products);
+    }
   }
 
   const [values, setValues] = useState([5]);
@@ -200,7 +211,7 @@ const Discover: FC<TProducts> = ({products}) => {
           </div>
           <div className={styles.wrapper}>
             <div className={styles.list}>
-              {products.map((product, index) => (
+              {filteredResults.map((product, index) => (
                 <Card className={styles.card} product={product} key={index} />
               ))}
             </div>
