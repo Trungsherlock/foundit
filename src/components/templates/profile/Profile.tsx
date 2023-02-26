@@ -7,6 +7,7 @@ import {UserProfile} from "../../modules/userProfile";
 import { IProfile } from "./types";
 import { IdeaCard } from "@/components/modules/ideaCard";
 import { TIdeas } from "../ideas/types";
+import { Card } from "@/components/modules/card";
 
 const navLinks = [
    "Products",
@@ -98,6 +99,7 @@ const Profile: FC<IProfile> = ({ user, products, ideas }) => {
             className={styles.user} 
             socials={socials} 
             user={user}
+            
           />
           {/* <div className={styles.wrapper}>
             <div className={styles.nav}>
@@ -179,6 +181,15 @@ const Profile: FC<IProfile> = ({ user, products, ideas }) => {
                   </div>
 
 
+                )}
+                {activeIndex === 0 && (
+                  <div className={styles.wrapper}>       
+                    <div className={styles.list}>
+                      {products.map((product, index) => 
+                        <Card className={styles.card} key={index} product={product} />
+                      )}
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
