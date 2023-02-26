@@ -1,4 +1,6 @@
+import { TProduct } from "types/product";
+
 export type TUsers = {
     className: string;
-    items:any,
+    product: TProduct
 }

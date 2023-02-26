@@ -15,11 +15,10 @@ import useUserByUid from "../../../hooks/useUserByUid"
 import {getRandomProductCategories} from "../../../../utils/getRandomProductCategories"
 
 const Card: FC<TCard> = ({ className, product }) => {
-  const href: string = "/";
+  const href: string = `/discover-details/${product.id}`;
   const type:(Type |undefined) = getRandomProductType(product);
   const author = useUserByUid(product.authorId);
   const categories = getRandomProductCategories(product, 3)?.map((e)=> e.toString())
-  console.log(categories)
 
   const [hydrated, setHydrated] = useState(false);
   React.useEffect(() => {
@@ -28,7 +27,7 @@ const Card: FC<TCard> = ({ className, product }) => {
 
   return (
     <div className={cn(styles.card, className)}>
-      <CustomLink className={styles.cover} href="/discover-detail">
+      <CustomLink className={styles.cover} href={href}>
       
       <div className={styles.box}>
         <div className={styles.preview}>
