@@ -3,8 +3,8 @@ import cn from "classnames";
 import styles from "./UploadProductDetails.module.sass";
 import {TextInput} from "../../modules/textInput";
 import {TextArea} from "../../modules/textArea";
-//import {Select} from "../../modules/select";
-//import { SelectOption } from "./types";
+import {Select} from "../../modules/select";
+import { SelectOption } from "src/components/modules/select/types";
 import {useRouter} from 'next/router';
 import { Button } from "../../modules/button";
 import { Category, Type } from "@prisma/client";
@@ -150,8 +150,10 @@ const typeOfProduct = [
 
 const UploadProductDetails:FC = () => {
   const [title, setTitle] = useState<string>("");
+  //const [type, setType] = useState<Type[]>();
+  const [brief, setBrief] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [feature, setFeature] = useState<string>("");
+  const [link, setLink] = useState<string>("");
   //const [tags, setTags] = useState<SelectOption[]>([]);
   //const [type, setType] = useState<SelectOption[]>([]);
 
@@ -168,17 +170,17 @@ const UploadProductDetails:FC = () => {
     try {
       const data = {
         title, 
-        description, 
-        feature, 
-        //tags
+        //type,
+        brief,
+        description,
+        link
       } 
-      //console.log(tags);
       console.log(data);
-      const res = await axios.post(`/api/ideas`, data)
+      const res = await axios.post(`/api/products`, data)
       console.log("upload successfully", res);
       setUploadLoading(false);
       setUploadSuccess(true);
-      await router.push('/ideas')
+      await router.push('/discover')
     } catch (err) {
       console.log("errr",err);
       setUploadLoading(false);
@@ -204,12 +206,22 @@ const UploadProductDetails:FC = () => {
                     <TextInput
                       className={styles.field}
                       label="Product name"
-                      name="Item"
+                      name="Title"
                       type="text"
                       placeholder='e. g. Potata"'
                       required
                       value={title}
                       onChange={(e: any) => setTitle(e.target.value)}
+                    />
+                    <TextInput
+                      className={styles.field}
+                      label="Brief"
+                      name="Brief"
+                      type="text"
+                      placeholder="e. g. “Grocery shopping app”"
+                      required
+                      value={brief}
+                      onChange={(e: any) => setBrief(e.target.value)}
                     />
                     <TextArea
                       className={styles.field}
@@ -221,38 +233,38 @@ const UploadProductDetails:FC = () => {
                       value={description}
                       onChange={(e: any) => setDescription(e.target.value)}
                     />
-                    <TextArea
+                    <TextInput
                       className={styles.field}
-                      label="Feature"
-                      name="Feature"
+                      label="Link to product"
+                      name="Link"
                       type="text"
-                      placeholder="e. g. “abc”"
+                      placeholder="e. g. “https://potata.com”"
                       required
-                      value={feature}
-                      onChange={(e: any) => setFeature(e.target.value)}
+                      value={link}
+                      onChange={(e: any) => setDescription(e.target.value)}
                     />
-                    <div className={styles.field}>
+                    {/* <div className={styles.field}>
                       <div className={styles.label}>Type of product</div>
-                      {/* <Select 
+                      <Select 
                         multiple
                         options={typeOfProduct}
                         value={type}
                         onChange={o => { 
                           setType(o)
                         }}
-                      /> */}
-                    </div>
-                    <div className={styles.field}>
+                      />
+                    </div> */}
+                    {/* <div className={styles.field}>
                       <div className={styles.label}>Categories</div>
-                      {/* <Select
+                      <Select
                         multiple
                         options={options}
                         value={tags}
                         onChange={o => { 
                           setTags(o)
                         }}
-                      /> */}
-                    </div>
+                      />
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -268,7 +280,7 @@ const UploadProductDetails:FC = () => {
                   loading={uploadingLoading}
                   success={uploadSuccess}
                   disabled={false}
-                  name="Create Idea"
+                  name="Upload product"
                   onClick={async (e) => { await submitData(e)}}
                 />
               </div>
