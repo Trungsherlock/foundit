@@ -11,4 +11,5 @@ export type TIdea = {
     authorId: string,
     author: string,
     categories: Category[],
+    likeAuthor: string[]
 }
