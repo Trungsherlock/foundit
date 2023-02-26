@@ -2,7 +2,7 @@ import { Category, Type } from "@prisma/client";
 
 export type TProduct = {
     id: string,
-    link: string,
+    link?: string,
     title: string,
     type: Type[],
     brief: string,
