@@ -180,6 +180,15 @@ const Profile: FC<IProfile> = ({ user, products, ideas }) => {
 
 
                 )}
+                {activeIndex === 0 && (
+                  // <ProductCard idea = {idea1} />
+
+                  <div>
+                    {ideas.map((idea, index) => <IdeaCard key={index} idea={idea} />)}
+                  </div>
+
+
+                )}
               </div>
             </div>
           </div>
