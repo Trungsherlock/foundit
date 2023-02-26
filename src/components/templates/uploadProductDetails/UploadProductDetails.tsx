@@ -11,7 +11,6 @@ import { Category, Type } from "@prisma/client";
 import axios from 'axios';
 import Product from "../profile/Product/Product";
 import { TProduct } from "types/product";
-import { IImageUpload } from "./types";
 import {toast} from "react-hot-toast";
 
 export const options = [
