@@ -9,6 +9,6 @@ export type TIdea = {
     createdAt: string,
     updatedAt: string,
     authorId: string,
-    author: string
+    author: string,
     categories: Category[],
 }

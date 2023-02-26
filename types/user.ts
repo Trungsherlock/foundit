@@ -13,5 +13,5 @@ export type TUser = {
     image: string;
     ideas: TIdea[];
     point: number;
-    product: TProduct[]
+    product: TProduct[];
 }

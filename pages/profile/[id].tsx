@@ -7,7 +7,6 @@ import { prisma } from '../../lib/prismadb';
 import { IProfile } from '../../src/components/templates/profile/types';
 
 
-
 export const getServerSideProps = async ({ params } : any) => {
     const userId = params.id;
     
@@ -17,10 +16,21 @@ export const getServerSideProps = async ({ params } : any) => {
         }
     })
 
-    if (user) {
+    const products = await prisma.product.findMany({
+        where: { authorId: userId },
+    });
+
+    const ideas = await prisma.idea.findMany({
+        where: { authorId: userId },
+    });
+
+
+    if (user && products && ideas) {
         return {
             props: {
-                user: JSON.parse(JSON.stringify(user))
+                user: JSON.parse(JSON.stringify(user)),
+                products: JSON.parse(JSON.stringify(products)),
+                ideas: JSON.parse(JSON.stringify(ideas)),
             }
         }  
     }
@@ -34,13 +44,15 @@ export const getServerSideProps = async ({ params } : any) => {
 }
 
 
-const ProfilePage: NextPage<IProfile> = ({ user }) => {
+const ProfilePage: NextPage<IProfile> = ({ user, products, ideas}) => {
     const { data: session } = useSession();
     if (session?.user) {
         return (
             <Layout>
                 <Profile 
                     user={user}
+                    products = {products}
+                    ideas = {ideas}
                 />
             </Layout>
         )

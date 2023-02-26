@@ -11,10 +11,12 @@ import Interpunct from "react-interpunct";
 import { updatedAt } from "../../../../utils/updatedAt";
 import { getRandomProductType } from "utils/getRandomProductType";
 import { Type } from "@prisma/client";
+import useUserByUid from "../../../hooks/useUserByUid"
 
 const Card: FC<TCard> = ({ className, product }) => {
   const href: string = "/";
-  const typeasd:Type = getRandomProductType(product);
+  const type:Type = getRandomProductType(product);
+  const author = useUserByUid(product.authorId);
 
   const [hydrated, setHydrated] = useState(false);
   React.useEffect(() => {
@@ -34,12 +36,12 @@ const Card: FC<TCard> = ({ className, product }) => {
           </div>
        
           <div className={styles.types}>
-              {hydrated && <div className={cn("status-black",styles.type) }> {typeasd} </div>}
+              {hydrated && <div className={cn("status-black",styles.type) }> {type} </div>}
           </div>
 
           <img 
-            srcSet="/images/mock-logo/1.webp"
-            src=""
+            srcSet={product.image[0]}
+            src="/images/mock-logo/1.webp"
             alt="Card" 
           />
           {/* <div className={styles.control}>
@@ -57,7 +59,7 @@ const Card: FC<TCard> = ({ className, product }) => {
         <div className={styles.frame}>
           <div className={styles.avatar}>
             <img 
-            src={"/images/content/avatar-user.jpg"} 
+            src={author?.image} 
             alt="Avatar" />
           </div> 
           <div className={styles.tittle}>{product.title}</div>
