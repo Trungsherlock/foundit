@@ -14,7 +14,7 @@ import { Type } from "@prisma/client";
 import useUserByUid from "../../../hooks/useUserByUid"
 
 const Card: FC<TCard> = ({ className, product }) => {
-  const href: string = "/";
+  const href: string = `/discover-details/${product.id}`;
   const type:Type = getRandomProductType(product);
   const author = useUserByUid(product.authorId);
 
@@ -25,7 +25,7 @@ const Card: FC<TCard> = ({ className, product }) => {
 
   return (
     <div className={cn(styles.card, className)}>
-      <CustomLink className={styles.cover} href="/discover-detail">
+      <CustomLink className={styles.cover} href={href}>
       
       <div className={styles.box}>
         <div className={styles.preview}>
