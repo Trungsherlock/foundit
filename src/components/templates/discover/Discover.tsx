@@ -9,7 +9,7 @@ import { TSlide, IDiscovery } from "./types";
 import {Dropdown} from "../../modules/dropdown";
 import { TProducts } from "./types";
 import { TProduct } from "types/product";
-import { SelectOption } from "../uploadIdeaDetails/types";
+import { SelectOption1 } from "../uploadIdeaDetails/types";
 import {Select} from "../../modules/select";
 import { Category, Type } from "@prisma/client";
 import { randomizeArray } from "utils/randomizeArray";
@@ -156,12 +156,27 @@ const navLinks = ["Suggestion", "Trending", "Newest"];
 const Discover: FC<TProducts> = ({products}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [type, setType] = useState(typesOptions[0]);
-  const [tags, setTags] = useState<SelectOption[]>([]);
+  const [tags, setTags] = useState<SelectOption1[]>([]);
 
   //const [creator, setCreator] = useState(creatorOptions[0]);
   //const [date, setDate] = useState(dateOptions[0]);
 
-  const [search, setSearch] = useState("");
+  //const [search, setSearch] = useState("");
+  const [searchInput, setSearchInput] = useState('');
+  const [filteredResults, setFilteredResults] = useState<TProduct[]>(products);
+
+
+  const searchItems = (searchValue: string) => {
+    setSearchInput(searchValue);    
+    if (searchInput !== '') {
+      const filteredData = products.filter((item) => {
+        return Object.values(item.title).join('').toLowerCase().includes(searchInput.toLowerCase())
+      });
+      setFilteredResults(filteredData);
+    } else {
+      setFilteredResults(products);
+    }
+  }
 
   const [values, setValues] = useState([5]);
 
@@ -223,8 +238,8 @@ const Discover: FC<TProducts> = ({products}) => {
             <input
               className={styles.input}
               type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              value={searchInput}
+              onChange={(e) => searchItems(e.target.value)}
               name="search"
               placeholder="Search ..."
               required
@@ -333,7 +348,7 @@ const Discover: FC<TProducts> = ({products}) => {
               />
               <div className={styles.scale}>
                 <div className={styles.number}>0 </div>
-                <div className={styles.number}>10000</div>
+                <div className={styles.number}>100</div>
               </div>
             </div>
             <div className={styles.group}>
@@ -374,7 +389,7 @@ const Discover: FC<TProducts> = ({products}) => {
           </div>
           <div className={styles.wrapper}>
             <div className={styles.list}>
-              {filteredProducts.map((product, index) => (
+              {filteredResults.map((product, index) => (
                 <Card className={styles.card} product={product} key={index} />
               ))}
             </div>

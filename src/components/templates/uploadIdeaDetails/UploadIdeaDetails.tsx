@@ -4,11 +4,12 @@ import styles from "./UploadIdeaDetails.module.sass";
 import {TextInput} from "../../modules/textInput";
 import {TextArea} from "../../modules/textArea";
 import {Select} from "../../modules/select";
-import { SelectOption } from "./types";
+import { SelectOption1, SelectOption2 } from "./types";
 import {useRouter} from 'next/router';
 import { Button } from "../../modules/button";
 import { Category, Type } from "@prisma/client";
 import axios from 'axios';
+import { SelectSingle } from "../../modules/selectSingle";
 
 export const options = [
   { label: "Action", value: Category.ACTION },
@@ -152,8 +153,9 @@ const UploadIdeaDetails:FC = () => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [feature, setFeature] = useState<string>("");
-  const [tags, setTags] = useState<SelectOption[]>([]);
-  const [type, setType] = useState<SelectOption[]>([]);
+  const [tags, setTags] = useState<SelectOption1[]>([]);
+  const [type, setType] = useState<SelectOption2>();
+  const single: boolean = false;
 
   const router = useRouter();
   const [visiblePreview, setVisiblePreview] = useState(false);
@@ -170,7 +172,8 @@ const UploadIdeaDetails:FC = () => {
         title, 
         description, 
         feature, 
-        tags
+        tags,
+        type
       } 
       console.log(tags);
       console.log(data);
@@ -233,14 +236,14 @@ const UploadIdeaDetails:FC = () => {
                     />
                     <div className={styles.field}>
                       <div className={styles.label}>Type of product</div>
-                      {/* <Select 
-                        multiple
+                      <SelectSingle
+                        multiple={single}
                         options={typeOfProduct}
                         value={type}
                         onChange={o => { 
                           setType(o)
                         }}
-                      /> */}
+                      />
                     </div>
                     <div className={styles.field}>
                       <div className={styles.label}>Categories</div>

@@ -95,9 +95,14 @@
         color: $neutrals8
 
 .body
+    margin-top: 12px
     flex-direction: row
     flex-grow: 1
-    border-bottom: 1px solid $neutrals6
+    height: 180px
+    background-color:  #ffffff
+    border-radius: 15px
+    border-width: 4px
+    //border-bottom: 20px solid $neutrals6
     & > img
         border-radius: 12px
         margin-top: 12px
@@ -107,43 +112,48 @@
     flex-direction: column
     align-items: flex-start
 .title
-    margin-top: 12px
+    margin-top: 8px
+    width:70%
+    height: 30px
     margin-right: auto
-    margin-left: 12px
+    margin-left: 16px
     padding-top: 1px
     font-size: 24px
     +dm-sans
-    color: $neutrals1
+    color: cn("status-purple")
 .details
     margin-top: 12px
     margin-right: auto
-    margin-left: 12px
+    margin-left: 16px
     padding-top: 1px
-    font-size: 18px
+    font-size: 15px
     width: 90%
-    color: $neutrals4
+    height: 20px
+    color: $neutrals1
 .update
     margin-right: auto
     padding-top: 9px
     font-size: 11px
     color: $green
 .author
+    margin-top: auto
     margin-right: 5px
-    font-size: 13px
-    color: $yellow
+    font-size: 15px
+    margin-bottom: 10px
     
 .updatedAt 
     margin-right: auto
     padding-right: 3px
     font-size: 13px
     margin-left: 5px
-    color: $neutrals2
+    color: $neutrals4
 
 .users
     display: flex
     margin-right: auto
 
 .avatar
+    
     margin-bottom: 6px
     padding-right: 0
     flex-shrink: 0
@@ -157,7 +167,13 @@
         object-fit: cover
         border-radius: 50%
     &:not(:first-child)
+        
         margin-left: -8px
+
+.avatarBox
+    display: flex
+    margin-right: 10px
+    margin-top:30px
     
 .counter
     +dark
@@ -174,10 +190,9 @@
         border-color: $neutrals3
 
 .line2
-    display: flex
-    align-items: flex-start
-    margin-right: auto
-    margin-left: 12px
+    display: left
+    margin-left: -5px
+
 
 .status
     svg
@@ -199,8 +214,68 @@
 
 .tag
     +dm-sans
-    font-size: 10px
+    margin-top: auto
+    font-size: 12px
     line-height: 20px
     border-radius: 10px
     &:not(:last-child)
         margin-right: 4px
+.limitSize 
+    margin-right: auto
+    padding-right: 3px
+    font-size: 13px
+    margin-left: 5px
+.upper
+    height: 50%
+    display: flex
+.copy
+    margin-left: auto
+    margin-right: 5px
+    svg
+        display: flex
+        fill: #990099
+        transition: fill .2s
+        margin-top:-5px
+    &:hover
+        svg
+            fill: darken(#FF0000, 10)
+.number
+    +dm-sans
+    margin-top: -5px
+    font-size: 25px
+    line-height: 50px
+    &:not(:last-child)
+        margin-right: 8px
+    color: #ff1a75
+.price
+    +dm-sans
+    margin-right: 12px
+    //margin-top: 12px
+    font-size: 20px
+    display: flex
+    line-height: 30px
+    &:not(:last-child)
+        margin-right: 8px
+.authorBox
+    margin-top: 10px
+    margin-right: 12px
+    margin-left: auto
+    display: flex
+    height: 70px
+.tags
+    +dm-sans
+    display: flex
+    color:#ffffff
+    font-size: 14px
+    line-height: 25px
+    border-radius: 10px
+    width:33.3%
+    text-align: center
+    margin: 0 auto
+    &:not(:last-child)
+        margin-right: 5px  
+.categoryBox
+    display: flex
+    margin-top:10px
+    margin-left: 12px
+    align-items: flex-start

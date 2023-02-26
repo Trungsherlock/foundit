@@ -3,13 +3,12 @@ import { Layout } from '../../src/components/layout';
 import { prisma } from '../../lib/prismadb';
 import { IdeasDetails } from '../../src/components/templates/ideas-details';
 import { TIdeasDetails } from '../../src/components/templates/ideas-details/types';
-
 export const getServerSideProps = async ({ params }: any) => {
-    const issueId = params.id;
+    const ideasId = params.id;
 
-    const issue = await prisma.idea.findUnique({
+    const idea = await prisma.idea.findUnique({
         where: {
-            id: issueId
+            id: ideasId
         },
         // include: {
         //     categories: true
@@ -17,17 +16,17 @@ export const getServerSideProps = async ({ params }: any) => {
     })
 
 
-    if (issue) {
+    if (idea) {
         return {
             props: {
-                issue: JSON.parse(JSON.stringify(issue))
+                idea: JSON.parse(JSON.stringify(idea))
             }
         }
     }
 
     return {
         redirect: {
-            destination: '/issues',
+            destination: '/ideas',
             permanent: false
         }
     }
