@@ -30,7 +30,7 @@ const users = [
 
 const Item = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-
+  const [bigImage,setBigImage] = useState("/images/content/photo-1.1.jpg");
   return (
     <>
       <div className={cn("section", styles.section)}>
@@ -51,11 +51,40 @@ const Item = () => {
                   </div>
                 ))}
               </div>
-              <img
-                srcSet="/images/content/item-pic@2x.jpg 2x"
+              <div>
+                <img
+                  srcSet={bigImage}
+                  src="/images/content/item-pic.jpg"
+                  alt="Item"
+                />
+              </div>
+              <div className={styles.threeSlide}>
+                <div className={styles.slideOne}>
+                  
+                <img
+                srcSet="/images/content/photo-1.1.jpg"
                 src="/images/content/item-pic.jpg"
                 alt="Item"
-              />
+                onClick={() => setBigImage("/images/content/photo-1.1.jpg")}
+                />  
+                </div>
+                <div className={styles.slideTwo}>
+                  <img
+                  srcSet="/images/content/item-pic@2x.jpg 2x"
+                  src="/images/content/photo-1.2.jpg"
+                  alt="Item"
+                  onClick={() => setBigImage("/images/content/item-pic@2x.jpg 2x")}
+                />  
+                </div>
+                <div className={styles.slideThree}>
+                  <img
+                  srcSet="/images/content/item-pic@2x.jpg 2x"
+                  src="/images/content/photo-1.3.jpg"
+                  alt="Item"
+                  onClick={() => setBigImage("/images/content/item-pic@2x.jpg 2x")}
+                />  
+                </div>
+              </div>
             </div>
             {/* <Options className={styles.options} /> */}
           </div>
@@ -114,9 +143,20 @@ const Item = () => {
                 )}
               </div>
             </div>
-            {/* <Users className={styles.users} items={users} /> */}
+            <div className={styles.categoryBox}>
+              <div className={cn("status-purple", styles.tag)}>
+                <p className={styles.textCenter}>#category.name
+                </p>
+              </div>
+              <div className={cn("status-purple", styles.tag)}>
+                #category.name
+              </div>
+              <div className={cn("status-purple", styles.tag)}>
+                #category.name
+            </div>
           </div>
         </div>
+      </div>
       </div>
     </>
   );
