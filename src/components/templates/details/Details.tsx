@@ -112,7 +112,6 @@ const Item: FC<TProductDetails> = ({product}) => {
                 </button>
               ))}
             </div> 
-            <div className={styles.group}>
               <div className={styles.item}>
                 {activeIndex === 0 && (
                   <div className={styles.about}>
@@ -130,7 +129,6 @@ const Item: FC<TProductDetails> = ({product}) => {
                 </div>
                 )}
               </div>
-            </div>
             <div className={styles.categoryBox}>
               {product.categories.map((c, index) => (
                 <div className={cn("status-purple", styles.tag)} key={index}>
