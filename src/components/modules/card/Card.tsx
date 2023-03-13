@@ -64,7 +64,7 @@ const Card: FC<TCard> = ({ className, product }) => {
             src={author?.image} 
             alt="Avatar" />
           </div> 
-          <div className={styles.tittle}>{product.title}</div>
+          <div className={styles.title}>{product.title}</div>
           <div className={styles.textFrame}>
             <div className={styles.text}>
             {issuePreviewShorterner(product.description, 250)} </div>

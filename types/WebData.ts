@@ -7,6 +7,13 @@ export type TWebData = {
     category: Category[];
 }
 
+export type TWeb = {
+    name: string;
+    url: string;
+    image?: string;
+    about: string;
+}
+
 // export enum Type {
 //     WEB,
 //     APP,

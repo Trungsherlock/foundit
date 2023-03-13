@@ -1,0 +1,105 @@
+@import ../../../styles/helpers
+
+.search
+    position: relative
+    flex-shrink: 0
+    //width: 256px
+    //margin-right: 24px
+    +m
+        display: block
+        width: 100%
+        margin: auto 0 0
+
+.input
+    width: 100%
+    height: 40px
+    padding: 0 42px 0 16px
+    background: none
+    border: 2px solid $neutrals6
+    border-radius: 8px
+    +poppins
+    +caption-2
+    transition: border-color .2s
+    +placeholder
+        color: $neutrals4
+    +dark
+        border-color: $neutrals3
+        color: $neutrals8
+    &:focus
+        border-color: $neutrals4
+
+.result
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    width: 42px
+    svg
+        fill: $neutrals4
+        transition: fill .2s
+    &:hover
+        svg
+            fill: $blue
+
+            
+.buttonset
+    display: flex
+    margin-top: 12px
+.reset
+    display: flex
+    padding: 12px 12px 12px 12px
+    margin-right: 12px
+    border: 2px solid $neutrals2
+    border-radius: 16px
+    svg
+        margin-left: 12px
+        fill: $neutrals4
+        transition: fill .2s
+
+.title
+    text-align: center
+    padding-top: 1px
+    font-size: 35px
+    +poppins
+    color:  #4d4d4d
+
+.title2
+    margin-right: auto
+    margin-bottom: 12px
+    +body-1
+    +poppins
+    +t
+        display: none
+    color: #663300
+
+.text
+    display: flex
+    text-align: left
+    color: #663300
+    opacity: 0.6
+
+.textFrame
+    display: flex
+    padding: 12px 12px 12px 12px
+
+.frame
+    margin-top:2%
+    width:100%
+    border: 2px solid $purple-light
+    border-radius: 8px
+
+.avatar
+    margin-left: auto
+    flex-shrink: 0
+    width: 32px
+    height: 32px
+    border-radius: 50%
+    border: 2px solid $neutrals8
+    +dark
+        border-color: $neutrals2
+    & > img
+        width: 100%
+        height: 100%
+        object-fit: cover
+        border-radius: 50%
+    &:not(:first-child)

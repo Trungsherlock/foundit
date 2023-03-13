@@ -20,7 +20,8 @@ const Home: FC = () => {
                         </h1>
                         <CustomLink
                             className={cn("button-small", styles.button)}
-                            href="/search-results#gsc.tab=0">
+                            // href="/search-results#gsc.tab=0">
+                            href="/chatgpt">
                             Go To Search
                         </CustomLink>
                         {/* <SearchBar /> */}
