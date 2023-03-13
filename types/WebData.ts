@@ -10,7 +10,7 @@ export type TWebData = {
 export type TWeb = {
     name: string;
     url: string;
-    image?: string;
+    //image?: string;
     about: string;
 }
 
