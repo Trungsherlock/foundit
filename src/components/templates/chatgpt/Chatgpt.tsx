@@ -14,7 +14,7 @@ interface Conversation {
 const Chatgpt: FC = () => {
   const [value, setValue] = useState<string>("")
   const [conversation, setConversation] = useState<Conversation[]>([])
-  const [result, setResult] = useState<TWeb[] | undefined>([])
+  const [result, setResult] = useState<TWeb[] | string>([])
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleInput = useCallback(
@@ -25,7 +25,7 @@ const Chatgpt: FC = () => {
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      let v = `Return 3 results in JSON with this format without counting number: [{"name": "Google", "url": "https://www.google.com/", "image": "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1", "about": "Google is a search engine that started development in 1996 by Sergey Brin and Larry Page as a research project at Stanford University to find files on the Internet."}, {"name": "Google", "url": "https://www.google.com/", "image": "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1", "about": "Google is a search engine that started development in 1996 by Sergey Brin and Larry Page as a research project at Stanford University to find files on the Internet."}]` + value
+      let v = `Return only 3 results in JSON with this format without counting number and no any comments: [{"name": "Google", "url": "https://www.google.com/", "about": "Google is a search engine that started development in 1996 to find files on the Internet."}, {"name": "Google", "url": "https://www.google.com/", "about": "Google is a search engine that started development in 1996 to find files on the Internet."}]` + value
       const chatHistory = [...conversation, {role: "user", content: v}]
       const response = await fetch("/api/openAIChat", {
         method: "POST",
@@ -46,9 +46,11 @@ const Chatgpt: FC = () => {
     }
   }
 
+  //{"name": "Google", "url": "https://www.google.com/", "image": "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1", "about": "Google is a search engine that started development in 1996 by Sergey Brin and Larry Page as a research project at Stanford University to find files on the Internet."}
+
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    let v = `Return 3 results in JSON with this format without counting number: [{"name": "Google", "url": "https://www.google.com/", "image": "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1", "about": "Google is a search engine that started development in 1996 by Sergey Brin and Larry Page as a research project at Stanford University to find files on the Internet."}, {"name": "Google", "url": "https://www.google.com/", "image": "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1", "about": "Google is a search engine that started development in 1996 by Sergey Brin and Larry Page as a research project at Stanford University to find files on the Internet."}]` + value
+    let v = `Return 3 results in JSON with this format without counting number: [{"name": "Google", "url": "https://www.google.com/", "about": "Google is a search engine that started development in 1996 to find files on the Internet."}, {"name": "Google", "url": "https://www.google.com/", "about": "Google is a search engine that started development in 1996 to find files on the Internet."}]` + value
       const chatHistory = [...conversation, {role: "user", content: v}]
       const response = await fetch("/api/openAIChat", {
         method: "POST",
@@ -65,7 +67,6 @@ const Chatgpt: FC = () => {
         {role: "assistant", content: data.result.choices[0].message.content},
       ])
       setResult(ChangeStringToArray(data.result.choices[0].message.content))
-      console.log(ChangeStringToArray(data.result.choices[0].message.content))
   }
 
   const handleRefresh = () => {
@@ -105,25 +106,27 @@ const Chatgpt: FC = () => {
               <Icon name="close" size="12" />
             </button>
           </div>
-          <div>
+          <div className={styles.results}>
             {
-              result?.map((item, index) => (
-                <Link style={{ textDecoration: 'none' }} href={item.url} key = {index} target="_blank">
-                <div className={styles.frame}>
-                  <div className={styles.avatar}>
-                    <img 
-                    src={item.image}
-                    alt="Avatar" />
-                  </div> 
-                  <div className={styles.title}>{item.name}</div>
-                  <div className={styles.textFrame}>
-                    <div className={styles.text}>
-                      {item.about}
+              Array.isArray(result) ?
+                result.map((item, index) => (
+                  <Link style={{ textDecoration: 'none' }} href={item.url} key = {index} target="_blank">
+                  <div className={styles.frame}>
+                    <div className={styles.avatar}>
+                      <img 
+                      src='/images/content/activity-pic-2.jpg'
+                      alt="Avatar" />
+                    </div> 
+                    <div className={styles.title}>{item.name}</div>
+                    <div className={styles.textFrame}>
+                      <div className={styles.text}>
+                        {item.about}
+                      </div>
                     </div>
                   </div>
-                </div>
-                </Link>
-              ))
+                  </Link>
+                ))
+                : result
             }
             {/* <div className={styles.frame}>
               <div className={styles.avatar}>

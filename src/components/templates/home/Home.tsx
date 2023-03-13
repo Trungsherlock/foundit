@@ -18,12 +18,19 @@ const Home: FC = () => {
                         <h1 className={cn("h3", styles.title)}>
                             NEED ANY WEBSITE?
                         </h1>
+                        <div className={styles.buttonset}>
                         <CustomLink
                             className={cn("button-small", styles.button)}
                             // href="/search-results#gsc.tab=0">
                             href="/chatgpt">
-                            Go To Search
+                            Search by AI
                         </CustomLink>
+                        <CustomLink
+                            className={cn("button-small", styles.button)}
+                            href="/search-results#gsc.tab=0">
+                            Search by Google
+                        </CustomLink>
+                        </div>
                         {/* <SearchBar /> */}
                         <p className={styles.ppp}>
                             This section helps you rediscover forgotten websites. Use our search tool and tips to find what you're looking for. Don't let forgetting a site hold you back - let us help you rediscover it today.
