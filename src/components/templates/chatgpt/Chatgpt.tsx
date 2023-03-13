@@ -1,4 +1,4 @@
-import React, {useRef, useState, useCallback, FC} from 'react';
+import React, {useRef, useState, useCallback, FC, useEffect} from 'react';
 import styles from "./Chatgpt.module.sass";
 import { Icon } from "../../modules/icon";
 import cn from "classnames";
@@ -15,6 +15,7 @@ const Chatgpt: FC = () => {
   const [value, setValue] = useState<string>("")
   const [conversation, setConversation] = useState<Conversation[]>([])
   const [result, setResult] = useState<TWeb[] | string>([])
+  const [loading, setLoading] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleInput = useCallback(
@@ -25,7 +26,8 @@ const Chatgpt: FC = () => {
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      let v = `Return only 3 results in JSON with this format without counting number and no any comments: [{"name": "Google", "url": "https://www.google.com/", "about": "Google is a search engine that started development in 1996 to find files on the Internet."}, {"name": "Google", "url": "https://www.google.com/", "about": "Google is a search engine that started development in 1996 to find files on the Internet."}]` + value
+      setLoading(true)
+      let v = value + '. Return 3 results in JSON with this format without counting number: [{"name": "Google", "url": "https://www.google.com/", "about": "Google is a search engine that started development in 1996 to find files on the Internet."}, {"name": "Google", "url": "https://www.google.com/", "about": "Google is a search engine that started development in 1996 to find files on the Internet."}]'
       const chatHistory = [...conversation, {role: "user", content: v}]
       const response = await fetch("/api/openAIChat", {
         method: "POST",
@@ -46,11 +48,14 @@ const Chatgpt: FC = () => {
     }
   }
 
+
+
   //{"name": "Google", "url": "https://www.google.com/", "image": "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1", "about": "Google is a search engine that started development in 1996 by Sergey Brin and Larry Page as a research project at Stanford University to find files on the Internet."}
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    let v = `Return 3 results in JSON with this format without counting number: [{"name": "Google", "url": "https://www.google.com/", "about": "Google is a search engine that started development in 1996 to find files on the Internet."}, {"name": "Google", "url": "https://www.google.com/", "about": "Google is a search engine that started development in 1996 to find files on the Internet."}]` + value
+    setLoading(true)
+    let v =  value + '. Return 3 results in JSON with this format without counting number: [{"name": "Google", "url": "https://www.google.com/", "about": "Google is a search engine that started development in 1996 to find files on the Internet."}, {"name": "Google", "url": "https://www.google.com/", "about": "Google is a search engine that started development in 1996 to find files on the Internet."}]'
       const chatHistory = [...conversation, {role: "user", content: v}]
       const response = await fetch("/api/openAIChat", {
         method: "POST",
@@ -74,7 +79,12 @@ const Chatgpt: FC = () => {
     setValue("")
     setConversation([])
     setResult([])
+    setLoading(false)
   }
+
+  useEffect(() => {
+    setLoading(false)
+  }, [result])
 
   return (
     <div>
@@ -108,7 +118,10 @@ const Chatgpt: FC = () => {
           </div>
           <div className={styles.results}>
             {
-              Array.isArray(result) ?
+              loading ? 
+                <div>Loading...</div>
+              : 
+                Array.isArray(result) ?
                 result.map((item, index) => (
                   <Link style={{ textDecoration: 'none' }} href={item.url} key = {index} target="_blank">
                   <div className={styles.frame}>
