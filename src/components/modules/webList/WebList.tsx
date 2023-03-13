@@ -4,7 +4,7 @@ import styles from "./WebList.module.sass";
 import {data} from "../../mock/data";
 import { getRandomData } from "utils/getRandomData";
 import { TWebData } from "types/WebData";
-import { CustomLink } from "../customLink";
+import Link from "next/link";
 
 const WebList: FC = () => {
 
@@ -13,12 +13,11 @@ const WebList: FC = () => {
     useEffect(() => {
         setRandomData(getRandomData(data));
     }, []);
-    console.log(randomData);
 
     return (
         <div className={styles.chain}>
-            {randomData ? randomData.map((d) => (
-            <CustomLink className={styles.head} href={d.url}>
+            {randomData ? randomData.map((d, index) => (
+            <Link className={styles.head} style={{ textDecoration: 'none' }} href={d.url} key ={index} target="_blank">
                 <div className={styles.avatar}>
                     <img src={d.image}/>
                 </div>
@@ -27,7 +26,7 @@ const WebList: FC = () => {
                         {d.name}
                     </div>
                 </div>
-            </CustomLink>
+            </Link>
             ))
                 : <span>Loading...</span>
         }
