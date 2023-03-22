@@ -5,6 +5,7 @@ import cn from "classnames";
 import { ChangeStringToArray } from 'utils/ChangeStringToArray';
 import { TWeb } from 'types/WebData';
 import Link from 'next/link';
+import { Loader } from '@/components/modules/loader';
 
 interface Conversation {
   role: string
@@ -44,6 +45,7 @@ const Chatgpt: FC = () => {
         {role: "assistant", content: data.result.choices[0].message.content},
       ])
       setResult(ChangeStringToArray(data.result.choices[0].message.content))
+      setLoading(false)
       console.log(ChangeStringToArray(data.result.choices[0].message.content))
     }
   }
@@ -72,6 +74,7 @@ const Chatgpt: FC = () => {
         {role: "assistant", content: data.result.choices[0].message.content},
       ])
       setResult(ChangeStringToArray(data.result.choices[0].message.content))
+      setLoading(false)
   }
 
   const handleRefresh = () => {
@@ -119,7 +122,7 @@ const Chatgpt: FC = () => {
           <div className={styles.results}>
             {
               loading ? 
-                <div>Loading...</div>
+              <div className={styles.loaders}><Loader className={styles.loader}/></div>
               : 
                 Array.isArray(result) ?
                 result.map((item, index) => (
