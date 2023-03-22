@@ -1,0 +1,329 @@
+@import ../../../styles/helpers
+
+.container
+    display: flex
+    padding: 4px 4px 4px 4px
+    align-items: flex-start
+    +t
+        display: block
+
+.topsection
+    position: relative
+    display: flex
+    img
+        width: 100%
+        height: 400px
+
+.slider 
+    position: relative
+    width: 100%
+    height: 400px
+    overflow: hidden
+    img 
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        opacity: 0
+        transition: opacity 1s ease-in-out
+        
+        &:first-child 
+            opacity: 1
+    
+    .navButtonLeft,
+    .navButtonRight 
+        position: absolute
+        top: 50%
+        transform: translateY(-50%)
+        background: transparent
+        border: none
+        outline: none
+        cursor: pointer
+        svg 
+            width: 40px
+            height: 40px
+            fill: #666600   
+    .navButtonLeft 
+        left: 12px
+        .svg 
+            transform: rotate(180deg)
+    .navButtonRight 
+        right: 12px
+
+.leftsection
+    position: relative
+    flex-grow: 1
+    display: flex
+    flex-direction: column
+    margin-right: 12px
+    width: 800px
+    +x
+        margin-right: 64px
+        //width: 720px
+    +d
+        margin-right: 32px
+    +t
+        margin: 0 0 32px
+        width: 100%
+
+.rightsection
+    position: relative
+    flex-grow: 1
+    display: flex
+    flex-direction: column
+    margin-right: 12px
+    width: 360px
+    +d
+        width: 336px
+    +t
+        width: 100%
+    
+    flex-wrap: wrap
+    +m
+        display: block
+        margin: 0
+
+.scrollcontainer
+    overflow-y: scroll
+    scroll-behavior: smooth
+
+.a
+    display: inline-block
+    width: 50px
+    text-decoration: none
+.bg
+    position: relative
+    background-color: $white
+    border-radius: 8px
+    margin-bottom: 12px
+    
+.details
+    position: relative
+    background-color: $white
+    border-radius: 8px
+    padding: 12px 12px 12px 12px
+    margin-bottom: 12px
+
+.preview
+    background-color: $white
+    border-radius: 8px
+    padding: 12px 12px 12px 12px
+    position: relative
+    flex-grow: 1
+    display: flex
+    img
+        width: 120px
+        height: 120px
+        border-radius: 8px
+
+.categories
+    position: absolute
+    top: 24px
+    left: 24px
+    display: flex
+    flex-wrap: wrap
+    margin: -8px 0 0 -8px
+
+.category
+    margin: 8px 0 0 8px
+
+.options
+    position: absolute
+    top: auto
+    left: 50%
+    bottom: 24px
+    transform: translateX(-50%)
+
+.titlegroup
+    margin-left: 12px
+    +poppins
+
+.title
+    //margin-bottom: 8px
+    
+.subtitle
+    color: $neutrals4
+
+.cost
+    display: flex
+    align-items: center
+    margin-bottom: 12px
+    padding-bottom: 12px
+    border-bottom: 2px solid $neutrals6
+
+.price
+    +dm-sans
+    display: flex
+    font-size: 16px
+    flex-direction: row
+    line-height: 30px
+    &:not(:last-child)
+        margin-right: 8px
+    
+.counter
+    +button-1
+    color: $neutrals4
+
+.info
+    margin-bottom: 40px
+    +body-2
+    color: $neutrals4
+    a
+        text-decoration: underline
+        font-weight: 500
+        color: $neutrals2
+        +dark
+            color: $neutrals8
+        &:hover
+            text-decoration: none
+
+.nav
+    display: flex
+    padding: 6px
+    border-radius: 8px
+    scroll-behavior: smooth
+    box-shadow: inset 0 0 0 2px #660000
+    +dark
+        box-shadow: inset 0 0 0 2px $neutrals3
+
+.link
+    padding: 6px 12px
+    border-radius: 14px
+    background: none
+    +button-2
+    color: $neutrals4
+    transition: all .2s
+    &:hover
+        color: $neutrals3
+        +dark
+            color: $neutrals6
+    &.active
+        background: #666600
+        color: $neutrals8
+        +dark
+            background: $neutrals8
+            color: $neutrals2
+    &:not(:last-child)
+        margin-right: 8px
+    
+.users
+    margin-bottom: auto
+
+.control
+    margin-top: 40px
+    +m
+        margin-top: 32px
+.number
+    +dm-sans
+    font-size: 16px
+    line-height: 30px
+    &:not(:last-child)
+        margin-right: 8px
+    color: $blue
+
+.visitgroup
+   margin-bottom: 12px
+
+.button
+    position: relative
+    flex-grow: 1
+    display: flex
+    flex-direction: column
+    color: $white
+    background: #666600
+    +button-1
+    //border: 2px solid $neutrals6
+    border-radius: 8px
+
+.copy
+    margin-right: 8px
+    svg
+        display: top
+        fill: $neutrals1
+        transition: fill .2s
+        margin-top:2px
+    &:hover
+        svg
+            fill: darken(#FF0000, 10)
+.about
+    height: auto
+
+.item
+    padding: 12px 12px 12px 12px    
+    box-shadow: inset 0 0 0 2px #665e00
+    border-radius: 8px
+
+.author1 
+    flex-direction: row
+    background-color: #000
+.author2
+    background-color: #000
+.about
+   +dm-sans
+   color: #54545f
+.threeSlide
+    display: flex
+    width:97%
+    height:200px
+    align-items: space-between
+.slideOne
+    display: flex
+    height: 200px
+    width:33.3%
+    border-radius: 10px
+    & > img
+        height:100%
+.slideTwo
+    display: flex
+    height: 200px
+    width:33.3%
+    border-radius: 10px
+    & > img
+        height:100%    
+.slideThree
+    display: flex
+    height: 200px
+    border-radius: 10px
+    width:33.3%
+    & > img
+        height:100% 
+
+.tags
+    padding-bottom: 12px
+    border-bottom: 2px solid $neutrals6
+    margin-bottom: 20px
+.tag
+    +dm-sans
+    display: flex
+    color:#ffffff
+    font-size: 10px
+    line-height: 25px
+    border-radius: 10px
+    width:33.3%
+    text-align: center
+    margin: 0 auto
+    &:not(:last-child)
+        margin-right: 5px  
+.categoryBox
+    display: flex
+    align-items: flex-start
+
+.lists
+    flex-direction: row
+    position: relative
+    flex-grow: 1
+    display: flex
+    margin-bottom: 12px
+
+.square
+    padding: 10px 10px 10px 10px
+    border-radius: 8px
+    box-shadow: inset 0 0 0 1px #221f1f
+
+.text
+    margin-left: 24px
+    +dm-sans
+
+    
+
