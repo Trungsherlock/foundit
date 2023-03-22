@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { Layout } from '../../src/components/layout';
-import {Details} from "../../src/components/templates/details"
+import {PostsDetails} from "../../src/components/templates/posts-details"
 import {prisma} from '../../lib/prismadb';
 import { TProductDetails } from '@/components/templates/details/types';
 
@@ -34,7 +34,7 @@ const DetailsPage: NextPage<TProductDetails> = ({product}) => {
 
   return (
     <Layout>
-      <Details product = {product}/>
+      <PostsDetails product = {product}/>
     </Layout>
   )
 }

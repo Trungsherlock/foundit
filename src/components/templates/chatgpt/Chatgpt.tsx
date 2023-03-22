@@ -90,7 +90,7 @@ const Chatgpt: FC = () => {
     <div>
       <div className={cn("section", styles.section)}>
         <div className={cn("container", styles.container)}>
-          <div className = {styles.title2}>Please type your prompt</div>
+          <div className = {styles.title2}>Please type your prompt with "what is/are the website/s for"</div>
           <div className={styles.search}>
             <input
               className={styles.input}
@@ -99,7 +99,7 @@ const Chatgpt: FC = () => {
               onChange={handleInput}
               onKeyDown={handleKeyDown}
               name="search"
-              placeholder="eg: websites that help to purchase books"
+              placeholder="eg: what are websites for online shopping"
               required
             />
             <button className={styles.result}>
