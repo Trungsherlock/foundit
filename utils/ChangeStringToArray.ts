@@ -10,9 +10,16 @@ export const ChangeStringToArray = (str: string) : (TWeb[] | string) => {
     const match = str.substring(index1, index2+1);
     console.log(match);
     if (!match) return message;
-    const arr = JSON.parse(match);
-    return arr.map((obj: any) => {
-      const { name, url, about } = obj;
-      return { name, url, about };
-    });
+    try{
+      const arr = JSON.parse(match);
+      return arr.map((obj: any) => {
+        const { name, url, about } = obj;
+        return { name, url, about };
+      });
+    }
+    catch(e){
+      console.log(e);
+      return message;
+    }
+    
 } 
