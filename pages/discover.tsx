@@ -12,15 +12,16 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
 
   if (cachedProducts) {
     return {
-      props: { products: cachedProducts },
+      props: { products: JSON.parse(JSON.stringify(cachedProducts)) },
     };
   }
 
   const products = await prisma.product.findMany();
-  await cache.set(CACHE_KEY, products, 300);
+  const serializedProducts = JSON.parse(JSON.stringify(products));
+  await cache.set(CACHE_KEY, serializedProducts, 300);
 
   return {
-    props: { products: JSON.parse(JSON.stringify(products))},
+    props: { products: serializedProducts },
   };
 }
 
