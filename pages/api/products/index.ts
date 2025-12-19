@@ -4,6 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { Category, Type } from '@prisma/client';
 import { TProduct } from 'types/product';
 import { SelectOption } from '@/components/modules/select/types';
+import { cache } from "../../../lib/redis";
 
 export default async function handler(
     req: NextApiRequest,
@@ -13,19 +14,16 @@ export default async function handler(
         try {
             const {title, type, brief, description, link, image, categories} = req.body;
             let cate: Category[] = [];
-            console.log("title", title);
             categories.forEach((tag: SelectOption) => {
                 cate.push(tag.value)
             });
-            let typeOfProduct: Type = type.value;
+            let typeOfProduct: Type[] = [type.value];
             const session = await getSession({req});
-            console.log(session);
             if (!session) {
                 res.status(401).json({message: 'Unauthorized'});
                 return;
             }
             const authorId = session.user.id;
-            console.log("author", authorId);
             const result = await prisma.product.create({
                 data: {
                     title,
@@ -37,13 +35,12 @@ export default async function handler(
                     author: { connect: { id: authorId } },
                     categories: cate
                 }
-                
             });
-            console.log(result);
+
+            await cache.del('products:all');
             res.status(200).json(result);
         }
         catch (e) {
-            console.log(e);
             res.status(500).json({ message: 'Something went wrong' });
         }
     }

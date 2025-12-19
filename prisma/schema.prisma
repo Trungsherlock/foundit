@@ -1,12 +1,9 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearchPostgres"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider          = "postgresql"
-  url               = env("DATABASE_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  provider = "postgresql"
 }
 
 model User {
@@ -76,6 +73,11 @@ model Idea {
   vote        Int        @default(0)
   likeAuthor  String[]
   author      User       @relation(fields: [authorId], references: [id])
+
+  @@index([vote])
+  @@index([createdAt])
+  @@index([authorId])
+  @@index([title])
 }
 
 model Product {
@@ -93,6 +95,11 @@ model Product {
   categories  Category[]
   likeAuthor  String[]
   author      User       @relation(fields: [authorId], references: [id])
+
+  @@index([vote])
+  @@index([createdAt])
+  @@index([authorId])
+  @@index([title])
 }
 
 enum Type {
