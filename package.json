@@ -7,12 +7,18 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:redis": "ts-node --project tsconfig.node.json scripts/test-redis.ts"
+    "test:redis": "ts-node --project tsconfig.node.json scripts/test-redis.ts",
+    "seed": "ts-node --project tsconfig.node.json prisma/seed.ts",
+    "benchmark": "ts-node --project tsconfig.node.json scripts/benchmark.ts"
+  },
+  "prisma": {
+    "seed": "ts-node --project tsconfig.node.json prisma/seed.ts"
   },
   "dependencies": {
     "@faker-js/faker": "^10.1.0",
     "@next-auth/prisma-adapter": "^1.0.5",
     "@next/font": "13.1.6",
+    "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "^7.2.0",
     "@supabase/supabase-js": "^2.8.0",
     "@types/node": "18.13.0",
@@ -31,6 +37,7 @@
     "next-auth": "^4.19.2",
     "nodemailer": "^6.9.1",
     "openai": "^3.2.1",
+    "pg": "^8.16.3",
     "prisma": "^7.2.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
@@ -48,6 +55,7 @@
   },
   "devDependencies": {
     "@types/ioredis": "^5.0.0",
+    "@types/pg": "^8.16.0",
     "ts-node": "^10.9.2"
   }
 }

@@ -1,16 +1,20 @@
-import {prisma} from '../../../lib/prismadb';
+import {prisma} from 'lib/prismadb';
 import {getSession} from 'next-auth/react';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { SelectOption } from '@/components/modules/select/types';
 import { Category, Type } from '@prisma/client';
 import { SelectOption2 } from '@/components/templates/uploadIdeaDetails/types';
-import { cache } from "../../../lib/redis";
+import { cache } from "lib/redis";
+import { limiter } from 'lib/rate-limit';
 
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    const rateLimitPassed = await limiter.check(req, res, 10);
+    if (!rateLimitPassed) return;
+
     if (req.method === 'POST') {
         try {
             const {title, description, feature, tags, type} = req.body;
