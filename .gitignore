@@ -46,3 +46,10 @@ next-env.d.ts
 # Keep template
 !.env.example
 
+# Docker files (may contain sensitive data)
+docker-compose.yml
+docker-compose.override.yml
+
+# Keep template
+!docker-compose.yml.example
+

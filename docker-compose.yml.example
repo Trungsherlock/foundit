@@ -9,9 +9,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: trung123
-      POSTGRES_DB: foundit
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-foundit}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -51,39 +51,39 @@ services:
       - "3000:3000"
     environment:
       # Database
-      DATABASE_URL: postgresql://postgres:trung123@postgres:5432/foundit
+      DATABASE_URL: ${DATABASE_URL}
 
       # Redis
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
+      REDIS_HOST: ${REDIS_HOST:-redis}
+      REDIS_PORT: ${REDIS_PORT:-6379}
 
       # NextAuth
-      NEXTAUTH_URL: http://localhost:3000
-      NEXTAUTH_SECRET: 5HUZiXiuwYiueBMLXS7u/nMC269tPCn5nyIQz800jVE=
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
 
       # OAuth (empty for now)
-      GOOGLE_ID: ""
-      GOOGLE_SECRET: ""
-      GITHUB_ID: ""
-      GITHUB_SECRET: ""
+      GOOGLE_ID: ${GOOGLE_ID:-}
+      GOOGLE_SECRET: ${GOOGLE_SECRET:-}
+      GITHUB_ID: ${GITHUB_ID:-}
+      GITHUB_SECRET: ${GITHUB_SECRET:-}
 
       # Email (empty for now)
-      EMAIL_SERVER_HOST: ""
-      EMAIL_SERVER_PORT: "587"
-      EMAIL_SERVER_USER: ""
-      EMAIL_SERVER_PASSWORD: ""
-      EMAIL_FROM: ""
+      EMAIL_SERVER_HOST: ${EMAIL_SERVER_HOST:-}
+      EMAIL_SERVER_PORT: ${EMAIL_SERVER_PORT:-587}
+      EMAIL_SERVER_USER: ${EMAIL_SERVER_USER:-}
+      EMAIL_SERVER_PASSWORD: ${EMAIL_SERVER_PASSWORD:-}
+      EMAIL_FROM: ${EMAIL_FROM:-}
 
       # Supabase (empty for now)
-      NEXT_PUBLIC_SUPABASE_URL: ""
-      NEXT_PUBLIC_SUPABASE_ANON_KEY: ""
+      NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:-}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY:-}
 
       # OpenAI (empty for now)
-      OPENAI_API_KEY: ""
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
 
       # Application
-      NODE_ENV: production
-      NEXT_TELEMETRY_DISABLED: 1
+      NODE_ENV: ${NODE_ENV:-production}
+      NEXT_TELEMETRY_DISABLED: ${NEXT_TELEMETRY_DISABLED:-1}
     depends_on:
       postgres:
         condition: service_healthy
