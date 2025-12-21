@@ -35,3 +35,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.docker
+.env*.local
+
+# Keep template
+!.env.example
+

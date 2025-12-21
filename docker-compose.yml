@@ -1,0 +1,103 @@
+version: '3.9'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: foundit-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: trung123
+      POSTGRES_DB: foundit
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - foundit-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: foundit-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - foundit-network
+
+  # Next.js Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: foundit-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # Database
+      DATABASE_URL: postgresql://postgres:trung123@postgres:5432/foundit
+
+      # Redis
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+
+      # NextAuth
+      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_SECRET: 5HUZiXiuwYiueBMLXS7u/nMC269tPCn5nyIQz800jVE=
+
+      # OAuth (empty for now)
+      GOOGLE_ID: ""
+      GOOGLE_SECRET: ""
+      GITHUB_ID: ""
+      GITHUB_SECRET: ""
+
+      # Email (empty for now)
+      EMAIL_SERVER_HOST: ""
+      EMAIL_SERVER_PORT: "587"
+      EMAIL_SERVER_USER: ""
+      EMAIL_SERVER_PASSWORD: ""
+      EMAIL_FROM: ""
+
+      # Supabase (empty for now)
+      NEXT_PUBLIC_SUPABASE_URL: ""
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ""
+
+      # OpenAI (empty for now)
+      OPENAI_API_KEY: ""
+
+      # Application
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: 1
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - foundit-network
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  foundit-network:
+    driver: bridge
